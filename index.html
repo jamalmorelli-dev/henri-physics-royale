@@ -520,14 +520,18 @@
       to { transform: skew(-10deg) scale(1.08); box-shadow: 0 0 30px #ffd700, 0 0 10px #ff0000; }
     }
 
-    /* Pedestal Emote GIF */
-    .pedestal-avatar-gif {
-      width: 170px;
-      height: 210px;
+    /* Pedestal Official Skin Render */
+    .pedestal-skin-render {
+      width: 220px;
+      height: 250px;
       object-fit: contain;
-      filter: drop-shadow(0 10px 25px rgba(0, 162, 255, 0.5));
-      border-radius: 12px;
+      filter: drop-shadow(0 14px 28px rgba(0, 162, 255, 0.6));
       z-index: 2;
+      transition: transform 0.2s ease;
+    }
+
+    .pedestal-skin-render:hover {
+      transform: scale(1.05);
     }
 
     .emote-cycle-btn {
@@ -794,18 +798,17 @@
     <section id="play-screen">
       <div class="lobby-grid">
         <div class="pedestal-card">
-          <div class="pedestal-rank-badge fn-font-heavy" id="ped-tier-badge">👑 TIER 100 CHUGGER</div>
+          <div class="pedestal-rank-badge fn-font-heavy" id="ped-tier-badge">👑 245 LBS (F = ma)</div>
           <div class="pedestal-avatar-img">
-            <img id="ped-avatar-gif" class="pedestal-avatar-gif" src="https://media.giphy.com/media/A1oBMukTqFfkoY1HiH/giphy.gif" alt="Fortnite Emote" onerror="this.style.display='none'; document.getElementById('ped-avatar-fallback').style.display='block';">
-            <div id="ped-avatar-fallback" class="pedestal-avatar-skin" style="display: none;">🥋</div>
+            <img id="ped-avatar-skin" class="pedestal-skin-render" src="https://fortnite-api.com/images/cosmetics/br/cid_a_136_athena_commando_m_majesty_yr1gj/featured.png" alt="LeBron James Fortnite Skin">
             <div class="pedestal-base"></div>
           </div>
           <div style="display: flex; justify-content: center; margin-top: 8px;">
-            <button class="emote-cycle-btn fn-font-condensed" onclick="cycleLobbyEmote()">🕺 EMOTE: <span id="current-emote-name">THE GRIDDY</span> ➔</button>
+            <button class="emote-cycle-btn fn-font-condensed" onclick="cycleLockerSkin()">👕 LOCKER SKIN: <span id="current-skin-btn-label">LEBRON JAMES</span> ➔</button>
           </div>
           <div style="text-align: center; margin-top: 10px;">
-            <h2 class="fn-font-heavy" style="font-size: 26px; color: #fff;">AGENT HENRI MORELLI</h2>
-            <p class="fn-font-condensed" style="color: var(--fn-blue-glow);">OUTFIT: NEWTON'S DISCIPLE (MYTHIC)</p>
+            <h2 class="fn-font-heavy" id="player-skin-name" style="font-size: 26px; color: #fff;">LEBRON JAMES</h2>
+            <p class="fn-font-condensed" id="player-skin-series" style="color: var(--fn-blue-glow);">OUTFIT: ICON SERIES (245 LBS • F = ma)</p>
           </div>
           <div class="pedestal-stats-row fn-font-condensed">
             <div><div id="ped-wins" style="font-size: 22px; color: #ffe600;">0</div><span style="font-size: 11px; color: #94a3b8;">VICTORY ROYALES</span></div>
@@ -890,13 +893,12 @@
             <button class="next-drop-btn fn-font-heavy" id="next-drop-btn" onclick="nextQuestion()">NEXT DROP ➔</button>
           </div>
 
-          <!-- Right: Reactive Reaction Meme / Killcam -->
+          <!-- Right: Official Fortnite Combat Intel Card -->
           <div class="coach-meme-pane" id="coach-meme-pane">
             <div class="meme-card-frame">
-              <div class="meme-badge fn-font-heavy" id="meme-reaction-tag">👑 200 PUMP HEADSHOT</div>
-              <img id="meme-reaction-gif" class="meme-gif-img" src="https://media.giphy.com/media/CAYVZA5NRb529kKQUc/giphy.gif" alt="Meme Reaction" onerror="this.style.display='none'; document.getElementById('meme-fallback-badge').style.display='flex';">
-              <div id="meme-fallback-badge" class="meme-fallback-badge fn-font-heavy" style="display:none;">🎯 DIRECT HIT!</div>
-              <div class="meme-caption fn-font-condensed" id="meme-reaction-caption">HE IS HIM. F = ma IN FULL EFFECT!</div>
+              <div class="meme-badge fn-font-heavy" id="meme-reaction-tag">🎯 200 PUMP HEADSHOT</div>
+              <img id="meme-reaction-gif" class="meme-gif-img" src="https://fortnite-api.com/images/cosmetics/br/eid_griddles/icon.png" alt="Fortnite Combat Intel" style="object-fit: contain; background: radial-gradient(circle, rgba(0,229,255,0.2) 0%, rgba(15,23,42,0.9) 100%);">
+              <div class="meme-caption fn-font-condensed" id="meme-reaction-caption">DIRECT HIT! F = ma IN FULL EFFECT!</div>
             </div>
           </div>
         </div>
@@ -993,7 +995,7 @@
     <div class="victory-main-banner">
       <h1 class="fn-font-heavy" style="font-size: 52px; color: #fff; text-shadow: 3px 3px 0 #000;">#1 VICTORY ROYALE</h1>
     </div>
-    <img class="victory-gif-img" id="victory-royale-gif" src="https://media.giphy.com/media/3o7TKr3nzbh5WgCFxe/giphy.gif" alt="Victory Royale Celebration" onerror="this.style.display='none';">
+    <img class="victory-gif-img" id="victory-royale-gif" src="https://fortnite-api.com/images/cosmetics/br/eid_coronet/icon.png" alt="Crowning Achievement Victory" style="object-fit: contain; width: 140px; height: 140px; background: radial-gradient(circle, rgba(255,230,0,0.35) 0%, transparent 70%); border-radius: 50%; border: 3px solid #ffe600; box-shadow: 0 0 40px rgba(255,230,0,0.8); margin: 0 auto 16px auto; display: block;">
     <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #ffe600; border-radius: 12px; padding: 24px; text-align: center; max-width: 600px; width: 90%;">
       <div id="v-stat-score" class="fn-font-heavy" style="font-size: 42px; color: #ffe600;">100%</div>
       <p id="victory-summary-text" style="color: #cbd5e1; margin: 15px 0; font-size: 16px;"></p>
@@ -1596,24 +1598,55 @@
       document.getElementById("next-drop-btn").innerText = (currentQIndex === total - 1) ? "CLAIM VICTORY ROYALE ➔" : "CLAIM INTEL & NEXT DROP ➔";
     }
 
-    // LOBBY EMOTE CYCLER
-    const LOBBY_EMOTES = [
-      { name: "THE GRIDDY", url: "https://media.giphy.com/media/A1oBMukTqFfkoY1HiH/giphy.gif" },
-      { name: "DEFAULT DANCE", url: "https://media.giphy.com/media/1Z02vuppxP1Pa/giphy.gif" },
-      { name: "TAKE THE L", url: "https://media.giphy.com/media/rVbAzUUSUC6dO/giphy.gif" },
-      { name: "THE FLOSS", url: "https://media.giphy.com/media/2Faz116n4GYiZXJw4/giphy.gif" },
-      { name: "HYPE CELEBRATION", url: "https://media.giphy.com/media/artj92V8o75VPL7AeQ/giphy.gif" }
+    // OFFICIAL FORTNITE LOCKER SKINS (ZERO CRINGE, 100% AUTHENTIC)
+    const LOCKER_SKINS = [
+      {
+        name: "LEBRON JAMES",
+        series: "ICON SERIES (245 LBS • F = ma)",
+        btn: "LEBRON JAMES",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_a_136_athena_commando_m_majesty_yr1gj/featured.png"
+      },
+      {
+        name: "TRAVIS SCOTT",
+        series: "ICON SERIES (ASTROWORLD)",
+        btn: "TRAVIS SCOTT",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_703_athena_commando_m_cyclone/featured.png"
+      },
+      {
+        name: "JOHN WICK",
+        series: "LEGENDARY (ASSASSIN SUIT)",
+        btn: "JOHN WICK",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_416_athena_commando_m_assassinsuit/featured.png"
+      },
+      {
+        name: "MIDAS",
+        series: "CHAPTER 2 TIER 100 (GOLDEN TOUCH)",
+        btn: "MIDAS",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_694_athena_commando_m_catburglar/featured.png"
+      },
+      {
+        name: "BLACK KNIGHT",
+        series: "OG SEASON 2 EXCLUSIVE",
+        btn: "BLACK KNIGHT",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_035_athena_commando_m_medieval/featured.png"
+      },
+      {
+        name: "RENEGADE RAIDER",
+        series: "OG SEASON 1 GRAIL (SWEAT)",
+        btn: "RENEGADE RAIDER",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_028_athena_commando_f/featured.png"
+      }
     ];
-    let currentEmoteIdx = 0;
+    let currentSkinIdx = 0;
 
-    function cycleLobbyEmote() {
-      currentEmoteIdx = (currentEmoteIdx + 1) % LOBBY_EMOTES.length;
-      const em = LOBBY_EMOTES[currentEmoteIdx];
-      document.getElementById("current-emote-name").innerText = em.name;
-      const img = document.getElementById("ped-avatar-gif");
-      img.src = em.url;
-      img.style.display = "block";
-      document.getElementById("ped-avatar-fallback").style.display = "none";
+    function cycleLockerSkin() {
+      currentSkinIdx = (currentSkinIdx + 1) % LOCKER_SKINS.length;
+      const skin = LOCKER_SKINS[currentSkinIdx];
+      document.getElementById("current-skin-btn-label").innerText = skin.btn;
+      document.getElementById("player-skin-name").innerText = skin.name;
+      document.getElementById("player-skin-series").innerText = "OUTFIT: " + skin.series;
+      const img = document.getElementById("ped-avatar-skin");
+      img.src = skin.url;
       playFnSound("click");
     }
 
@@ -1657,50 +1690,39 @@
       setTimeout(() => { overlay.style.display = "none"; }, 400);
     }
 
-    // REACTIVE BLEEDING-EDGE MEME ENGINE
+    // OFFICIAL FORTNITE COMBAT REACTION CARDS
     function renderMemeReaction(isCorrect, q) {
       const tagEl = document.getElementById("meme-reaction-tag");
       const gifEl = document.getElementById("meme-reaction-gif");
       const captionEl = document.getElementById("meme-reaction-caption");
-      const fallbackEl = document.getElementById("meme-fallback-badge");
-
-      fallbackEl.style.display = "none";
-      gifEl.style.display = "block";
 
       const titleLower = (q.title + " " + q.category).toLowerCase();
       const isLeBron = titleLower.includes("lebron") || titleLower.includes("mass") || titleLower.includes("jump") || titleLower.includes("3rd law");
 
       if (isCorrect) {
         if (isLeBron) {
-          tagEl.innerText = "👑 YOU ARE MY SUNSHINE";
-          gifEl.src = "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif";
-          captionEl.innerText = "245 LBS OF PURE F=ma LAUNCHED 44 INCHES INTO THE HARDWOOD!";
+          tagEl.innerText = "👑 LEBRON: F = ma MASTER";
+          gifEl.src = "https://fortnite-api.com/images/cosmetics/br/cid_a_136_athena_commando_m_majesty_yr1gj/featured.png";
+          captionEl.innerText = "245 LBS LAUNCHED 44 INCHES! DOWNWARD PUSH = UPWARD BLAST!";
         } else if (streak >= 3) {
-          tagEl.innerText = "🗿 AVERAGE SCIENCE CHAD";
-          gifEl.src = "https://media.giphy.com/media/CAYVZA5NRb529kKQUc/giphy.gif";
-          captionEl.innerText = "FLAWLESS ELIMINATION. MR. CAROSAARI IN ABSOLUTE DISBELIEF!";
+          tagEl.innerText = "👑 CROWNED VICTORY STREAK";
+          gifEl.src = "https://fortnite-api.com/images/cosmetics/br/eid_coronet/icon.png";
+          captionEl.innerText = "FLAWLESS EXECUTION! ALL DISTRACTOR TRAPS ELIMINATED!";
         } else {
-          const rand = Math.random();
-          if (rand > 0.5) {
-            tagEl.innerText = "🔥 LET HIM COOK";
-            gifEl.src = "https://media.giphy.com/media/KmdV4ZWUOYtD75pMAR/giphy.gif";
-            captionEl.innerText = "HE IS COOKING! ZERO AIR RESISTANCE, MAXIMUM VELOCITY!";
-          } else {
-            tagEl.innerText = "🕺 HITTING THE GRIDDY";
-            gifEl.src = "https://media.giphy.com/media/A1oBMukTqFfkoY1HiH/giphy.gif";
-            captionEl.innerText = "200 PUMP! NO CONTEST, FULL 100% MARKS SECURED!";
-          }
+          tagEl.innerText = "🎯 200 PUMP HEADSHOT";
+          gifEl.src = "https://fortnite-api.com/images/cosmetics/br/eid_griddles/icon.png";
+          captionEl.innerText = "DIRECT HIT! FULL 100% MARKS SECURED ON THIS CONCEPT!";
         }
       } else {
         const rand = Math.random();
         if (rand > 0.5) {
-          tagEl.innerText = "💀 EMOTIONAL DAMAGE";
-          gifEl.src = "https://media.giphy.com/media/ro08ZmQ1MeqZypzgDN/giphy.gif";
-          captionEl.innerText = "BRO GOT BOXED LIKE A FISH BY A TRAP DISTRACTOR!";
+          tagEl.innerText = "⚠️ SHIELD CRACKED (-50)";
+          gifEl.src = "https://fortnite-api.com/images/cosmetics/br/eid_takethel/icon.png";
+          captionEl.innerText = "YOU WALKED INTO THE DISTRACTOR TRAP! MEMORIZE THE CHANT!";
         } else {
-          tagEl.innerText = "🪦 REBOOT CARD IN TRANSIT";
-          gifEl.src = "https://media.giphy.com/media/d2lcHJTG5Tscg/giphy.gif";
-          captionEl.innerText = "SHIELD CRACKED! MEMORIZE THE 5-WORD CHANT AND POP A CHUG SPLASH!";
+          tagEl.innerText = "🪦 REBOOT CARD DROPPED";
+          gifEl.src = "https://fortnite-api.com/images/cosmetics/br/eid_laugh/icon.png";
+          captionEl.innerText = "CAROSAARI'S TRAP TRIGGERED! STUDY THE EXACT PAPER PHRASING!";
         }
       }
     }
