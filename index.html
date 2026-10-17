@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FORTNITE × MR. CAROSAARI: PHYSICAL SCIENCE (OFFLINE EDITION)</title>
+  <style>
+    :root {
+      --fn-yellow: #ffe600;
+      --fn-yellow-dark: #b89c00;
+      --fn-blue: #0078ff;
+      --fn-blue-glow: #00e5ff;
+      --fn-purple: #9d2df5;
+      --fn-dark-bg: #090e1d;
+      --fn-card-bg: rgba(15, 23, 42, 0.94);
+      --fn-border: #1e293b;
+      --fn-text: #ffffff;
+      
+      /* Rarity Colors */
+      --rarity-common: #88929b;
+      --rarity-uncommon: #22c55e;
+      --rarity-rare: #0094ff;
+      --rarity-epic: #a335ee;
+      --rarity-legendary: #ff8000;
+      --rarity-mythic: #ffd700;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background: var(--fn-dark-bg);
+      color: var(--fn-text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fallback Font Styles for Offline (Emulating Burbank / Impact) */
+    .fn-font-heavy {
+      font-family: "Impact", "Arial Black", -apple-system, sans-serif;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .fn-font-condensed {
+      font-family: -apple-system, BlinkMacSystemFont, "Arial Narrow", sans-serif;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* Animated Fortnite Lobby Background (Pure CSS - Zero Network Requests) */
+    .fn-lobby-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      background: radial-gradient(circle at 50% 35%, #182859 0%, #0c142c 50%, #060913 100%);
+      overflow: hidden;
+    }
+
+    .fn-sunburst {
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: repeating-conic-gradient(
+        from 0deg,
+        rgba(0, 162, 255, 0.08) 0deg 15deg,
+        transparent 15deg 30deg
+      );
+      animation: spinRays 120s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes spinRays {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .fn-grid-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+                  linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* TOP HEADER: FORTNITE LOBBY NAV */
+    header.fn-header {
+      background: rgba(8, 14, 29, 0.95);
+      border-bottom: 3px solid #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.7);
+    }
+
+    .fn-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .fn-logo-badge {
+      background: linear-gradient(135deg, #ffe600, #ff8000);
+      color: #000;
+      font-size: 20px;
+      padding: 4px 14px;
+      transform: skew(-10deg);
+      border: 2px solid #fff;
+      box-shadow: 3px 3px 0 #000, 0 0 15px rgba(255, 230, 0, 0.5);
+    }
+
+    .fn-title {
+      font-size: 24px;
+      color: #fff;
+      text-shadow: 2px 2px 0 #000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .fn-title span {
+      color: var(--fn-blue-glow);
+    }
+
+    .offline-tag {
+      background: #10b981;
+      color: #000;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 800;
+      margin-left: 6px;
+    }
+
+    /* Nav Tabs */
+    .fn-nav {
+      display: flex;
+      gap: 8px;
+    }
+
+    .fn-tab {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 20px;
+      padding: 8px 16px;
+      cursor: pointer;
+      position: relative;
+      transition: all 0.15s ease;
+      transform: skew(-8deg);
+      border-radius: 4px;
+    }
+
+    .fn-tab:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .fn-tab.active {
+      color: #fff;
+      background: #0078ff;
+      border-bottom: 4px solid #004fb3;
+      box-shadow: 0 0 20px rgba(0, 120, 255, 0.6);
+      transform: skew(-8deg) translateY(-2px);
+    }
+
+    /* Header Currencies / Player Info */
+    .fn-player-bar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .fn-currency {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 19px;
+      background: rgba(0,0,0,0.4);
+      padding: 5px 12px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .vbucks-icon {
+      width: 22px;
+      height: 22px;
+      background: radial-gradient(circle, #00e5ff 40%, #0078ff 100%);
+      border-radius: 50%;
+      border: 2px solid #fff;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 8px #00e5ff;
+    }
+
+    /* MAIN CONTAINER */
+    .fn-main {
+      max-width: 1200px;
+      margin: 20px auto;
+      padding: 0 20px 60px 20px;
+      width: 100%;
+    }
+
+    /* SCREEN 1: LOBBY */
+    .lobby-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: center;
+      margin-top: 20px;
+    }
+
+    .pedestal-card {
+      width: 100%;
+      max-width: 440px;
+      background: linear-gradient(180deg, rgba(20, 32, 60, 0.9) 0%, rgba(10, 16, 32, 0.95) 100%);
+      border: 2px solid #2a3f6e;
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0, 120, 255, 0.2);
+    }
+
+    .pedestal-rank-badge {
+      position: absolute;
+      top: -14px;
+      left: 20px;
+      background: linear-gradient(90deg, #ffe600, #ff9500);
+      color: #000;
+      font-size: 14px;
+      padding: 4px 14px;
+      border-radius: 4px;
+      transform: skew(-10deg);
+      border: 2px solid #fff;
+      box-shadow: 2px 2px 0 #000;
+    }
+
+    .pedestal-avatar-img {
+      width: 100%;
+      height: 260px;
+      background: radial-gradient(circle at 50% 60%, rgba(0, 162, 255, 0.25) 0%, transparent 70%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .pedestal-avatar-skin {
+      font-size: 110px;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.6));
+    }
+
+    .pedestal-base {
+      width: 80%;
+      height: 20px;
+      background: linear-gradient(90deg, transparent, #00e5ff, transparent);
+      box-shadow: 0 0 25px #00e5ff;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 5px;
+    }
+
+    .pedestal-stats-row {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 15px;
+      background: rgba(0,0,0,0.4);
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .mode-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .mode-card {
+      background: linear-gradient(90deg, rgba(20, 32, 60, 0.85) 0%, rgba(13, 20, 38, 0.9) 100%);
+      border: 2px solid #2a3f6e;
+      border-radius: 8px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transform: skew(-6deg);
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .mode-card:hover {
+      border-color: var(--fn-blue-glow);
+      transform: skew(-6deg) translateX(8px);
+    }
+
+    .mode-card.selected {
+      border-color: #ffe600;
+      background: linear-gradient(90deg, rgba(30, 48, 90, 0.95) 0%, rgba(20, 32, 60, 0.95) 100%);
+      box-shadow: 0 0 25px rgba(255, 230, 0, 0.4);
+    }
+
+    .ready-up-btn {
+      background: linear-gradient(180deg, #ffe600 0%, #ff9500 100%);
+      border: 3px solid #ffffff;
+      border-bottom: 8px solid #b36b00;
+      color: #0b1022;
+      font-size: 34px;
+      padding: 16px 40px;
+      cursor: pointer;
+      transform: skew(-10deg);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(255, 150, 0, 0.5), 3px 3px 0 #000;
+      width: 100%;
+      margin-top: 15px;
+    }
+
+    .ready-up-btn:hover {
+      transform: skew(-10deg) translateY(-3px);
+    }
+
+    /* SCREEN 2: IN-GAME HUD */
+    #battle-hud-screen {
+      display: none;
+      width: 100%;
+    }
+
+    .fn-compass-wrapper {
+      width: 100%;
+      background: rgba(8, 14, 29, 0.85);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 6px;
+      padding: 6px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .fn-compass-ticks {
+      font-size: 16px;
+      letter-spacing: 12px;
+      color: #94a3b8;
+    }
+
+    .fn-question-crate {
+      background: linear-gradient(180deg, rgba(24, 38, 72, 0.95) 0%, rgba(12, 19, 38, 0.98) 100%);
+      border: 3px solid #00e5ff;
+      border-radius: 12px;
+      padding: 24px 30px;
+      position: relative;
+      box-shadow: 0 10px 35px rgba(0, 229, 255, 0.25);
+      margin-bottom: 20px;
+    }
+
+    .fn-options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 25px;
+    }
+
+    .fn-option-card {
+      background: rgba(18, 28, 54, 0.9);
+      border: 2px solid #2a3f6e;
+      border-radius: 8px;
+      padding: 16px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transform: skew(-6deg);
+      transition: all 0.15s ease;
+      font-size: 15.5px;
+      font-weight: 600;
+      color: #f1f5f9;
+    }
+
+    .fn-opt-0 { border-color: var(--rarity-uncommon); }
+    .fn-opt-1 { border-color: var(--rarity-rare); }
+    .fn-opt-2 { border-color: var(--rarity-epic); }
+    .fn-opt-3 { border-color: var(--rarity-legendary); }
+
+    .fn-opt-letter {
+      width: 36px;
+      height: 36px;
+      background: #000;
+      border: 2px solid #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #ffe600;
+      flex-shrink: 0;
+    }
+
+    .fn-option-card.correct {
+      background: linear-gradient(90deg, #15803d, #22c55e) !important;
+      border-color: #4ade80 !important;
+      color: #fff !important;
+    }
+
+    .fn-option-card.wrong {
+      background: linear-gradient(90deg, #991b1b, #ef4444) !important;
+      border-color: #f87171 !important;
+      color: #fff !important;
+    }
+
+    .damage-popup {
+      position: absolute;
+      font-size: 44px;
+      color: #ffe600;
+      text-shadow: 3px 3px 0 #000, 0 0 20px #ff8000;
+      -webkit-text-stroke: 1.5px #000;
+      pointer-events: none;
+      z-index: 999;
+      animation: floatDamage 1s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+    }
+
+    @keyframes floatDamage {
+      0% { opacity: 0; transform: translate(-50%, 0) scale(0.5); }
+      30% { opacity: 1; transform: translate(-50%, -40px) scale(1.3); }
+      100% { opacity: 0; transform: translate(-50%, -90px) scale(1); }
+    }
+
+    .coach-npc-dialog {
+      display: none;
+      background: linear-gradient(180deg, rgba(16, 26, 50, 0.96) 0%, rgba(8, 14, 30, 0.98) 100%);
+      border: 2px solid #00e5ff;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .coach-npc-dialog.visible { display: block; }
+
+    .next-drop-btn {
+      background: linear-gradient(180deg, #0094ff 0%, #0052cc 100%);
+      border: 2px solid #ffffff;
+      border-bottom: 6px solid #003380;
+      color: #fff;
+      font-size: 22px;
+      padding: 12px 28px;
+      cursor: pointer;
+      transform: skew(-8deg);
+      border-radius: 6px;
+      margin-top: 15px;
+    }
+
+    .fn-bottom-hud {
+      display: grid;
+      grid-template-columns: 320px 1fr 340px;
+      gap: 20px;
+      align-items: flex-end;
+      margin-top: 20px;
+    }
+
+    .fn-bar-container {
+      background: rgba(0,0,0,0.6);
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 6px;
+      height: 24px;
+      position: relative;
+      overflow: hidden;
+      transform: skew(-10deg);
+      margin-bottom: 6px;
+    }
+
+    .shield-fill { background: linear-gradient(90deg, #0094ff, #00e5ff); }
+    .health-fill { background: linear-gradient(90deg, #15803d, #22c55e); }
+
+    /* VICTORY MODAL */
+    #victory-royale-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(5, 8, 18, 0.96);
+      z-index: 1000;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .victory-main-banner {
+      background: linear-gradient(90deg, #0052cc 0%, #0094ff 50%, #0052cc 100%);
+      border: 4px solid #fff;
+      border-bottom: 8px solid #002966;
+      transform: skew(-10deg);
+      padding: 12px 60px;
+      border-radius: 12px;
+      box-shadow: 0 0 50px rgba(0, 148, 255, 0.8), 4px 4px 0 #000;
+      margin-bottom: 20px;
+    }
+
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="fn-lobby-bg"><div class="fn-sunburst"></div></div>
+  <div class="fn-grid-overlay"></div>
+  <canvas id="confetti-canvas"></canvas>
+
+  <header class="fn-header">
+    <div class="fn-brand">
+      <div class="fn-logo-badge fn-font-heavy">FORTNITE</div>
+      <div class="fn-title fn-font-condensed">PHYSICAL SCIENCE <span>BATTLE ROYALE</span> <span class="offline-tag">OFFLINE OK</span></div>
+    </div>
+
+    <nav class="fn-nav">
+      <button class="fn-tab active fn-font-condensed" onclick="switchFnTab('play')">PLAY</button>
+      <button class="fn-tab fn-font-condensed" onclick="switchFnTab('career')">CAREER</button>
+      <button class="fn-tab fn-font-condensed" onclick="switchFnTab('vault')">REDO VAULT (<span id="tab-vault-count">0</span>)</button>
+      <button class="fn-tab fn-font-condensed" onclick="switchFnTab('cheatsheet')">TACTICAL INTEL</button>
+    </nav>
+
+    <div class="fn-player-bar">
+      <div class="fn-currency fn-font-condensed">
+        <div class="vbucks-icon">V</div>
+        <span id="vbucks-display">95,450</span>
+      </div>
+      <div class="fn-currency fn-font-condensed">
+        <span>👑</span>
+        <span id="header-level">LEVEL 88</span>
+      </div>
+      <div class="fn-font-condensed" style="color: #ffe600; font-size: 19px;">
+        HENRI <span style="color: #22c55e;">[OFFLINE READY]</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="fn-main">
+
+    <!-- TAB 1: PLAY -->
+    <section id="play-screen">
+      <div class="lobby-grid">
+        <div class="pedestal-card">
+          <div class="pedestal-rank-badge fn-font-heavy" id="ped-tier-badge">👑 TIER 100 CHUGGER</div>
+          <div class="pedestal-avatar-img">
+            <div class="pedestal-avatar-skin">🥋</div>
+            <div class="pedestal-base"></div>
+          </div>
+          <div style="text-align: center; margin-top: 10px;">
+            <h2 class="fn-font-heavy" style="font-size: 26px; color: #fff;">AGENT HENRI MORELLI</h2>
+            <p class="fn-font-condensed" style="color: var(--fn-blue-glow);">OUTFIT: NEWTON'S DISCIPLE (MYTHIC)</p>
+          </div>
+          <div class="pedestal-stats-row fn-font-condensed">
+            <div><div id="ped-wins" style="font-size: 22px; color: #ffe600;">0</div><span style="font-size: 11px; color: #94a3b8;">VICTORY ROYALES</span></div>
+            <div><div id="ped-acc" style="font-size: 22px; color: #ffe600;">0%</div><span style="font-size: 11px; color: #94a3b8;">PEAK ACCURACY</span></div>
+            <div><div id="ped-pts" style="font-size: 22px; color: #ffe600;">0</div><span style="font-size: 11px; color: #94a3b8;">TOTAL SCORE</span></div>
+          </div>
+        </div>
+
+        <div>
+          <h2 class="fn-font-condensed" style="color: #94a3b8; font-size: 24px;">SELECT MISSION / MODE</h2>
+          <div class="mode-cards">
+            <div class="mode-card selected" onclick="selectMode('physics', this)">
+              <div>
+                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">SOLO: MONDAY'S PHYSICS UNIT EXAM</h3>
+                <p style="font-size: 13px; color: #94a3b8;">12 Drops • Newton's 1st, 2nd, 3rd Laws & Sports Physics</p>
+              </div>
+              <span class="fn-font-heavy" style="background: #0078ff; padding: 4px 10px; border-radius: 4px; font-size: 12px;">SOLO</span>
+            </div>
+            <div class="mode-card" onclick="selectMode('intro', this)">
+              <div>
+                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">DUOS: INTRO TEST REDO (ROAD TO 90%)</h3>
+                <p style="font-size: 13px; color: #94a3b8;">12 Traps • 11 Senses, Hypotheses, Cold Fusion & Carosaari Rules</p>
+              </div>
+              <span class="fn-font-heavy" style="background: #22c55e; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px;">DUOS</span>
+            </div>
+            <div class="mode-card" onclick="selectMode('boss', this)">
+              <div>
+                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">SQUADS: 24-QUESTION BOSS GAUNTLET</h3>
+                <p style="font-size: 13px; color: #94a3b8;">Full 24-Q Victory Royale Mastery Challenge</p>
+              </div>
+              <span class="fn-font-heavy" style="background: #ff8000; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px;">SQUADS</span>
+            </div>
+            <div class="mode-card" onclick="selectMode('vault_practice', this)">
+              <div>
+                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">CREATIVE: REDO VAULT DRILL</h3>
+                <p style="font-size: 13px; color: #94a3b8;">Targeted Practice of Missed Questions</p>
+              </div>
+              <span class="fn-font-heavy" style="background: #a335ee; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 12px;">CREATIVE</span>
+            </div>
+          </div>
+
+          <button class="ready-up-btn fn-font-heavy" onclick="launchMatch()">
+            READY UP! ➔
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: IN-GAME HUD -->
+    <section id="battle-hud-screen">
+      <div class="fn-compass-wrapper fn-font-condensed">
+        <div class="fn-compass-ticks">N · 15 · 30 · NE · 60 · E · 105 · SE · S · SW · W · NW</div>
+      </div>
+
+      <div class="fn-question-crate">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 12px;">
+          <span class="fn-font-heavy" id="hud-q-badge" style="color: #ffe600; font-size: 14px;">LEGENDARY QUEST</span>
+          <span class="fn-font-condensed" id="hud-q-counter" style="color: var(--fn-blue-glow); font-size: 18px;">DROP 1 OF 12</span>
+        </div>
+        <div id="hud-q-text" style="font-size: 21px; font-weight: 800; line-height: 1.4;">Loading Question...</div>
+      </div>
+
+      <div class="fn-options-grid" id="hud-options-container"></div>
+
+      <!-- Coach Carosaari NPC Dialog (Works 100% Offline with instant embedded intellect!) -->
+      <div class="coach-npc-dialog" id="coach-dialog">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
+          <div style="font-size: 32px;">👨‍🏫</div>
+          <div>
+            <h4 class="fn-font-heavy" style="color: #00e5ff; font-size: 18px;">COACH CAROSAARI (INTEL)</h4>
+            <p id="coach-subtitle" class="fn-font-condensed" style="color: #94a3b8; font-size: 14px;">PLAY DEBRIEF</p>
+          </div>
+        </div>
+        <div id="coach-feedback-text" style="font-size: 15px; line-height: 1.6; color: #e2e8f0; white-space: pre-line;"></div>
+        <div id="coach-hook-text" style="background: rgba(255,230,0,0.12); border-left: 4px solid #ffe600; padding: 8px 12px; margin-top: 10px; font-weight: 700; color: #ffe600;"></div>
+        <button class="next-drop-btn fn-font-heavy" id="next-drop-btn" onclick="nextQuestion()">NEXT DROP ➔</button>
+      </div>
+
+      <div class="fn-bottom-hud">
+        <div>
+          <div class="fn-bar-container"><div class="shield-fill" id="hud-shield-fill" style="width: 100%; height: 100%;"></div></div>
+          <div class="fn-bar-container"><div class="health-fill" id="hud-health-fill" style="width: 100%; height: 100%;"></div></div>
+        </div>
+        <div id="killfeed-container" style="font-size: 12.5px; color: #cbd5e1;"></div>
+        <div class="fn-font-condensed" style="text-align: right; color: #fff;">
+          🪵 999 · 🧱 999 · 🪙 999
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: CAREER -->
+    <section id="career-screen" style="display: none;">
+      <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #2a3f6e; border-radius: 12px; padding: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2 class="fn-font-heavy" style="color: #ffe600; font-size: 26px;">OFFLINE MATCH LOG & CAREER PROGRESS</h2>
+          <button class="next-drop-btn fn-font-heavy" style="margin: 0; font-size: 16px; padding: 8px 16px;" onclick="exportScoresJSON()">EXPORT SCORES (.JSON) 💾</button>
+        </div>
+        <div class="pedestal-stats-row fn-font-condensed" style="margin-bottom: 20px;">
+          <div><div id="career-wins" style="font-size: 26px; color: #ffe600;">0</div>VICTORY ROYALES</div>
+          <div><div id="career-matches" style="font-size: 26px; color: #38bdf8;">0</div>MATCHES PLAYED</div>
+          <div><div id="career-peak-acc" style="font-size: 26px; color: #22c55e;">0%</div>PEAK ACCURACY</div>
+          <div><div id="career-pts" style="font-size: 26px; color: #a855f7;">0</div>TOTAL SCORE</div>
+        </div>
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+          <thead>
+            <tr class="fn-font-condensed" style="color: #94a3b8; border-bottom: 2px solid #334155;">
+              <th style="padding: 10px;">DATE / TIME</th>
+              <th style="padding: 10px;">MISSION</th>
+              <th style="padding: 10px;">ELIMS</th>
+              <th style="padding: 10px;">ACCURACY</th>
+              <th style="padding: 10px;">RESULT</th>
+            </tr>
+          </thead>
+          <tbody id="history-table-body">
+            <tr><td colspan="5" style="text-align: center; color: #64748b; padding: 30px;">No offline matches recorded yet. Ready Up in the PLAY tab!</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 4: REDO VAULT -->
+    <section id="vault-screen" style="display: none;">
+      <div style="background: rgba(15, 23, 42, 0.95); border: 3px solid #ffe600; border-radius: 12px; padding: 30px;">
+        <h2 class="fn-font-heavy" style="color: #ffe600; font-size: 28px; margin-bottom: 15px;">📦 SUPPLY DROP REDO VAULT (OFFLINE)</h2>
+        <div id="vault-list-container"></div>
+        <div id="vault-empty-message" style="display: none; text-align: center; color: #22c55e; padding: 30px;">
+          <h3 class="fn-font-heavy" style="font-size: 24px;">🎉 VAULT IS EMPTY!</h3>
+          <p>Zero missed questions. You have mastered every Carosaari test trap!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: CHEAT SHEET -->
+    <section id="cheatsheet-screen" style="display: none;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00e5ff; border-radius: 10px; padding: 18px;">
+          <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 18px;">⚡ NEWTON'S 1ST LAW (INERTIA)</h3>
+          <p style="font-size: 14px; color: #cbd5e1; margin-top: 6px;">
+            Objects stay moving unless an unbalanced force pushes back. On grass, soccer balls stop because of friction and drag. Cyclists shave body hair and wear aerodynamic spandex to eliminate air friction.
+          </p>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00e5ff; border-radius: 10px; padding: 18px;">
+          <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 18px;">🚀 NEWTON'S 2ND LAW (F = ma)</h3>
+          <p style="font-size: 14px; color: #cbd5e1; margin-top: 6px;">
+            Force = Mass × Acceleration. If mass doubles, you need 2× the force. LeBron weighs 245 lbs, so his legs must push with vastly more force into the court than a 170-lb player.
+          </p>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00e5ff; border-radius: 10px; padding: 18px;">
+          <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 18px;">💥 NEWTON'S 3RD LAW (ACTION / REACTION)</h3>
+          <p style="font-size: 14px; color: #cbd5e1; margin-top: 6px;">
+            Every action has an equal and opposite reaction. LeBron pushes DOWN on the floor (action); the floor pushes back UP against his feet (reaction). Muscle produces contractile force; fat is dead weight.
+          </p>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00e5ff; border-radius: 10px; padding: 18px;">
+          <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 18px;">👑 THEORY VS. LAW (MR. CAROSAARI'S TRAP)</h3>
+          <p style="font-size: 14px; color: #cbd5e1; margin-top: 6px;">
+            Laws describe WHAT happens (often math). Theories explain WHY it happens (predictive, repeatable). A Theory NEVER turns into a Law!
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- VICTORY ROYALE MODAL -->
+  <div id="victory-royale-modal">
+    <div class="victory-main-banner">
+      <h1 class="fn-font-heavy" style="font-size: 52px; color: #fff; text-shadow: 3px 3px 0 #000;">#1 VICTORY ROYALE</h1>
+    </div>
+    <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #ffe600; border-radius: 12px; padding: 24px; text-align: center; max-width: 600px;">
+      <div id="v-stat-score" class="fn-font-heavy" style="font-size: 38px; color: #ffe600;">100%</div>
+      <p id="victory-summary-text" style="color: #cbd5e1; margin: 15px 0; font-size: 15px;"></p>
+      <button class="ready-up-btn fn-font-heavy" style="font-size: 22px; padding: 12px 28px;" onclick="closeVictoryModal()">RETURN TO LOBBY</button>
+    </div>
+  </div>
+
+  <script>
+    // FULL OFFLINE QUESTION BANK WITH EMBEDDED INTEL (ZERO NETWORK REQUIRED)
+    const QUESTIONS = {
+      physics: [
+        {
+          id: "p1",
+          category: "Newton's 1st Law",
+          title: "What is Sir Isaac Newton’s First Law of Motion?",
+          options: [
+            "For every action there is an equal and opposite reaction.",
+            "An object at rest stays at rest and an object in motion stays in motion, unless acted on by an unbalanced force.",
+            "When a force acts on an object, its mass automatically increases.",
+            "Force equals mass divided by acceleration."
+          ],
+          correct: 1,
+          hook: "Lazy Law: Moving things stay moving unless friction or someone hits the brakes!",
+          explanation: "Newton's First Law (Law of Inertia) states that moving objects have an innate tendency to keep moving at constant speed unless an unbalanced force pushes back.",
+          paperPhrase: "An object at rest stays at rest and an object in motion stays in motion with the same speed and in the same direction unless acted upon by an unbalanced force."
+        },
+        {
+          id: "p2",
+          category: "Newton's 1st Law (Soccer)",
+          title: "According to physics, why does a kicked soccer ball eventually slow down and stop on the grass instead of rolling forever?",
+          options: [
+            "The ball runs out of its internal stored momentum.",
+            "The mass of the soccer ball naturally increases as it travels.",
+            "Surface friction from the grass and air resistance act as unbalanced forces opposing its motion.",
+            "Gravity pulls the ball horizontally backward."
+          ],
+          correct: 2,
+          hook: "Grass Push-Back: Friction and air drag are the forces that stop the ball!",
+          explanation: "If you kicked a soccer ball in a frictionless vacuum, it would travel forever. On a soccer pitch, friction with grass and air resistance constantly oppose the ball's motion.",
+          paperPhrase: "The soccer ball decelerates because friction between the ball and grass, along with aerodynamic drag, act as unbalanced opposing forces."
+        },
+        {
+          id: "p3",
+          category: "Newton's 1st Law (Cycling)",
+          title: "What are some specific things competitive cyclists do to reduce friction and air drag?",
+          options: [
+            "Wear heavy baggy clothes and carry heavier weights.",
+            "Shave their body hair, wear form-fitting spandex, use aerodynamic helmets, and crouch low.",
+            "Ride with their arms spread wide to catch the wind.",
+            "Inflate their tires to the minimum possible pressure."
+          ],
+          correct: 1,
+          hook: "Aero Advantage: Shaving + Spandex + Teardrop Helmets = Zero Drag!",
+          explanation: "Cyclists shave body hair and wear skin-tight spandex clothing and aerodynamic helmets to minimize air friction, allowing them to maintain higher speed with less effort.",
+          paperPhrase: "Cyclists reduce fluid friction by eliminating turbulent boundary layers using shaved skin, smooth Lycra/spandex suits, and teardrop helmets."
+        },
+        {
+          id: "p4",
+          category: "Newton's 2nd Law",
+          title: "What is Newton's Second Law of Motion?",
+          options: [
+            "When an unbalanced force acts on a mass, acceleration is produced (F = ma).",
+            "An object in motion always comes to rest eventually.",
+            "Energy can never be created or destroyed, only changed.",
+            "For every push, there is a delay before the reaction."
+          ],
+          correct: 0,
+          hook: "F = ma: Heavy things need monster force to accelerate fast!",
+          explanation: "Newton's Second Law states that Force = Mass × Acceleration. The greater an object's mass, the more force is required to produce acceleration.",
+          paperPhrase: "Force equals mass times acceleration (F = ma); acceleration is directly proportional to net force and inversely proportional to mass."
+        },
+        {
+          id: "p5",
+          category: "Newton's 2nd Law (Mass)",
+          title: "LeBron James weighs 245 pounds. If a 170-pound basketball player wants to achieve the same vertical acceleration, who must push with more force into the court?",
+          options: [
+            "The 170-pound player, because lighter players have less inertia.",
+            "Both players must push with the exact same amount of force.",
+            "LeBron James, because his greater mass requires more force to accelerate (F = ma).",
+            "Neither player uses force against the court."
+          ],
+          correct: 2,
+          hook: "Bigger Mass = Bigger Push: 245 lbs requires much more force than 170 lbs!",
+          explanation: "Because F = ma, lifting a 245-pound body against gravity requires substantially more downward force than lifting a 170-pound body.",
+          paperPhrase: "Because F = ma, achieving identical acceleration with greater mass (245 lbs vs 170 lbs) requires proportionally greater net force into the floor."
+        },
+        {
+          id: "p6",
+          category: "Newton's 3rd Law",
+          title: "What is Sir Isaac Newton’s Third Law of Motion?",
+          options: [
+            "Objects with more mass fall faster in a vacuum.",
+            "For every action, there is an equal and opposite reaction.",
+            "Moving bodies will always stop when they run out of energy.",
+            "Force is equal to velocity multiplied by time."
+          ],
+          correct: 1,
+          hook: "Action = Reaction: When you push an object, it pushes right back!",
+          explanation: "Newton's Third Law states that forces always exist in matched pairs: whenever one object exerts a force on a second object, the second object exerts an equal force in the opposite direction.",
+          paperPhrase: "For every action force exerted on a body, there is an equal in magnitude and opposite in direction reaction force exerted on the other body."
+        },
+        {
+          id: "p7",
+          category: "Newton's 3rd Law (LeBron James)",
+          title: "When LeBron James jumps 44 inches into the air to slam-dunk, what is the 'Action' and what is the 'Reaction'?",
+          options: [
+            "Action: He jumps into the air. Reaction: The ball hits the rim.",
+            "Action: He pushes DOWN on the court floor. Reaction: The court floor pushes UP on his feet with equal force.",
+            "Action: His muscles relax. Reaction: Gravity pulls him downward.",
+            "Action: He holds the basketball. Reaction: His legs bend."
+          ],
+          correct: 1,
+          hook: "Floor Push: LeBron pushes the wood DOWN, the wood launches him UP!",
+          explanation: "When jumping, you cannot push against empty air. LeBron pushes down forcefully against the court floor (action); the floor pushes back upward against his body with equal force (reaction).",
+          paperPhrase: "Action force: LeBron exerts downward force on the hardwood floor. Reaction force: The hardwood floor exerts an equal upward normal force on his feet."
+        },
+        {
+          id: "p8",
+          category: "Newton's 3rd Law (Athletes)",
+          title: "Why do professional basketball players like LeBron James maintain extremely low body fat?",
+          options: [
+            "Fat is too cold and slows down muscle contractions.",
+            "Fat does not store energy as effectively as muscle and acts like dead lead weights on the hips.",
+            "Fat decreases the height of the basketball rim.",
+            "Fat causes basketball shoes to slip on the hardwood floor."
+          ],
+          correct: 1,
+          hook: "No Dead Weight: Muscle pushes; fat is just lead weight you have to carry!",
+          explanation: "Muscle generates force into the court; fat does not produce force but adds dead weight that increases gravitational resistance, hindering vertical jump height.",
+          paperPhrase: "Muscle mass produces contractile force (F = ma), whereas adipose tissue (body fat) does not produce force and merely acts as dead mass requiring additional force to accelerate against gravity."
+        },
+        {
+          id: "p9",
+          category: "Theory vs. Law",
+          title: "Why is Newton's Third Law classified as a 'Law' rather than a 'Theory' in physical science?",
+          options: [
+            "Because Laws have been proven by the government, but Theories are just unproven guesses.",
+            "Because a Law describes WHAT happens in nature, but does not explain WHY it happens.",
+            "Because Theories are older than Laws.",
+            "Because Newton was not a certified scientist."
+          ],
+          correct: 1,
+          hook: "Law = WHAT happens (Description); Theory = WHY it happens (Explanation)!",
+          explanation: "A Scientific Law is a concise description of an observed natural behavior (like forces coming in equal pairs). A Scientific Theory explains the underlying mechanism.",
+          paperPhrase: "A scientific law is an empirical description of WHAT happens under specified conditions, often expressed mathematically, whereas a theory explains WHY it happens."
+        },
+        {
+          id: "p10",
+          category: "Theory vs. Law",
+          title: "Is a Scientific Theory 'inferior' or 'less proven' than a Scientific Law?",
+          options: [
+            "Yes, theories are hypotheses that have not yet graduated into laws.",
+            "No! Theories explain, are predictive and repeatable, and are 'as good as it gets' in science.",
+            "Yes, laws can never be questioned, but theories are always doubted.",
+            "No, because laws and theories are the exact same thing."
+          ],
+          correct: 1,
+          hook: "Theories are Kings: Explanatory, predictive, repeatable — scientific truth!",
+          explanation: "In science, a Theory does not become a Law with more evidence. Theories explain phenomena and represent the highest level of scientific understanding.",
+          paperPhrase: "No. A theory never becomes a law. Theories represent the highest pinnacle of scientific understanding because they explain mechanisms, are predictive, repeatable, and supported by extensive empirical evidence."
+        },
+        {
+          id: "p11",
+          category: "11 Senses & Physics",
+          title: "Which non-traditional sense allows an athlete like LeBron James to know his exact body and limb position in mid-air without looking at his legs?",
+          options: [
+            "Vestibular sense",
+            "Proprioception",
+            "Caloric sense",
+            "Insha'allah sense"
+          ],
+          correct: 1,
+          hook: "Proprioception = Body position awareness; Vestibular = Balance!",
+          explanation: "Proprioception is your body's sensory ability to perceive its position, motion, and equilibrium through receptors in muscles and joints.",
+          paperPhrase: "Proprioception is the neuromuscular sense of joint and limb position in 3D space, mediated by muscle spindle and tendon receptors."
+        },
+        {
+          id: "p12",
+          category: "Nature of Evidence",
+          title: "What is Mr. Carosaari's cardinal rule about scientific truth?",
+          options: [
+            "In science, a law is permanent and can never change.",
+            "In science, whatever the teacher says is the truth.",
+            "In science, something is true until we get new evidence.",
+            "Science is purely a collection of unchangeable facts."
+          ],
+          correct: 2,
+          hook: "The Golden Rule: Something is true until we get NEW EVIDENCE!",
+          explanation: "Science is a dynamic process of discovery. Even established laws are modified when new observations or measurements contradict them.",
+          paperPhrase: "In science, knowledge is provisional: an idea or law is considered true only until new, verifiable empirical evidence arises that refutes or modifies it."
+        }
+      ],
+
+      intro: [
+        {
+          id: "i1",
+          category: "Scientific Method",
+          title: "According to Mr. Carosaari's lecture notes, what is the best way to think of the Scientific Method?",
+          options: [
+            "A rigid set of ten commandments that must never be broken.",
+            "More of a guideline than a set of rules (in a pirate accent).",
+            "A legal procedure for suing fraudulent companies.",
+            "A method only used in chemistry and astronomy."
+          ],
+          correct: 1,
+          hook: "Pirate Accent: 'More of a guideline than a set of rules!'",
+          explanation: "Mr. Carosaari explicitly teaches that there are multiple scientific approaches, and the scientific method serves as a flexible guideline rather than a rigid rulebook.",
+          paperPhrase: "The scientific method is a flexible heuristic guideline rather than a rigid linear checklist."
+        },
+        {
+          id: "i2",
+          category: "11 Senses",
+          title: "Mr. Carosaari teaches that observations come from reading and your 11 senses. What does your Vestibular sense detect?",
+          options: [
+            "Muscle pain and lactic acid buildup.",
+            "Balance, motion, and spatial orientation from the inner ear.",
+            "Heat flow through the bloodstream.",
+            "Atmospheric pressure changes."
+          ],
+          correct: 1,
+          hook: "Vestibular = Inner Ear Balance & Head Motion!",
+          explanation: "The vestibular system (located in the inner ear) detects gravity, balance, and head movement, allowing you to maintain equilibrium.",
+          paperPhrase: "The vestibular system utilizes the semicircular canals and otolith organs of the inner ear to sense balance, acceleration, and head orientation."
+        },
+        {
+          id: "i3",
+          category: "Hypothesis Rules",
+          title: "What are the three strict rules for writing a hypothesis in Mr. Carosaari's class?",
+          options: [
+            "Must be long, use big words, and be written in cursive.",
+            "Must be in If/Then format, must predict specific numbers, and is not a guess (no insha'allah).",
+            "Must prove the teacher wrong, must be copied from Reddit, and have no numbers.",
+            "Must only be written after the experiment is already finished."
+          ],
+          correct: 1,
+          hook: "Hypothesis Formula: If/Then + Specific Numbers + No Insha'Allah!",
+          explanation: "A valid scientific hypothesis must be an empirically testable, falsifiable prediction in 'If/Then' structure with quantifiable values, not vague speculation.",
+          paperPhrase: "A hypothesis must follow a strict If/Then format, provide a specific quantifiable prediction, and avoid ungrounded speculation ('no guesses, no insha'allah')."
+        },
+        {
+          id: "i4",
+          category: "Variables",
+          title: "What is the difference between an Independent Variable and a Dependent Variable?",
+          options: [
+            "The Independent variable is measured; the Dependent variable is what you ignore.",
+            "The Independent variable is what the experimenter deliberately changes; the Dependent variable is what is measured.",
+            "The Independent variable has numbers; the Dependent variable only has words.",
+            "They are two names for the exact same variable."
+          ],
+          correct: 1,
+          hook: "I Change the Independent; the Dependent Depends on it!",
+          explanation: "The independent variable is the experimental factor manipulated by the scientist; the dependent variable is the responding output that is observed and measured.",
+          paperPhrase: "The independent variable is the factor intentionally manipulated by the researcher; the dependent variable is the responding output that is systematically measured."
+        },
+        {
+          id: "i5",
+          category: "Controls",
+          title: "In most scientific experiments, who or what forms the Control Group?",
+          options: [
+            "Nature automatically creates all controls.",
+            "The school principal.",
+            "The experimenter sets up the control group as a baseline comparison.",
+            "Controls are forbidden in modern physical science."
+          ],
+          correct: 2,
+          hook: "Experimenter Creates Controls: A baseline is needed to compare results!",
+          explanation: "The experimenter deliberately establishes a control group that does not receive the experimental treatment to isolate the effects of the independent variable.",
+          paperPhrase: "The experimenter actively establishes a control group to serve as a baseline comparison to ensure observed effects are solely caused by the independent variable."
+        },
+        {
+          id: "i6",
+          category: "Peer Review",
+          title: "Why is publishing results in a peer-reviewed journal a crucial step of the scientific method?",
+          options: [
+            "So scientists can become rich celebrities on social media.",
+            "Science cannot progress without sharing observations so other scientists can independently replicate and test the results.",
+            "To prove that only alpha males understand physics.",
+            "To satisfy copyright law."
+          ],
+          correct: 1,
+          hook: "Share or It Didn't Happen: Peer review ensures independent replication!",
+          explanation: "Scientific claims must be subjected to peer scrutiny and independent replication. If an experiment cannot be duplicated by others, it cannot become scientific theory.",
+          paperPhrase: "Peer review ensures that methodologies and findings are scrutinized and verified through independent replication by the global scientific community."
+        },
+        {
+          id: "i7",
+          category: "Replication Failure",
+          title: "What famous 1989 experiment did Mr. Carosaari cite as a failure because other scientists could not replicate the results?",
+          options: [
+            "The Discovery of the Electron",
+            "The American scientists' Cold Fusion experiment",
+            "The Apollo 11 Moon Landing",
+            "The Hubble Telescope calibration"
+          ],
+          correct: 1,
+          hook: "1989 Cold Fusion: Failed because nobody else could repeat it!",
+          explanation: "In 1989, researchers claimed they created tabletop nuclear fusion at room temperature (Cold Fusion). When independent labs failed to reproduce it, the claim was discredited.",
+          paperPhrase: "The 1989 Fleischmann-Pons cold fusion experiment was discredited when independent research laboratories worldwide failed to replicate the claimed excess enthalpy."
+        },
+        {
+          id: "i8",
+          category: "Thomas Huxley Quote",
+          title: "What did British biologist Thomas Huxley say regarding belief without evidence?",
+          options: [
+            "Belief without evidence is fine as long as you are enthusiastic.",
+            "Scientists develop a habit of believing nothing without evidence, and consider belief not based on evidence illogical and immoral.",
+            "Evidence is only necessary when dealing with chemistry.",
+            "Belief is more powerful than observation."
+          ],
+          correct: 1,
+          hook: "Huxley Rule: Belief without evidence is Illogical & Immoral!",
+          explanation: "Thomas Huxley famously argued that the essence of science is skepticism: accepting claims without empirical evidence is intellectually and ethically unacceptable.",
+          paperPhrase: "Thomas Huxley maintained that believing claims without sufficient empirical evidence is both intellectually illogical and ethically immoral."
+        },
+        {
+          id: "i9",
+          category: "Caloric Theory",
+          title: "What was the 'Caloric Theory', and what did new evidence prove it to be?",
+          options: [
+            "The theory that calories in food make you run faster.",
+            "The obsolete theory that heat was a fluid called 'caloric'; new evidence proved heat is the kinetic energy of particles in motion.",
+            "The theory that the sun is made of burning coal.",
+            "The theory that plants grow faster under blue light."
+          ],
+          correct: 1,
+          hook: "Caloric = Fluid Myth; Heat = Energy of Moving Particles!",
+          explanation: "Caloric theory was widely accepted until experiments showed friction could generate limitless heat, proving heat is the kinetic energy of moving molecules.",
+          paperPhrase: "Caloric theory posited that heat was a self-repellent weightless fluid; it was superseded by the kinetic-molecular theory demonstrating heat is particle kinetic energy."
+        },
+        {
+          id: "i10",
+          category: "Scientific Failure",
+          title: "Why does Mr. Carosaari teach that failure is often 'the bedrock for future scientific advancement'?",
+          options: [
+            "Because failed scientists get promoted faster.",
+            "Because when something fails, it teaches us what went wrong, and there is no growth without risk and failure.",
+            "Because failure proves science is impossible.",
+            "Because failed experiments receive higher grant money."
+          ],
+          correct: 1,
+          hook: "Bedrock of Advancement: Failure teaches what went wrong so we get it right!",
+          explanation: "Failure isolates incorrect hypotheses and reveals hidden variables, guiding scientists toward correct models and breakthroughs.",
+          paperPhrase: "Failure is the bedrock of scientific progress because ruling out incorrect models illuminates hidden variables and guides subsequent experimental design."
+        },
+        {
+          id: "i11",
+          category: "Cosmic Discordance",
+          title: "What modern example does Mr. Carosaari give to show that science is still discovering new evidence?",
+          options: [
+            "The Earth has recently stopped rotating.",
+            "Hubble and James Webb telescopes disagree on the speed of universe expansion (67.4 vs 73 km/s/Mpc).",
+            "Gravity has reversed in the Pacific Ocean.",
+            "Electrons have been proven to have no electric charge."
+          ],
+          correct: 1,
+          hook: "Hubble vs Webb: Expansion rate discordance shows science is still learning!",
+          explanation: "The 'Hubble Tension' (67.4 vs 73 km/s/Mpc) demonstrates that even modern physical constants are subject to ongoing discovery and revised evidence.",
+          paperPhrase: "The Hubble Tension (the persistent discrepancy between early-universe CMB measurements of ~67.4 km/s/Mpc and local Cepheid measurements of ~73 km/s/Mpc) proves that foundational physics is continuously evolving."
+        },
+        {
+          id: "i12",
+          category: "Class Rules",
+          title: "What is Mr. Carosaari's policy regarding cell phones, smart watches, and earbuds in class?",
+          options: [
+            "They are allowed during lectures as long as volume is low.",
+            "Any phone, watch, or earbud seen or heard will be 'emancipated' (freed from ownership).",
+            "Students may use them to check social media during lab.",
+            "You only get a warning after five violations."
+          ],
+          correct: 1,
+          hook: "Emancipation: Phones seen or heard are freed from ownership!",
+          explanation: "Mr. Carosaari enforces strict focus in the classroom: electronic devices are strictly banned from being visible or audible during instructional time.",
+          paperPhrase: "Any digital device, wearable, or earbud visible or audible during class is subject to immediate emancipation (confiscation) without warning."
+        }
+      ]
+    };
+
+    // OFFLINE GAME STATE
+    let selectedGameMode = "physics";
+    let activeQuestions = [];
+    let currentQIndex = 0;
+    let shield = 100;
+    let health = 100;
+    let elims = 0;
+    let streak = 0;
+    let missedQuestions = [];
+    let matchHistory = [];
+    let careerStats = {
+      matches_played: 0,
+      victory_royales: 0,
+      total_score: 0,
+      peak_accuracy: 0,
+      battle_stars: 0,
+      battle_pass_tier: 1
+    };
+
+    // NATIVE WEB AUDIO SYNTHESIZER (100% OFFLINE)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playFnSound(type) {
+      if (!audioCtx) return;
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const now = audioCtx.currentTime;
+
+      if (type === "headshot") {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(1400, now);
+        osc.frequency.exponentialRampToValueAtTime(3200, now + 0.08);
+        gain.gain.setValueAtTime(0.4, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        osc.start(now);
+        osc.stop(now + 0.25);
+      } else if (type === "shield_crack") {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = "sawtooth";
+        osc.frequency.setValueAtTime(260, now);
+        osc.frequency.exponentialRampToValueAtTime(70, now + 0.3);
+        gain.gain.setValueAtTime(0.45, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+        osc.start(now);
+        osc.stop(now + 0.35);
+      } else if (type === "click") {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(600, now);
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.05);
+        osc.start(now);
+        osc.stop(now + 0.05);
+      } else if (type === "victory") {
+        const chords = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+        chords.forEach((freq, idx) => {
+          const o = audioCtx.createOscillator();
+          const g = audioCtx.createGain();
+          o.connect(g);
+          g.connect(audioCtx.destination);
+          o.type = "sawtooth";
+          o.frequency.setValueAtTime(freq, now + idx * 0.1);
+          g.gain.setValueAtTime(0.2, now + idx * 0.1);
+          g.gain.exponentialRampToValueAtTime(0.01, now + idx * 0.1 + 0.5);
+          o.start(now + idx * 0.1);
+          o.stop(now + idx * 0.1 + 0.5);
+        });
+      }
+    }
+
+    // NATIVE CANVAS CONFETTI (100% OFFLINE)
+    function launchVictoryConfetti() {
+      const canvas = document.getElementById("confetti-canvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ["#ffe600", "#00e5ff", "#22c55e", "#ff8000", "#a335ee", "#ffffff"];
+
+      for (let i = 0; i < 120; i++) {
+        particles.push({
+          x: canvas.width / 2,
+          y: canvas.height * 0.4,
+          vx: (Math.random() - 0.5) * 20,
+          vy: (Math.random() - 0.8) * 20,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          rotation: Math.random() * 360,
+          vRot: (Math.random() - 0.5) * 12,
+          opacity: 1
+        });
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let anyAlive = false;
+
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.35;
+          p.rotation += p.vRot;
+          p.opacity -= 0.012;
+
+          if (p.opacity > 0) {
+            anyAlive = true;
+            ctx.save();
+            ctx.translate(p.x, p.y);
+            ctx.rotate((p.rotation * Math.PI) / 180);
+            ctx.fillStyle = p.color;
+            ctx.globalAlpha = p.opacity;
+            ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+            ctx.restore();
+          }
+        });
+
+        if (anyAlive) requestAnimationFrame(animate);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      animate();
+    }
+
+    // TAB NAVIGATION
+    function switchFnTab(tabId) {
+      playFnSound("click");
+      const tabs = ["play", "career", "vault", "cheatsheet"];
+      tabs.forEach(t => {
+        const el = document.getElementById(t + "-screen");
+        if (el) el.style.display = "none";
+      });
+
+      document.querySelectorAll(".fn-tab").forEach(btn => btn.classList.remove("active"));
+      const targetScreen = document.getElementById(tabId + "-screen");
+      if (targetScreen) targetScreen.style.display = "block";
+
+      const navBtns = document.querySelectorAll(".fn-tab");
+      const idx = tabs.indexOf(tabId);
+      if (idx !== -1 && navBtns[idx]) navBtns[idx].classList.add("active");
+
+      if (tabId !== "play") {
+        document.getElementById("battle-hud-screen").style.display = "none";
+      }
+
+      if (tabId === "career") renderCareerUI();
+      if (tabId === "vault") updateVaultUI();
+    }
+
+    function selectMode(mode, cardEl) {
+      playFnSound("click");
+      selectedGameMode = mode;
+      document.querySelectorAll(".mode-card").forEach(c => c.classList.remove("selected"));
+      cardEl.classList.add("selected");
+    }
+
+    function launchMatch() {
+      playFnSound("click");
+
+      if (selectedGameMode === "physics") activeQuestions = [...QUESTIONS.physics];
+      else if (selectedGameMode === "intro") activeQuestions = [...QUESTIONS.intro];
+      else if (selectedGameMode === "boss") activeQuestions = [...QUESTIONS.physics, ...QUESTIONS.intro];
+      else if (selectedGameMode === "vault_practice") {
+        if (missedQuestions.length === 0) {
+          alert("Your Redo Vault is currently empty! Play Solo or Duos first.");
+          return;
+        }
+        activeQuestions = [...missedQuestions];
+      }
+
+      activeQuestions.sort(() => Math.random() - 0.5);
+      currentQIndex = 0;
+      shield = 100;
+      health = 100;
+      elims = 0;
+      streak = 0;
+      updateHudStats();
+
+      document.getElementById("play-screen").style.display = "none";
+      document.getElementById("battle-hud-screen").style.display = "block";
+
+      renderQuestion();
+    }
+
+    function renderQuestion() {
+      const q = activeQuestions[currentQIndex];
+      const total = activeQuestions.length;
+
+      document.getElementById("hud-q-badge").innerText = "LEGENDARY QUEST // " + q.category.toUpperCase();
+      document.getElementById("hud-q-counter").innerText = "DROP " + (currentQIndex + 1) + " OF " + total;
+      document.getElementById("hud-q-text").innerText = q.title;
+
+      const container = document.getElementById("hud-options-container");
+      container.innerHTML = "";
+
+      const letters = ["A", "B", "C", "D"];
+      q.options.forEach((optText, idx) => {
+        const btn = document.createElement("button");
+        btn.className = "fn-option-card fn-opt-" + (idx % 4);
+        btn.innerHTML = `
+          <div class="fn-opt-letter fn-font-heavy">${letters[idx]}</div>
+          <div>${optText}</div>
+        `;
+        btn.onclick = (e) => selectOption(idx, btn, e);
+        container.appendChild(btn);
+      });
+
+      document.getElementById("coach-dialog").classList.remove("visible");
+      document.getElementById("next-drop-btn").innerText = (currentQIndex === total - 1) ? "CLAIM VICTORY ROYALE ➔" : "CLAIM INTEL & NEXT DROP ➔";
+    }
+
+    function selectOption(selectedIdx, btnElement, event) {
+      const q = activeQuestions[currentQIndex];
+      const buttons = document.querySelectorAll(".fn-option-card");
+      buttons.forEach(b => b.classList.add("disabled"));
+
+      const isCorrect = (selectedIdx === q.correct);
+
+      if (isCorrect) {
+        btnElement.classList.add("correct");
+        elims += 1;
+        streak += 1;
+        playFnSound("headshot");
+        spawnDamagePopup("200 CRITICAL!", event.clientX, event.clientY);
+        removeFromVault(q.id);
+        if (streak >= 3) launchVictoryConfetti();
+      } else {
+        btnElement.classList.add("wrong");
+        buttons[q.correct].classList.add("correct");
+        streak = 0;
+        playFnSound("shield_crack");
+        if (shield > 0) {
+          shield = Math.max(0, shield - 50);
+          spawnDamagePopup("-50 SHIELD CRACKED!", event.clientX, event.clientY, "#00e5ff");
+        } else {
+          health = Math.max(20, health - 40);
+          spawnDamagePopup("-40 STORM HIT!", event.clientX, event.clientY, "#ef4444");
+        }
+        addToVault(q);
+      }
+
+      updateHudStats();
+
+      // INSTANT OFFLINE COACH CAROSAARI INTEL
+      const studentChoice = q.options[selectedIdx];
+      const correctChoice = q.options[q.correct];
+
+      const feedback = isCorrect 
+        ? `🔥 BOOM! Flawless execution. You picked: "${studentChoice}".\n\n📝 EXACT PAPER PHRASING FOR 100%:\n"${q.paperPhrase}"`
+        : `⚠️ TRAP DETECTED! You picked: "${studentChoice}".\nWinning Play is: "${correctChoice}".\n\n📝 EXACT PAPER PHRASING FOR 100%:\n"${q.paperPhrase}"`;
+
+      document.getElementById("coach-feedback-text").innerText = feedback;
+      document.getElementById("coach-hook-text").innerText = "💡 5-Word Memory Chant: " + q.hook;
+      document.getElementById("coach-dialog").classList.add("visible");
+    }
+
+    function spawnDamagePopup(text, x, y, color = "#ffe600") {
+      const popup = document.createElement("div");
+      popup.className = "damage-popup fn-font-heavy";
+      popup.innerText = text;
+      popup.style.color = color;
+      popup.style.left = (x || (window.innerWidth / 2)) + "px";
+      popup.style.top = (y || (window.innerHeight / 2)) + "px";
+      document.body.appendChild(popup);
+      setTimeout(() => popup.remove(), 1000);
+    }
+
+    function updateHudStats() {
+      document.getElementById("hud-shield-fill").style.width = shield + "%";
+      document.getElementById("hud-health-fill").style.width = health + "%";
+    }
+
+    function nextQuestion() {
+      playFnSound("click");
+      if (currentQIndex < activeQuestions.length - 1) {
+        currentQIndex++;
+        renderQuestion();
+      } else {
+        triggerVictoryRoyale();
+      }
+    }
+
+    function triggerVictoryRoyale() {
+      playFnSound("victory");
+      launchVictoryConfetti();
+
+      const total = activeQuestions.length;
+      const pct = Math.round((elims / total) * 100);
+      const points = elims * 100;
+
+      document.getElementById("v-stat-score").innerText = pct + "%";
+      const summaryText = document.getElementById("victory-summary-text");
+      summaryText.innerText = (pct === 100)
+        ? "👑 FLAWLESS 100%! You eliminated every single trap in Mr. Carosaari's bank! Full marks are guaranteed."
+        : `You scored ${elims}/${total} (${pct}%). Check your Redo Vault to drill what you missed until you hit 100%!`;
+
+      document.getElementById("victory-royale-modal").style.display = "flex";
+
+      // PERSIST OFFLINE TO LOCALSTORAGE
+      const matchRecord = {
+        id: "offline_" + Date.now(),
+        date: new Date().toLocaleDateString(),
+        formatted_time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        mode_title: selectedGameMode.toUpperCase(),
+        elims: elims,
+        total_questions: total,
+        accuracy: pct,
+        score: points,
+        result: (pct === 100) ? "VICTORY_ROYALE" : (pct >= 85 ? "TOP_5" : "REBOOT")
+      };
+
+      matchHistory.unshift(matchRecord);
+      careerStats.matches_played += 1;
+      if (pct === 100) careerStats.victory_royales += 1;
+      careerStats.total_score += points;
+      if (pct > careerStats.peak_accuracy) careerStats.peak_accuracy = pct;
+
+      try {
+        localStorage.setItem("carosaari_offline_history", JSON.stringify(matchHistory));
+        localStorage.setItem("carosaari_offline_stats", JSON.stringify(careerStats));
+      } catch(e) {}
+
+      updateLobbyCareerStats();
+    }
+
+    function closeVictoryModal() {
+      playFnSound("click");
+      document.getElementById("victory-royale-modal").style.display = "none";
+      switchFnTab("play");
+    }
+
+    function updateLobbyCareerStats() {
+      document.getElementById("ped-wins").innerText = careerStats.victory_royales;
+      document.getElementById("ped-acc").innerText = careerStats.peak_accuracy + "%";
+      document.getElementById("ped-pts").innerText = careerStats.total_score.toLocaleString();
+    }
+
+    function renderCareerUI() {
+      document.getElementById("career-wins").innerText = careerStats.victory_royales;
+      document.getElementById("career-matches").innerText = careerStats.matches_played;
+      document.getElementById("career-peak-acc").innerText = careerStats.peak_accuracy + "%";
+      document.getElementById("career-pts").innerText = careerStats.total_score.toLocaleString();
+
+      const tbody = document.getElementById("history-table-body");
+      if (!tbody) return;
+
+      if (matchHistory.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #64748b; padding: 30px;">No offline matches recorded yet. Ready Up in the PLAY tab!</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = matchHistory.map(m => `
+        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14.5px;">
+          <td style="padding: 10px;">${m.date} <span style="font-size: 12px; color: #94a3b8;">${m.formatted_time}</span></td>
+          <td style="padding: 10px; color: #ffe600; font-weight: 700;">${m.mode_title}</td>
+          <td style="padding: 10px;">${m.elims} / ${m.total_questions}</td>
+          <td style="padding: 10px; font-weight: 800; color: ${m.accuracy === 100 ? '#4ade80' : '#38bdf8'};">${m.accuracy}%</td>
+          <td style="padding: 10px;"><span style="background: ${m.result === 'VICTORY_ROYALE' ? '#ffe600' : '#0094ff'}; color: ${m.result === 'VICTORY_ROYALE' ? '#000' : '#fff'}; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 800;">${m.result}</span></td>
+        </tr>
+      `).join("");
+    }
+
+    function exportScoresJSON() {
+      const dataToExport = {
+        student: "Henri Michel Morelli",
+        edition: "100% Offline Standalone",
+        export_date: new Date().toISOString(),
+        career_stats: careerStats,
+        match_history: matchHistory,
+        missed_questions_vault: missedQuestions
+      };
+
+      const blob = new Blob([JSON.stringify(dataToExport, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `henri_offline_scores_${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function loadVault() {
+      try {
+        const stored = localStorage.getItem("carosaari_offline_vault");
+        missedQuestions = stored ? JSON.parse(stored) : [];
+      } catch(e) { missedQuestions = []; }
+      updateVaultUI();
+    }
+
+    function saveVault() {
+      try { localStorage.setItem("carosaari_offline_vault", JSON.stringify(missedQuestions)); } catch(e) {}
+      updateVaultUI();
+    }
+
+    function addToVault(q) {
+      if (!missedQuestions.some(item => item.id === q.id)) {
+        missedQuestions.push(q);
+        saveVault();
+      }
+    }
+
+    function removeFromVault(id) {
+      missedQuestions = missedQuestions.filter(item => item.id !== id);
+      saveVault();
+    }
+
+    function updateVaultUI() {
+      const countEl = document.getElementById("tab-vault-count");
+      if (countEl) countEl.innerText = missedQuestions.length;
+
+      const container = document.getElementById("vault-list-container");
+      const emptyMsg = document.getElementById("vault-empty-message");
+
+      if (!container) return;
+
+      if (missedQuestions.length === 0) {
+        emptyMsg.style.display = "block";
+        container.innerHTML = "";
+      } else {
+        emptyMsg.style.display = "none";
+        container.innerHTML = missedQuestions.map(q => `
+          <div style="background: rgba(0,0,0,0.4); border: 1px solid #334155; border-left: 4px solid #ef4444; padding: 12px 16px; border-radius: 6px; margin-bottom: 10px;">
+            <h4 style="font-size: 15.5px; color: #fff;">${q.title}</h4>
+            <p style="font-size: 13.5px; color: #4ade80; margin-top: 4px;"><strong>Paper Solution:</strong> ${q.options[q.correct]}</p>
+            <p style="color: #ffe600; font-size: 13px; margin-top: 4px;">💡 ${q.hook}</p>
+          </div>
+        `).join("");
+      }
+    }
+
+    // INIT
+    window.onload = () => {
+      try {
+        const hist = localStorage.getItem("carosaari_offline_history");
+        if (hist) matchHistory = JSON.parse(hist);
+        const stats = localStorage.getItem("carosaari_offline_stats");
+        if (stats) careerStats = JSON.parse(stats);
+      } catch(e) {}
+
+      updateLobbyCareerStats();
+      loadVault();
+    };
+  </script>
+</body>
+</html>
