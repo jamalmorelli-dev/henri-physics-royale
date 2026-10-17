@@ -887,7 +887,7 @@
   <header class="fn-header">
     <div class="fn-brand">
       <div class="fn-logo-badge fn-font-heavy">FORTNITE</div>
-      <div class="fn-title fn-font-condensed">PHYSICAL SCIENCE <span>BATTLE ROYALE</span> <span class="offline-tag">OFFLINE OK</span></div>
+      <div class="fn-title fn-font-condensed">PHYSICAL SCIENCE <span>BATTLE ROYALE</span> <span class="offline-tag" style="background: #22c55e; color: #000; box-shadow: 0 0 12px rgba(34, 197, 94, 0.6);">ONLINE LIVE // AI COACH</span></div>
     </div>
 
     <nav class="fn-nav">
@@ -2067,18 +2067,68 @@
       updateHudStats();
       renderMemeReaction(isCorrect, q);
 
-      // INSTANT OFFLINE COACH CAROSAARI INTEL
-      const studentChoice = q.options[selectedIdx];
+    function requestCoachAI(q, studentChoice, isCorrect) {
       const correctChoice = q.options[q.correct];
-
-      const feedback = isCorrect 
+      const fallbackFeedback = isCorrect 
         ? `🔥 BOOM! Flawless execution. You picked: "${studentChoice}".\n\n📝 EXACT PAPER PHRASING FOR 100%:\n"${q.paperPhrase}"`
         : `⚠️ TRAP DETECTED! You picked: "${studentChoice}".\nWinning Play is: "${correctChoice}".\n\n📝 EXACT PAPER PHRASING FOR 100%:\n"${q.paperPhrase}"`;
 
-      document.getElementById("coach-feedback-text").innerText = feedback;
-      document.getElementById("coach-hook-text").innerText = "💡 5-Word Memory Chant: " + q.hook;
-      document.getElementById("coach-dialog").classList.add("visible");
+      const feedbackEl = document.getElementById("coach-feedback-text");
+      feedbackEl.innerHTML = `<div style="color: #00e5ff; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+        <span>⚡</span> COACH CAROSAARI AI TRANSMITTING LIVE COMBAT INTEL...
+      </div>`;
+
+      // 1. Google Apps Script native environment
+      if (typeof google !== 'undefined' && google.script && google.script.run) {
+        google.script.run
+          .withSuccessHandler(res => {
+            if (res && res.feedback) feedbackEl.innerText = res.feedback;
+            else feedbackEl.innerText = fallbackFeedback;
+          })
+          .withFailureHandler(() => {
+            feedbackEl.innerText = fallbackFeedback;
+          })
+          .askCoachCarosaari({
+            title: q.title,
+            correctAnswerText: correctChoice,
+            explanation: q.paperPhrase,
+            hook: q.hook
+          }, studentChoice, isCorrect);
+        return;
+      }
+
+      // 2. Local Node server or reverse proxy (/api/coach_ai)
+      fetch("/api/coach_ai", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          questionData: {
+            title: q.title,
+            correctAnswerText: correctChoice,
+            explanation: q.paperPhrase,
+            hook: q.hook
+          },
+          selectedOptionText: studentChoice,
+          isCorrect: isCorrect
+        })
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.feedback) feedbackEl.innerText = data.feedback;
+        else feedbackEl.innerText = fallbackFeedback;
+      })
+      .catch(() => {
+        feedbackEl.innerText = fallbackFeedback;
+      });
     }
+
+    // LIVE ONLINE COACH CAROSAARI INTEL
+    const studentChoice = q.options[selectedIdx];
+    requestCoachAI(q, studentChoice, isCorrect);
+
+    document.getElementById("coach-hook-text").innerText = "💡 5-Word Memory Chant: " + q.hook;
+    document.getElementById("coach-dialog").classList.add("visible");
+  }
 
     function spawnDamagePopup(text, x, y, color = "#ffe600") {
       const popup = document.createElement("div");
