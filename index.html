@@ -1210,6 +1210,26 @@
   <div id="rick-portal-vortex-overlay"></div>
 
   <!-- DATA PERSISTENCE & PRIVACY AUDIT MODAL -->
+
+  <!-- UNFINISHED SESSION RESUME MODAL -->
+  <div id="resume-session-modal" class="fn-player-modal" style="display: none;">
+    <div class="player-modal-box" style="max-width: 520px; border-color: #00ff66;">
+      <div class="player-modal-header fn-font-heavy" style="color: #00ff66;">⚡ COMBAT DROP RESUME DETECTED</div>
+      <h3 class="fn-font-heavy" style="color: #fff; font-size: 22px; margin: 10px 0;" id="resume-modal-title">IN-PROGRESS MATCH RECOVERED</h3>
+      <p class="fn-font-condensed" style="color: #cbd5e1; font-size: 15px; margin-bottom: 20px;" id="resume-modal-desc">
+        Your browser has saved an active match session. Would you like to resume your drop?
+      </p>
+      <div style="display: flex; gap: 12px; justify-content: center;">
+        <button class="ready-up-btn fn-font-heavy" style="padding: 12px 24px; font-size: 18px;" onclick="confirmResumeSession()">
+          RESUME DROP ➔
+        </button>
+        <button class="player-modal-btn guest-btn fn-font-heavy" style="padding: 12px 20px; font-size: 16px;" onclick="discardResumeSession()">
+          START FRESH
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div id="save-audit-modal" class="fn-player-modal" style="display: none;">
     <div class="player-modal-box" style="max-width: 640px;">
       <div class="player-modal-header fn-font-heavy">🛡️ SCORE & PROGRESS AUDIT</div>
@@ -1465,9 +1485,16 @@
     <!-- TAB 3: CAREER -->
     <section id="career-screen" style="display: none;">
       <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #2a3f6e; border-radius: 12px; padding: 24px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
           <h2 class="fn-font-heavy" style="color: #ffe600; font-size: 26px;">OFFLINE MATCH LOG & CAREER PROGRESS</h2>
-          <button class="next-drop-btn fn-font-heavy" style="margin: 0; font-size: 16px; padding: 8px 16px;" onclick="exportScoresJSON()">EXPORT SCORES (.JSON) 💾</button>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="next-drop-btn fn-font-heavy" style="margin: 0; font-size: 14px; padding: 8px 14px; background: #22c55e; color: #000;" onclick="exportScoresJSON()">EXPORT (.JSON) 💾</button>
+            <label class="next-drop-btn fn-font-heavy" style="margin: 0; font-size: 14px; padding: 8px 14px; background: #0078ff; color: #fff; cursor: pointer; display: inline-flex; align-items: center;">
+              IMPORT (.JSON) 📂
+              <input type="file" accept=".json" style="display: none;" onchange="importScoresJSON(event)">
+            </label>
+            <button class="next-drop-btn fn-font-heavy" style="margin: 0; font-size: 14px; padding: 8px 14px; background: #ffe600; color: #000;" onclick="copyBackupToClipboard()">COPY BACKUP 📋</button>
+          </div>
         </div>
         <div class="pedestal-stats-row fn-font-condensed" style="margin-bottom: 20px;">
           <div><div id="career-wins" style="font-size: 26px; color: #ffe600;">0</div>VICTORY ROYALES</div>
@@ -1944,6 +1971,248 @@
       battle_stars: 0,
       battle_pass_tier: 1
     };
+
+
+    // =========================================================================
+    // IRONCLAD FAIL-SAFE PERSISTENCE ENGINE (INDEXEDDB + LOCALSTORAGE + QUEUE)
+    // =========================================================================
+    let idb = null;
+    function initIndexedDB() {
+      return new Promise((resolve) => {
+        try {
+          const request = indexedDB.open("HenriPhysicsRoyaleDB", 1);
+          request.onupgradeneeded = (e) => {
+            const db = e.target.result;
+            if (!db.objectStoreNames.contains("vault")) {
+              db.createObjectStore("vault", { keyPath: "key" });
+            }
+          };
+          request.onsuccess = (e) => {
+            idb = e.target.result;
+            resolve(idb);
+          };
+          request.onerror = () => resolve(null);
+        } catch(e) { resolve(null); }
+      });
+    }
+
+    function saveToIndexedDB(key, val) {
+      if (!idb) return;
+      try {
+        const tx = idb.transaction("vault", "readwrite");
+        tx.objectStore("vault").put({ key: key, val: val, updated_at: Date.now() });
+      } catch(e) {}
+    }
+
+    function getFromIndexedDB(key) {
+      return new Promise((resolve) => {
+        if (!idb) return resolve(null);
+        try {
+          const tx = idb.transaction("vault", "readonly");
+          const req = tx.objectStore("vault").get(key);
+          req.onsuccess = () => resolve(req.result ? req.result.val : null);
+          req.onerror = () => resolve(null);
+        } catch(e) { resolve(null); }
+      });
+    }
+
+    function deleteFromIndexedDB(key) {
+      if (!idb) return;
+      try {
+        const tx = idb.transaction("vault", "readwrite");
+        tx.objectStore("vault").delete(key);
+      } catch(e) {}
+    }
+
+    // REAL-TIME PER-QUESTION MATCH SNAPSHOT (SAVED ON EVERY QUESTION ANSWERED)
+    function saveActiveSessionSnapshot() {
+      const snapshot = {
+        profile: currentProfile || "HENRI",
+        mode: selectedGameMode,
+        currentQIndex: currentQIndex,
+        elims: elims,
+        streak: streak,
+        shield: shield,
+        health: health,
+        missedQuestions: missedQuestions,
+        activeQuestionIds: activeQuestions.map(q => q.id),
+        timestamp: Date.now()
+      };
+      try {
+        localStorage.setItem("fn_active_session_snapshot", JSON.stringify(snapshot));
+        saveToIndexedDB("active_session", snapshot);
+      } catch(e) {}
+    }
+
+    function clearActiveSessionSnapshot() {
+      try {
+        localStorage.removeItem("fn_active_session_snapshot");
+        deleteFromIndexedDB("active_session");
+      } catch(e) {}
+    }
+
+    let recoveredSessionData = null;
+    function checkUnfinishedSession() {
+      try {
+        const raw = localStorage.getItem("fn_active_session_snapshot");
+        if (!raw) return;
+        const session = JSON.parse(raw);
+        // Valid if under 6 hours old and at least 1 question was answered
+        if (session && (Date.now() - session.timestamp < 6 * 3600 * 1000) && session.currentQIndex > 0) {
+          recoveredSessionData = session;
+          const modal = document.getElementById("resume-session-modal");
+          const desc = document.getElementById("resume-modal-desc");
+          if (desc) {
+            desc.innerHTML = `Found an in-progress match from ${new Date(session.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}:<br><strong style="color: #ffe600;">${session.mode.toUpperCase()}</strong> • Drop <strong>${session.currentQIndex + 1}</strong> • Elims: <strong>${session.elims}</strong>.<br>Would you like to resume your drop?`;
+          }
+          if (modal) modal.style.display = "flex";
+        }
+      } catch(e) {}
+    }
+
+    function confirmResumeSession() {
+      playFnSound("click");
+      const modal = document.getElementById("resume-session-modal");
+      if (modal) modal.style.display = "none";
+      if (!recoveredSessionData) return;
+
+      const s = recoveredSessionData;
+      currentProfile = s.profile || "HENRI";
+      selectedGameMode = s.mode || "physics";
+      elims = s.elims || 0;
+      streak = s.streak || 0;
+      shield = s.shield !== undefined ? s.shield : 100;
+      health = s.health !== undefined ? s.health : 100;
+      currentQIndex = s.currentQIndex || 0;
+      missedQuestions = s.missedQuestions || [];
+
+      // Rebuild active questions
+      const pool = [...QUESTIONS.physics, ...QUESTIONS.intro];
+      if (s.activeQuestionIds && s.activeQuestionIds.length) {
+        activeQuestions = s.activeQuestionIds.map(id => pool.find(q => q.id === id)).filter(Boolean);
+      } else {
+        activeQuestions = (selectedGameMode === "intro") ? [...QUESTIONS.intro] : [...QUESTIONS.physics];
+      }
+
+      applyProfileUI();
+      updateHudStats();
+      updateStreakBadge();
+      startKillfeedSimulation();
+
+      document.getElementById("play-screen").style.display = "none";
+      document.getElementById("battle-hud-screen").style.display = "block";
+      renderQuestion();
+    }
+
+    function discardResumeSession() {
+      playFnSound("click");
+      clearActiveSessionSnapshot();
+      recoveredSessionData = null;
+      const modal = document.getElementById("resume-session-modal");
+      if (modal) modal.style.display = "none";
+    }
+
+    // PERSISTENT OFFLINE RETRY QUEUE
+    function queueMatchForSync(savePayload) {
+      try {
+        let queue = JSON.parse(localStorage.getItem("fn_sync_queue") || "[]");
+        queue.push({
+          id: "queue_" + Date.now(),
+          payload: savePayload,
+          timestamp: Date.now()
+        });
+        localStorage.setItem("fn_sync_queue", JSON.stringify(queue));
+        saveToIndexedDB("sync_queue", queue);
+      } catch(e) {}
+      drainSyncQueue();
+    }
+
+    function drainSyncQueue() {
+      try {
+        let queue = JSON.parse(localStorage.getItem("fn_sync_queue") || "[]");
+        if (!queue || !queue.length) return;
+
+        const targets = ["/api/save_score", "http://localhost:3456/api/save_score"];
+        targets.forEach(targetUrl => {
+          queue.forEach(item => {
+            fetch(targetUrl, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(item.payload)
+            }).then(r => r.json()).then(res => {
+              if (res && res.success) {
+                let curQ = JSON.parse(localStorage.getItem("fn_sync_queue") || "[]");
+                curQ = curQ.filter(qItem => qItem.id !== item.id);
+                localStorage.setItem("fn_sync_queue", JSON.stringify(curQ));
+                saveToIndexedDB("sync_queue", curQ);
+              }
+            }).catch(() => {});
+          });
+        });
+      } catch(e) {}
+    }
+
+    window.addEventListener("online", drainSyncQueue);
+    setInterval(drainSyncQueue, 25000);
+
+    // IMPORT SCORES (.JSON)
+    function importScoresJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data.match_history || data.career_stats) {
+            const keys = getProfileKeys(currentProfile || "HENRI");
+            if (data.match_history) {
+              matchHistory = data.match_history;
+              localStorage.setItem(keys.historyKey, JSON.stringify(matchHistory));
+              saveToIndexedDB(keys.historyKey, matchHistory);
+            }
+            if (data.career_stats) {
+              careerStats = data.career_stats;
+              localStorage.setItem(keys.statsKey, JSON.stringify(careerStats));
+              saveToIndexedDB(keys.statsKey, careerStats);
+            }
+            if (data.missed_questions_vault) {
+              missedQuestions = data.missed_questions_vault;
+              localStorage.setItem(keys.vaultKey, JSON.stringify(missedQuestions));
+              saveToIndexedDB(keys.vaultKey, missedQuestions);
+            }
+            loadActiveProfileData();
+            applyProfileUI();
+            alert("✓ Success! Career scores, match history, and redo vault fully imported and restored.");
+          } else {
+            alert("Invalid backup format. Ensure you selected a valid Henri Physics Royale JSON file.");
+          }
+        } catch(err) {
+          alert("Error parsing backup JSON: " + err.message);
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // COPY CAREER DATA TO CLIPBOARD
+    function copyBackupToClipboard() {
+      const keys = getProfileKeys(currentProfile || "HENRI");
+      const backup = {
+        exported_at: new Date().toISOString(),
+        player: currentProfile || "HENRI",
+        student: (currentProfile === "HENRI") ? "Henri Michel Morelli" : "Guest Practice Player",
+        career_stats: careerStats,
+        match_history: matchHistory,
+        missed_questions_vault: missedQuestions
+      };
+      const jsonStr = JSON.stringify(backup, null, 2);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(jsonStr).then(() => {
+          alert("✓ Complete career backup copied to clipboard! Paste it into Notes or WhatsApp.");
+        }).catch(() => fallbackCopyText(jsonStr));
+      } else {
+        fallbackCopyText(jsonStr);
+      }
+    }
 
     function getProfileKeys(profile = currentProfile || "HENRI") {
       const isHenri = (profile === "HENRI");
@@ -2622,6 +2891,7 @@
 
       updateHudStats();
       renderMemeReaction(isCorrect, q);
+      saveActiveSessionSnapshot();
 
     function requestCoachAI(q, studentChoice, isCorrect) {
       const correctChoice = q.options[q.correct];
@@ -2788,6 +3058,10 @@
       });
 
       updateLobbyCareerStats();
+      clearActiveSessionSnapshot();
+      queueMatchForSync(savePayload);
+      saveToIndexedDB(keys.historyKey, matchHistory);
+      saveToIndexedDB(keys.statsKey, careerStats);
     }
 
     function closeVictoryModal() {
