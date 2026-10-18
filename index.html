@@ -2756,26 +2756,36 @@
         localStorage.setItem(keys.statsKey, JSON.stringify(careerStats));
       } catch(e) {}
 
-      // AUTO-SYNC TO LOCAL DISK SERVER IF ONLINE / RUNNING
-      try {
-        fetch("/api/save_score", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            player: currentProfile || "HENRI",
-            student_name: isHenri ? "Henri Michel Morelli" : "Guest Practice Player",
-            game_mode: selectedGameMode,
-            score: points,
-            accuracy: pct,
-            elims: elims,
-            total_questions: total,
-            victory_royale: (pct === 100),
-            stats_summary: careerStats
-          })
-        }).catch(() => {
-          // Offline mode: gracefully continue, scores are safely persisted in localStorage
-        });
-      } catch(e) {}
+      // AUTO-SYNC TO PERSISTENT SERVER DISK (PORT 3456)
+      const savePayload = {
+        player: currentProfile || "HENRI",
+        student_name: isHenri ? "Henri Michel Morelli" : "Guest Practice Player",
+        mode: selectedGameMode,
+        game_mode: selectedGameMode,
+        modeTitle: selectedGameMode.toUpperCase(),
+        mode_title: selectedGameMode.toUpperCase(),
+        score: points,
+        points: points,
+        pct: pct,
+        accuracy: pct,
+        elims: elims,
+        totalQuestions: total,
+        total_questions: total,
+        victory_royale: (pct === 100),
+        stats_summary: careerStats,
+        missedQuestions: missedQuestions
+      };
+
+      const serverTargets = ["/api/save_score", "http://localhost:3456/api/save_score"];
+      serverTargets.forEach(targetUrl => {
+        try {
+          fetch(targetUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(savePayload)
+          }).catch(() => {});
+        } catch(e) {}
+      });
 
       updateLobbyCareerStats();
     }
