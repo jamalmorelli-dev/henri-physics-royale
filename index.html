@@ -1180,6 +1180,628 @@
       animation: pulseGreen 1.5s infinite;
     }
 
+  
+    /* =======================================================
+       ITEM SHOP, LOCKER & ACTION JUICE (FORTNITE × C-137)
+       ======================================================= */
+
+    /* TAB NAV UPDATE */
+    .fn-tab.shop-tab {
+      background: linear-gradient(135deg, rgba(255, 230, 0, 0.15) 0%, rgba(255, 128, 0, 0.25) 100%);
+      border-color: #ffe600;
+      color: #ffe600;
+    }
+    .fn-tab.shop-tab:hover, .fn-tab.shop-tab.active {
+      background: linear-gradient(135deg, #ffe600 0%, #ff8000 100%);
+      color: #000;
+      box-shadow: 0 0 20px rgba(255, 230, 0, 0.6);
+    }
+    .fn-tab.locker-tab {
+      background: linear-gradient(135deg, rgba(0, 229, 255, 0.15) 0%, rgba(0, 120, 255, 0.25) 100%);
+      border-color: #00e5ff;
+      color: #00e5ff;
+    }
+    .fn-tab.locker-tab:hover, .fn-tab.locker-tab.active {
+      background: linear-gradient(135deg, #00e5ff 0%, #0078ff 100%);
+      color: #000;
+      box-shadow: 0 0 20px rgba(0, 229, 255, 0.6);
+    }
+
+    /* CURRENCY PILL */
+    .fn-currency.clickable-coin {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+    .fn-currency.clickable-coin:hover {
+      transform: scale(1.06);
+      box-shadow: 0 0 15px rgba(255, 230, 0, 0.5);
+    }
+    .vbucks-icon {
+      background: linear-gradient(135deg, #ffe600, #ff8000);
+      color: #000;
+      font-weight: 900;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(255, 230, 0, 0.7);
+    }
+
+    /* ITEM SHOP HEADER & COUNTDOWN */
+    .shop-header-banner {
+      background: radial-gradient(circle at 50% 20%, rgba(30, 58, 138, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 2px solid #3b82f6;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(59, 130, 246, 0.35);
+    }
+    .shop-header-banner::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0, 255, 102, 0.08) 0%, transparent 60%);
+      animation: vortexSpin 25s linear infinite;
+      pointer-events: none;
+    }
+    .shop-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      position: relative;
+      z-index: 2;
+    }
+    .shop-badge {
+      display: inline-block;
+      background: #00ff66;
+      color: #000;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      margin-bottom: 8px;
+      letter-spacing: 1px;
+    }
+    .shop-timer-box {
+      background: rgba(0, 0, 0, 0.65);
+      border: 1.5px solid #ffe600;
+      padding: 10px 18px;
+      border-radius: 10px;
+      text-align: right;
+    }
+
+    /* SPOTLIGHT BANNER */
+    .shop-spotlight {
+      background: linear-gradient(135deg, rgba(0, 255, 102, 0.15) 0%, rgba(15, 23, 42, 0.95) 70%);
+      border: 2px solid #00ff66;
+      border-radius: 16px;
+      padding: 20px 28px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 102, 0.3);
+    }
+    .spotlight-left {
+      max-width: 600px;
+    }
+    .spotlight-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .spotlight-thumb {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 15px #00ff66);
+      animation: floatSmooth 3.5s ease-in-out infinite;
+    }
+
+    /* SHOP GRID */
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 22px;
+    }
+    .shop-card {
+      background: rgba(15, 23, 42, 0.85);
+      border-radius: 14px;
+      border: 2px solid #334155;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .shop-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.7);
+    }
+    .shop-card.mythic { border-color: #00ff66; box-shadow: inset 0 0 20px rgba(0, 255, 102, 0.15); }
+    .shop-card.mythic:hover { box-shadow: 0 0 30px rgba(0, 255, 102, 0.5), inset 0 0 30px rgba(0, 255, 102, 0.2); }
+    .shop-card.rare { border-color: #38bdf8; box-shadow: inset 0 0 20px rgba(56, 189, 248, 0.15); }
+    .shop-card.rare:hover { box-shadow: 0 0 30px rgba(56, 189, 248, 0.5), inset 0 0 30px rgba(56, 189, 248, 0.2); }
+    .shop-card.epic { border-color: #a855f7; box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.15); }
+    .shop-card.epic:hover { box-shadow: 0 0 30px rgba(168, 85, 247, 0.5), inset 0 0 30px rgba(168, 85, 247, 0.2); }
+    .shop-card.icon { border-color: #f59e0b; box-shadow: inset 0 0 20px rgba(245, 158, 11, 0.15); }
+    .shop-card.icon:hover { box-shadow: 0 0 30px rgba(245, 158, 11, 0.5), inset 0 0 30px rgba(245, 158, 11, 0.2); }
+    .shop-card.legendary { border-color: #eab308; box-shadow: inset 0 0 20px rgba(234, 179, 8, 0.15); }
+    .shop-card.legendary:hover { box-shadow: 0 0 30px rgba(234, 179, 8, 0.5), inset 0 0 30px rgba(234, 179, 8, 0.2); }
+    .shop-card.og { border-color: #ef4444; box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.15); }
+    .shop-card.og:hover { box-shadow: 0 0 30px rgba(239, 68, 68, 0.5), inset 0 0 30px rgba(239, 68, 68, 0.2); }
+    .shop-card.grail { border-color: #f43f5e; box-shadow: inset 0 0 20px rgba(244, 63, 94, 0.15); }
+    .shop-card.grail:hover { box-shadow: 0 0 30px rgba(244, 63, 94, 0.5), inset 0 0 30px rgba(244, 63, 94, 0.2); }
+
+    .shop-card-badge {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      align-self: flex-start;
+      margin-bottom: 8px;
+    }
+    .badge-mythic { background: #00ff66; color: #000; }
+    .badge-rare { background: #38bdf8; color: #000; }
+    .badge-epic { background: #a855f7; color: #fff; }
+    .badge-icon { background: #f59e0b; color: #000; }
+    .badge-legendary { background: #eab308; color: #000; }
+    .badge-og { background: #ef4444; color: #fff; }
+    .badge-grail { background: #f43f5e; color: #fff; }
+
+    .shop-render-frame {
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 6px 0 14px 0;
+      background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%);
+      border-radius: 10px;
+    }
+    .shop-skin-img {
+      max-height: 210px;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 16px rgba(0,0,0,0.6));
+      transition: transform 0.3s ease;
+    }
+    .shop-card:hover .shop-skin-img {
+      transform: scale(1.08);
+    }
+    .shop-skin-title {
+      font-size: 21px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .shop-skin-series {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-bottom: 8px;
+      min-height: 28px;
+    }
+    .shop-skin-quote {
+      font-size: 12px;
+      color: #cbd5e1;
+      font-style: italic;
+      background: rgba(0,0,0,0.3);
+      padding: 6px 10px;
+      border-radius: 6px;
+      border-left: 2px solid #64748b;
+      margin-bottom: 12px;
+      min-height: 48px;
+    }
+    .shop-card-footer {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: auto;
+    }
+    .shop-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 18px;
+      font-weight: 800;
+    }
+    .shop-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .shop-btn.buy {
+      background: linear-gradient(135deg, #ffe600 0%, #ff8000 100%);
+      color: #000;
+      box-shadow: 0 4px 15px rgba(255, 230, 0, 0.4);
+    }
+    .shop-btn.buy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(255, 230, 0, 0.7);
+    }
+    .shop-btn.equip {
+      background: linear-gradient(135deg, #00e5ff 0%, #0078ff 100%);
+      color: #000;
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.4);
+    }
+    .shop-btn.equip:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 22px rgba(0, 229, 255, 0.7);
+    }
+    .shop-btn.equipped {
+      background: rgba(34, 197, 94, 0.25);
+      border: 1.5px solid #22c55e;
+      color: #22c55e;
+      cursor: default;
+    }
+    .shop-btn.locked {
+      background: rgba(100, 116, 139, 0.2);
+      border: 1px solid #475569;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+    .shop-btn.locked:hover {
+      background: rgba(100, 116, 139, 0.35);
+      color: #e2e8f0;
+    }
+
+    /* LOCKER WARDROBE LAYOUT */
+    .locker-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .locker-layout { grid-template-columns: 1fr; }
+    }
+    .locker-showcase-card {
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid #00e5ff;
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      position: sticky;
+      top: 90px;
+      box-shadow: 0 0 35px rgba(0, 229, 255, 0.25);
+    }
+    .locker-stage {
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 12px 0;
+    }
+    .locker-avatar-img {
+      max-height: 290px;
+      max-width: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 25px rgba(0, 229, 255, 0.5));
+      animation: floatSmooth 4s ease-in-out infinite;
+    }
+    .locker-pedestal-ring {
+      position: absolute;
+      bottom: 5px;
+      width: 220px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(0, 229, 255, 0.6) 0%, transparent 70%);
+      border: 2px solid rgba(0, 229, 255, 0.8);
+      box-shadow: 0 0 25px #00e5ff;
+    }
+
+    /* ACTION JUICE HUD: ALIVE PLAYERS BADGE */
+    .hud-alive-badge {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1.5px solid #ef4444;
+      border-radius: 8px;
+      padding: 6px 14px;
+      color: #fff;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+      transition: all 0.2s ease;
+    }
+    .alive-dot {
+      width: 9px;
+      height: 9px;
+      background: #ef4444;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #ef4444;
+      animation: pulseRed 1s infinite;
+    }
+    .alive-num {
+      font-size: 20px;
+      font-weight: 900;
+      color: #ffe600;
+    }
+    @keyframes pulseRed {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* ACTION JUICE HUD: FORTNITE MINI-MAP RADAR */
+    .hud-radar-card {
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid #8b5cf6;
+      border-radius: 12px;
+      padding: 12px;
+      width: 170px;
+      position: relative;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.35);
+      text-align: center;
+    }
+    .radar-circle {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, rgba(15, 23, 42, 0.95) 70%);
+      border: 2px solid #10b981;
+      position: relative;
+      margin: 0 auto 8px auto;
+      overflow: hidden;
+      box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.3);
+    }
+    .radar-storm-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      border: 2px dashed #a855f7;
+      background: rgba(168, 85, 247, 0.15);
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.5);
+      transition: width 0.8s ease, height 0.8s ease;
+    }
+    .radar-safe-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      border: 1.5px solid #00ff66;
+      animation: pulseGreen 2s infinite;
+    }
+    .radar-player-needle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      background: #ffe600;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 8px #ffe600;
+    }
+    .radar-sweep-beam {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, #10b981, transparent);
+      transform-origin: 0% 50%;
+      animation: radarScan 3s linear infinite;
+    }
+    @keyframes radarScan {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .radar-ticker {
+      font-size: 11px;
+      color: #cbd5e1;
+      font-weight: 700;
+    }
+
+    /* ACTION JUICE: OVERDRIVE HYPE METER */
+    .overdrive-wrapper {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1.5px solid #ffe600;
+      border-radius: 10px;
+      padding: 10px 16px;
+      margin: 12px 0 16px 0;
+      box-shadow: 0 0 20px rgba(255, 230, 0, 0.25);
+    }
+    .overdrive-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+    .overdrive-track {
+      width: 100%;
+      height: 12px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 230, 0, 0.4);
+    }
+    .overdrive-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ffe600, #ff8000, #00ff66);
+      border-radius: 6px;
+      transition: width 0.35s ease;
+      box-shadow: 0 0 12px #ffe600;
+    }
+    .overdrive-active {
+      animation: overdrivePulse 0.8s infinite alternate;
+    }
+    @keyframes overdrivePulse {
+      0% { box-shadow: 0 0 10px #ffe600, inset 0 0 10px #ffe600; }
+      100% { box-shadow: 0 0 30px #00ff66, inset 0 0 15px #00ff66; border-color: #00ff66; }
+    }
+
+    /* ACTION JUICE: SUPPLY DROP CRATE ANIMATION */
+    #supply-drop-stage {
+      display: none;
+      position: relative;
+      height: 90px;
+      margin-bottom: 12px;
+      text-align: center;
+      overflow: hidden;
+    }
+    .supply-drop-balloon {
+      width: 48px;
+      height: 58px;
+      background: radial-gradient(circle at 35% 30%, #ffe600 0%, #d97706 100%);
+      border-radius: 50% 50% 45% 45%;
+      margin: 0 auto;
+      box-shadow: 0 0 20px rgba(255, 230, 0, 0.8);
+      position: relative;
+      animation: balloonSway 2.5s ease-in-out infinite alternate;
+    }
+    .supply-drop-box {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, #1e3a8a 0%, #172554 100%);
+      border: 2px solid #38bdf8;
+      border-radius: 6px;
+      margin: 6px auto 0 auto;
+      box-shadow: 0 0 15px #38bdf8;
+      position: relative;
+    }
+    .supply-drop-box::after {
+      content: "★";
+      color: #ffe600;
+      font-size: 18px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes balloonSway {
+      0% { transform: rotate(-5deg) translateY(0); }
+      100% { transform: rotate(5deg) translateY(-8px); }
+    }
+
+    /* ACTION JUICE: RICK'S INTERDIMENSIONAL COMMUNICATOR */
+    #rick-communicator-card {
+      display: none;
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 380px;
+      max-width: 90vw;
+      background: rgba(15, 23, 42, 0.98);
+      border: 2px solid #00ff66;
+      border-radius: 14px;
+      padding: 16px;
+      z-index: 1000;
+      box-shadow: 0 0 35px rgba(0, 255, 102, 0.5);
+      animation: slideInRight 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+    @keyframes slideInRight {
+      from { transform: translateX(110%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .comm-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .comm-wave-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 18px;
+    }
+    .comm-bar {
+      width: 3px;
+      background: #00ff66;
+      border-radius: 2px;
+      animation: waveBar 0.6s infinite ease-in-out alternate;
+    }
+    .comm-bar:nth-child(2) { animation-delay: 0.15s; }
+    .comm-bar:nth-child(3) { animation-delay: 0.3s; }
+    .comm-bar:nth-child(4) { animation-delay: 0.45s; }
+    .comm-bar:nth-child(5) { animation-delay: 0.2s; }
+    @keyframes waveBar {
+      0% { height: 4px; }
+      100% { height: 18px; }
+    }
+
+    /* FLOATING COIN ANIMATION */
+    .floating-coin-burst {
+      position: fixed;
+      font-family: 'Luckiest Guy', Impact, sans-serif;
+      font-size: 26px;
+      color: #ffe600;
+      text-shadow: 0 0 10px #ff8000, 0 0 20px #ffe600;
+      pointer-events: none;
+      z-index: 9999;
+      animation: coinFlyUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    }
+    @keyframes coinFlyUp {
+      0% { transform: scale(0.6) translateY(0); opacity: 1; }
+      50% { transform: scale(1.3) translateY(-40px); opacity: 1; }
+      100% { transform: scale(1) translateY(-120px); opacity: 0; }
+    }
+
+    /* PURCHASE CELEBRATION MODAL */
+    #shop-purchase-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.88);
+      backdrop-filter: blur(12px);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .purchase-dialog-box {
+      background: radial-gradient(circle at 50% 30%, rgba(30, 58, 138, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+      border: 3px solid #ffe600;
+      border-radius: 20px;
+      max-width: 520px;
+      width: 100%;
+      padding: 32px;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 0 50px rgba(255, 230, 0, 0.6);
+      animation: modalPop 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+
   </style>
 </head>
 <body>
@@ -1298,15 +1920,17 @@
 
     <nav class="fn-nav">
       <button class="fn-tab active fn-font-condensed" onclick="switchFnTab('play')">PLAY</button>
+      <button class="fn-tab shop-tab fn-font-condensed" onclick="switchFnTab('shop')">ITEM SHOP 🛒</button>
+      <button class="fn-tab locker-tab fn-font-condensed" onclick="switchFnTab('locker')">LOCKER 👕</button>
       <button class="fn-tab fn-font-condensed" onclick="switchFnTab('career')">CAREER</button>
       <button class="fn-tab fn-font-condensed" onclick="switchFnTab('vault')">REDO VAULT (<span id="tab-vault-count">0</span>)</button>
       <button class="fn-tab fn-font-condensed" onclick="switchFnTab('cheatsheet')">TACTICAL INTEL</button>
     </nav>
 
     <div class="fn-player-bar">
-      <div class="fn-currency fn-font-condensed">
-        <div class="vbucks-icon">V</div>
-        <span id="vbucks-display">95,450</span>
+      <div class="fn-currency fn-font-condensed clickable-coin" onclick="switchFnTab('shop')" title="Click to open Item Shop">
+        <div class="vbucks-icon">🪙</div>
+        <span id="vbucks-display">1,000</span>
       </div>
       <div class="fn-currency fn-font-condensed">
         <span>👑</span>
@@ -1425,8 +2049,42 @@
 
     <!-- TAB 2: IN-GAME HUD -->
     <section id="battle-hud-screen">
-      <div class="fn-compass-wrapper fn-font-condensed">
-        <div class="fn-compass-ticks">N · 15 · 30 · NE · 60 · E · 105 · SE · S · SW · W · NW</div>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
+        <div class="fn-compass-wrapper fn-font-condensed" style="flex: 1; min-width: 260px; margin-bottom: 0;">
+          <div class="fn-compass-ticks">N · 15 · 30 · NE · 60 · E · 105 · SE · S · SW · W · NW</div>
+        </div>
+        <div class="hud-alive-badge fn-font-condensed">
+          <span class="alive-dot"></span>
+          <span>👥 ALIVE:</span>
+          <span id="hud-alive-count" class="alive-num">84</span>
+          <span style="font-size: 12px; color: #94a3b8;">/ 100</span>
+        </div>
+        <div class="hud-radar-card fn-font-condensed">
+          <div class="radar-circle">
+            <div id="radar-storm" class="radar-storm-ring"></div>
+            <div class="radar-safe-ring"></div>
+            <div class="radar-player-needle"></div>
+            <div class="radar-sweep-beam"></div>
+          </div>
+          <div class="radar-ticker" id="radar-storm-ticker">⚡ STORM CIRCLE 1: SAFE</div>
+        </div>
+      </div>
+
+      <!-- OVERDRIVE HYPE METER -->
+      <div class="overdrive-wrapper fn-font-condensed">
+        <div class="overdrive-header">
+          <span style="color: #ffe600;">⚡ MULTIVERSE HYPE OVERDRIVE: <span id="overdrive-pct">0%</span></span>
+          <span id="overdrive-multiplier-tag" style="color: #38bdf8;">1X COIN MULTIPLIER</span>
+        </div>
+        <div class="overdrive-track">
+          <div id="overdrive-fill" class="overdrive-bar"></div>
+        </div>
+      </div>
+
+      <!-- SUPPLY DROP STAGE -->
+      <div id="supply-drop-stage">
+        <div class="supply-drop-balloon"></div>
+        <div class="supply-drop-box"></div>
       </div>
 
       <div class="fn-question-crate">
@@ -1478,6 +2136,101 @@
         <div id="killfeed-container" style="font-size: 12.5px; color: #cbd5e1;"></div>
         <div class="fn-font-condensed" style="text-align: right; color: #fff;">
           🪵 999 · 🧱 999 · 🪙 999
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TAB: ITEM SHOP (FORTNITE × C-137 MULTIVERSE) -->
+    <section id="shop-screen" style="display: none;">
+      <div class="shop-header-banner">
+        <div class="shop-title-row">
+          <div>
+            <div class="shop-badge fn-font-heavy">⚡ C-137 MULTIVERSE STORE</div>
+            <h1 class="fn-font-heavy" style="font-size: 32px; color: #fff; margin: 0;">ITEM SHOP // DAILY ROTATION</h1>
+            <p class="fn-font-condensed" style="color: #94a3b8; font-size: 15px; margin-top: 4px;">
+              200-PUMP PHYSICS EXAM QUESTIONS TO EARN COINS • UNLOCK RICK & MORTY AND FORTNITE SKINS
+            </p>
+          </div>
+          <div class="shop-timer-box fn-font-condensed">
+            <div style="font-size: 12px; color: #94a3b8;">STORE ROTATION RESETS IN</div>
+            <div id="shop-timer-countdown" style="font-size: 22px; color: #ffe600; font-weight: 800;">08:14:32</div>
+            <div style="font-size: 13px; color: #00ff66; margin-top: 2px;">
+              BALANCE: 🪙 <span id="shop-vbucks-amt">1,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPOTLIGHT CARD -->
+      <div class="shop-spotlight">
+        <div class="spotlight-left">
+          <div class="shop-badge fn-font-heavy" style="background: #ffe600; color: #000;">FEATURED BUNDLE</div>
+          <h2 class="fn-font-heavy" style="font-size: 26px; color: #fff; margin: 6px 0;">DIMENSION C-137 MULTIVERSE SQUAD</h2>
+          <p class="fn-font-condensed" style="font-size: 14px; color: #e2e8f0; line-height: 1.5;">
+            Equip authentic Rick Sanchez, Mecha Morty, and Mr. Meeseeks. All skins feature custom quotes, reactive exam mastery glows, and 100% authentic Fortnite CDN visuals.
+          </p>
+        </div>
+        <div class="spotlight-right">
+          <img src="https://fortnite-api.com/images/cosmetics/br/cid_a_112_athena_commando_m_ruckus/featured.png" class="spotlight-thumb" alt="Rick Sanchez">
+          <img src="https://fortnite-api.com/images/cosmetics/br/cid_a_181_athena_commando_m_ruckusmini_a6vg6/featured.png" class="spotlight-thumb" alt="Mecha Morty">
+          <img src="https://fortnite-api.com/images/cosmetics/br/character_geniusblob/featured.png" class="spotlight-thumb" alt="Mr. Meeseeks">
+        </div>
+      </div>
+
+      <!-- SHOP CARDS GRID -->
+      <div class="shop-grid" id="shop-cards-container">
+        <!-- Rendered dynamically by renderShopUI() -->
+      </div>
+    </section>
+
+    <!-- TAB: LOCKER WARDROBE -->
+    <section id="locker-screen" style="display: none;">
+      <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00e5ff; border-radius: 16px; padding: 24px; margin-bottom: 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div class="shop-badge fn-font-heavy" style="background: #00e5ff; color: #000;">LOCKER // OUTFITS</div>
+            <h1 class="fn-font-heavy" style="font-size: 30px; color: #fff; margin: 0;">TACTICAL WARDROBE</h1>
+            <p class="fn-font-condensed" style="color: #94a3b8; font-size: 14px; margin-top: 4px;">
+              EQUIP YOUR FAVORITE OUTFIT TO LEAD YOU INTO MONDAY'S PHYSICS BATTLE
+            </p>
+          </div>
+          <div class="fn-font-condensed" style="font-size: 16px; color: #00ff66;">
+            UNLOCKED SKINS: <span id="locker-owned-count" style="font-weight: 800; font-size: 20px;">1</span> / <span id="locker-total-count">10</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="locker-layout">
+        <!-- Left: Current Showcase -->
+        <div class="locker-showcase-card">
+          <div class="shop-badge fn-font-heavy" id="locker-showcase-badge" style="background: #00ff66; color: #000;">EQUIPPED OUTFIT</div>
+          <h2 class="fn-font-heavy" id="locker-showcase-name" style="font-size: 26px; color: #fff; margin: 6px 0;">RICK SANCHEZ</h2>
+          <div class="fn-font-condensed" id="locker-showcase-series" style="color: #38bdf8; font-size: 13px;">DIMENSION C-137 • TIER 100</div>
+
+          <div class="locker-stage">
+            <div class="locker-pedestal-ring"></div>
+            <img id="locker-showcase-img" class="locker-avatar-img" src="https://fortnite-api.com/images/cosmetics/br/cid_a_112_athena_commando_m_ruckus/featured.png" alt="Equipped Skin">
+          </div>
+
+          <p class="fn-font-condensed" id="locker-showcase-quote" style="color: #e2e8f0; font-size: 13px; font-style: italic; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; border-left: 3px solid #00ff66;">
+            "Belief without evidence is immoral. 200-pump these questions!"
+          </p>
+
+          <button class="ready-up-btn fn-font-heavy" style="width: 100%; margin-top: 14px; padding: 12px;" onclick="switchFnTab('play')">
+            READY UP WITH THIS SKIN ➔
+          </button>
+        </div>
+
+        <!-- Right: Wardrobe Grid -->
+        <div>
+          <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+            <button class="next-drop-btn fn-font-heavy active" id="locker-filter-all" style="margin: 0; padding: 8px 16px; font-size: 14px;" onclick="filterLocker('all')">ALL SKINS</button>
+            <button class="next-drop-btn fn-font-heavy" id="locker-filter-owned" style="margin: 0; padding: 8px 16px; font-size: 14px; background: #334155; color: #94a3b8;" onclick="filterLocker('owned')">UNLOCKED ONLY</button>
+          </div>
+          <div class="shop-grid" id="locker-cards-container">
+            <!-- Rendered dynamically by renderLockerUI() -->
+          </div>
         </div>
       </div>
     </section>
@@ -1560,6 +2313,53 @@
         </div>
       </div>
     </section>
+
+  
+  <!-- RICK'S INTERDIMENSIONAL COMMUNICATOR (WALKIE TALKIE POPUP) -->
+  <div id="rick-communicator-card">
+    <div class="comm-header">
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <span style="font-size: 20px;">🧪</span>
+        <span class="fn-font-heavy" id="comm-title" style="color: #00ff66; font-size: 14px;">C-137 COMMUNICATOR // RICK</span>
+      </div>
+      <div class="comm-wave-bars">
+        <div class="comm-bar"></div>
+        <div class="comm-bar"></div>
+        <div class="comm-bar"></div>
+        <div class="comm-bar"></div>
+        <div class="comm-bar"></div>
+      </div>
+    </div>
+    <div class="fn-font-condensed" id="comm-message" style="color: #e2e8f0; font-size: 14px; line-height: 1.4;">
+      "Wubba Lubba Dub-Dub! Keep that combo rolling!"
+    </div>
+  </div>
+
+  <!-- PURCHASE CELEBRATION MODAL -->
+  <div id="shop-purchase-modal">
+    <div class="purchase-dialog-box">
+      <div class="shop-badge fn-font-heavy" style="background: #ffe600; color: #000; font-size: 14px; margin-bottom: 12px;">ITEM UNLOCKED!</div>
+      <h2 class="fn-font-heavy" id="purchase-modal-title" style="font-size: 28px; color: #fff; margin: 0;">MECHA MORTY</h2>
+      <div class="fn-font-condensed" id="purchase-modal-series" style="color: #38bdf8; font-size: 14px; margin-top: 4px;">THEORETICAL LAB ASSISTANT</div>
+
+      <div style="height: 220px; display: flex; align-items: center; justify-content: center; margin: 16px 0;">
+        <img id="purchase-modal-img" src="" alt="Skin" style="max-height: 210px; max-width: 100%; object-fit: contain; filter: drop-shadow(0 0 25px #ffe600); animation: floatSmooth 3s infinite;">
+      </div>
+
+      <p class="fn-font-condensed" id="purchase-modal-quote" style="color: #cbd5e1; font-size: 14px; font-style: italic; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px;">
+        "Transaction verified across the Multiverse Central Finite Curve!"
+      </p>
+
+      <div style="display: flex; gap: 12px; margin-top: 20px;">
+        <button class="shop-btn equip fn-font-heavy" id="purchase-modal-equip-btn" onclick="confirmEquipPurchasedSkin()">
+          👕 EQUIP IMMEDIATELY
+        </button>
+        <button class="shop-btn locked fn-font-heavy" onclick="closePurchaseModal()">
+          CONTINUE BROWSING ➔
+        </button>
+      </div>
+    </div>
+  </div>
 
   </main>
 
@@ -2293,6 +3093,7 @@
     }
 
     function applyProfileUI() {
+      initCareerEconomy();
       const pill = document.getElementById("header-player-pill");
       const isHenri = (currentProfile === "HENRI");
 
@@ -2507,7 +3308,7 @@
     // TAB NAVIGATION
     function switchFnTab(tabId) {
       playFnSound("click");
-      const tabs = ["play", "career", "vault", "cheatsheet"];
+      const tabs = ["play", "shop", "locker", "career", "vault", "cheatsheet"];
       tabs.forEach(t => {
         const el = document.getElementById(t + "-screen");
         if (el) el.style.display = "none";
@@ -2525,6 +3326,8 @@
         document.getElementById("battle-hud-screen").style.display = "none";
       }
 
+      if (tabId === "shop") renderShopUI();
+      if (tabId === "locker") renderLockerUI();
       if (tabId === "career") renderCareerUI();
       if (tabId === "vault") updateVaultUI();
     }
@@ -2580,8 +3383,561 @@
       }
     }
 
+    
+    /* ===================================================================
+       FORTNITE × C-137: ITEM SHOP, COINS & ACTION JUICE ENGINE
+       =================================================================== */
+
+    const SKINS_CATALOG = [
+      {
+        id: "rick_c137",
+        name: "RICK SANCHEZ",
+        title: "RICK SANCHEZ (C-137)",
+        series: "CH2 S7 TIER 100 • DIMENSION C-137",
+        rarity: "mythic",
+        rarityLabel: "C-137 MYTHIC",
+        badgeClass: "badge-mythic",
+        price: 0,
+        quote: "Theoretical Physicist • Zero-filter multiverse teacher. In science, belief without evidence is immoral!",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_a_112_athena_commando_m_ruckus/featured.png"
+      },
+      {
+        id: "mecha_morty",
+        name: "MECHA MORTY",
+        title: "MECHA MORTY",
+        series: "ICONIC ROBOTIC SUIT • LAB ASSISTANT",
+        rarity: "rare",
+        rarityLabel: "RARE OUTFIT",
+        badgeClass: "badge-rare",
+        price: 1200,
+        quote: "Aww geez Rick! I'm piloting a 10-foot mechanical suit calculating F = ma on distractor questions!",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_a_181_athena_commando_m_ruckusmini_a6vg6/featured.png"
+      },
+      {
+        id: "meeseeks",
+        name: "MR. MEESEEKS",
+        title: "MR. MEESEEKS",
+        series: "EPIC • EXISTENCE IS PAIN",
+        rarity: "epic",
+        rarityLabel: "EPIC OUTFIT",
+        badgeClass: "badge-epic",
+        price: 1800,
+        quote: "I'm Mr. Meeseeks, look at me! I will not vanish into thin air until Henri gets 100% on Monday's test!",
+        url: "https://fortnite-api.com/images/cosmetics/br/character_geniusblob/featured.png"
+      },
+      {
+        id: "queen_summer",
+        name: "QUEEN SUMMER",
+        title: "QUEEN SUMMER",
+        series: "MULTIVERSE GLORY • KINETIC DOMINATION",
+        rarity: "epic",
+        rarityLabel: "EPIC OUTFIT",
+        badgeClass: "badge-epic",
+        price: 2200,
+        quote: "Interdimensional warrior empress. Newton's laws bow to kinetic domination on the battlefield.",
+        url: "https://fortnite-api.com/images/cosmetics/br/character_genius/featured.png"
+      },
+      {
+        id: "lebron",
+        name: "LEBRON JAMES",
+        title: "LEBRON JAMES",
+        series: "ICON SERIES • 245 LBS MASS",
+        rarity: "icon",
+        rarityLabel: "ICON SERIES",
+        badgeClass: "badge-icon",
+        price: 3000,
+        quote: "245 LBS of pure kinetic mass launched 44 inches vert. Downward ground push = upward blast!",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_a_136_athena_commando_m_majesty_yr1gj/featured.png"
+      },
+      {
+        id: "travis",
+        name: "TRAVIS SCOTT",
+        title: "TRAVIS SCOTT",
+        series: "ICON SERIES • ASTROWORLD",
+        rarity: "icon",
+        rarityLabel: "ICON SERIES",
+        badgeClass: "badge-icon",
+        price: 3500,
+        quote: "Highest in the Room. Acoustic pressure waves at 343 m/s rattling the entire multiverse.",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_703_athena_commando_m_cyclone/featured.png"
+      },
+      {
+        id: "john_wick",
+        name: "JOHN WICK",
+        title: "JOHN WICK",
+        series: "LEGENDARY • ASSASSIN SUIT",
+        rarity: "legendary",
+        rarityLabel: "LEGENDARY",
+        badgeClass: "badge-legendary",
+        price: 4000,
+        quote: "A man of pure focus, sheer will, and strict Newtonian momentum conservation.",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_416_athena_commando_m_assassinsuit/featured.png"
+      },
+      {
+        id: "midas",
+        name: "MIDAS",
+        title: "MIDAS",
+        series: "SHADOW LEGEND • GOLDEN TOUCH",
+        rarity: "legendary",
+        rarityLabel: "SHADOW LEGEND",
+        badgeClass: "badge-legendary",
+        price: 5000,
+        quote: "Density of pure gold: 19.3 g/cm³. Transmuting physics questions into golden Victory Royales.",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_694_athena_commando_m_catburglar/featured.png"
+      },
+      {
+        id: "black_knight",
+        name: "BLACK KNIGHT",
+        title: "BLACK KNIGHT",
+        series: "OG SEASON 2 EXCLUSIVE",
+        rarity: "og",
+        rarityLabel: "OG EXCLUSIVE",
+        badgeClass: "badge-og",
+        price: 7500,
+        quote: "Fortified steel plate. An object at rest remains at rest unless acted on by an unbalanced force.",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_035_athena_commando_m_medieval/featured.png"
+      },
+      {
+        id: "renegade_raider",
+        name: "RENEGADE RAIDER",
+        title: "RENEGADE RAIDER",
+        series: "OG SEASON 1 GRAIL (SWEAT)",
+        rarity: "grail",
+        rarityLabel: "SWEAT GRAIL",
+        badgeClass: "badge-grail",
+        price: 10000,
+        quote: "The ultimate Chapter 1 Grail. Friction coefficient = zero on high-ground 90s ramp rushes.",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_028_athena_commando_f/featured.png"
+      }
+    ];
+
+    let currentLockerFilter = "all";
+    let pendingPurchasedSkin = null;
+    let overdriveEnergy = 0;
+    let alivePlayers = 84;
+
+    // AUDIO SYNTHESIZER EXTENSIONS (100% OFFLINE WEB AUDIO)
+    function playEnhancedSound(type) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        if (audioCtx.state === "suspended") audioCtx.resume();
+        const now = audioCtx.currentTime;
+
+        if (type === "coin") {
+          // Ascending bright dual-chime
+          const osc1 = audioCtx.createOscillator();
+          const osc2 = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc1.type = "sine"; osc2.type = "triangle";
+          osc1.frequency.setValueAtTime(987.77, now); // B5
+          osc1.frequency.exponentialRampToValueAtTime(1318.51, now + 0.12); // E6
+          osc2.frequency.setValueAtTime(1975.53, now); // B6
+          osc2.frequency.exponentialRampToValueAtTime(2637.02, now + 0.12); // E7
+          gain.gain.setValueAtTime(0.35, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+          osc1.connect(gain); osc2.connect(gain); gain.connect(audioCtx.destination);
+          osc1.start(now); osc2.start(now);
+          osc1.stop(now + 0.45); osc2.stop(now + 0.45);
+          return;
+        }
+
+        if (type === "purchase") {
+          // Triumphant brass fanfare chord (E-major triad)
+          const notes = [329.63, 415.30, 493.88, 659.25];
+          notes.forEach((freq, idx) => {
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = "sawtooth";
+            osc.frequency.setValueAtTime(freq, now + idx * 0.05);
+            gain.gain.setValueAtTime(0.01, now);
+            gain.gain.linearRampToValueAtTime(0.2, now + idx * 0.05 + 0.05);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+            osc.connect(gain); gain.connect(audioCtx.destination);
+            osc.start(now + idx * 0.05); osc.stop(now + 1.2);
+          });
+          return;
+        }
+
+        if (type === "overdrive") {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = "sawtooth";
+          osc.frequency.setValueAtTime(220, now);
+          osc.frequency.exponentialRampToValueAtTime(880, now + 0.5);
+          gain.gain.setValueAtTime(0.3, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 0.6);
+          return;
+        }
+
+        if (type === "supply_drop") {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(520, now);
+          osc.frequency.exponentialRampToValueAtTime(260, now + 0.4);
+          gain.gain.setValueAtTime(0.4, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.4);
+          osc.connect(gain); gain.connect(audioCtx.destination);
+          osc.start(now); osc.stop(now + 0.4);
+          return;
+        }
+      } catch(e) {}
+
+      // Fallback to existing playFnSound
+      playFnSound(type);
+    }
+
+    // INITIALIZE & SYNC CAREER COINS / SKINS
+    function initCareerEconomy() {
+      if (!careerStats.vbucks && careerStats.vbucks !== 0) {
+        careerStats.vbucks = (currentProfile === "HENRI") ? 1000 : 500;
+      }
+      if (!careerStats.unlocked_skins || !Array.isArray(careerStats.unlocked_skins)) {
+        careerStats.unlocked_skins = ["RICK SANCHEZ (C-137)"];
+      }
+      if (!careerStats.equipped_skin) {
+        careerStats.equipped_skin = "RICK SANCHEZ (C-137)";
+      }
+      updateEconomyUI();
+    }
+
+    function updateEconomyUI() {
+      const vDisplay = document.getElementById("vbucks-display");
+      if (vDisplay) vDisplay.innerText = (careerStats.vbucks || 0).toLocaleString();
+      const shopVbucks = document.getElementById("shop-vbucks-amt");
+      if (shopVbucks) shopVbucks.innerText = (careerStats.vbucks || 0).toLocaleString();
+
+      // Update equipped skin in lobby pedestal
+      const equippedObj = SKINS_CATALOG.find(s => s.title === careerStats.equipped_skin || s.name === careerStats.equipped_skin) || SKINS_CATALOG[0];
+      const pedAvatar = document.getElementById("ped-avatar-skin");
+      if (pedAvatar && equippedObj) pedAvatar.src = equippedObj.url;
+      const pedName = document.getElementById("player-skin-name");
+      if (pedName && equippedObj) pedName.innerText = equippedObj.name;
+      const pedSeries = document.getElementById("player-skin-series");
+      if (pedSeries && equippedObj) pedSeries.innerText = "OUTFIT: " + equippedObj.series;
+      const pedBtnLabel = document.getElementById("current-skin-btn-label");
+      if (pedBtnLabel && equippedObj) pedBtnLabel.innerText = equippedObj.name;
+    }
+
+    // EARN COINS WITH ANIMATED FLOATING NUMBER
+    function earnCoins(amount, x, y) {
+      careerStats.vbucks = (careerStats.vbucks || 0) + amount;
+      updateEconomyUI();
+      playEnhancedSound("coin");
+
+      // Spawn floating coin popup
+      if (x !== undefined && y !== undefined) {
+        const popup = document.createElement("div");
+        popup.className = "floating-coin-burst";
+        popup.innerText = "+ " + amount.toLocaleString() + " 🪙 COINS!";
+        popup.style.left = (x - 60) + "px";
+        popup.style.top = (y - 30) + "px";
+        document.body.appendChild(popup);
+        setTimeout(() => popup.remove(), 1200);
+      }
+
+      saveCareerProgressLocally();
+    }
+
+    // PERSIST CAREER PROGRESS TO ALL 5 TIERS
+    function saveCareerProgressLocally() {
+      const keys = getProfileKeys(currentProfile || "HENRI");
+      try {
+        localStorage.setItem(keys.statsKey, JSON.stringify(careerStats));
+      } catch(e) {}
+      saveToIndexedDB(keys.statsKey, careerStats);
+
+      // Async sync to server
+      const lockerPayload = {
+        player: currentProfile || "HENRI",
+        vbucks: careerStats.vbucks,
+        unlocked_skins: careerStats.unlocked_skins,
+        equipped_skin: careerStats.equipped_skin,
+        career_stats: careerStats
+      };
+
+      const serverTargets = ["/api/save_locker", "http://localhost:3456/api/save_locker"];
+      serverTargets.forEach(url => {
+        try {
+          fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(lockerPayload)
+          }).catch(() => {});
+        } catch(e) {}
+      });
+    }
+
+    // RENDER ITEM SHOP
+    function renderShopUI() {
+      initCareerEconomy();
+      const container = document.getElementById("shop-cards-container");
+      if (!container) return;
+      container.innerHTML = "";
+
+      SKINS_CATALOG.forEach(skin => {
+        const isOwned = (careerStats.unlocked_skins || []).includes(skin.title) || (careerStats.unlocked_skins || []).includes(skin.name) || skin.price === 0;
+        const isEquipped = (careerStats.equipped_skin === skin.title || careerStats.equipped_skin === skin.name);
+        const canAfford = (careerStats.vbucks >= skin.price);
+
+        const card = document.createElement("div");
+        card.className = "shop-card " + skin.rarity;
+
+        let actionBtnHtml = "";
+        if (isEquipped) {
+          actionBtnHtml = '<button class="shop-btn equipped fn-font-heavy" disabled>⭐ EQUIPPED</button>';
+        } else if (isOwned) {
+          actionBtnHtml = `<button class="shop-btn equip fn-font-heavy" onclick="equipSkin('${skin.title}')">👕 EQUIP NOW</button>`;
+        } else if (canAfford) {
+          actionBtnHtml = `<button class="shop-btn buy fn-font-heavy" onclick="buySkin('${skin.title}')">🛒 UNLOCK (🪙 ${skin.price.toLocaleString()})</button>`;
+        } else {
+          const needed = skin.price - careerStats.vbucks;
+          actionBtnHtml = `<button class="shop-btn locked fn-font-heavy" onclick="promptNeedMoreCoins('${skin.title}', ${needed})">🔒 NEED 🪙 ${needed.toLocaleString()} MORE</button>`;
+        }
+
+        card.innerHTML = `
+          <span class="shop-card-badge ${skin.badgeClass} fn-font-heavy">${skin.rarityLabel}</span>
+          <div class="shop-render-frame">
+            <img src="${skin.url}" class="shop-skin-img" alt="${skin.name}">
+          </div>
+          <div>
+            <h3 class="shop-skin-title fn-font-heavy">${skin.name}</h3>
+            <div class="shop-skin-series fn-font-condensed">${skin.series}</div>
+            <div class="shop-skin-quote fn-font-condensed">"${skin.quote}"</div>
+          </div>
+          <div class="shop-card-footer">
+            <div class="shop-price-row fn-font-condensed">
+              <span style="color: #94a3b8; font-size: 13px;">PRICE:</span>
+              <span style="color: #ffe600;">${skin.price === 0 ? "FREE / UNLOCKED" : "🪙 " + skin.price.toLocaleString() + " COINS"}</span>
+            </div>
+            ${actionBtnHtml}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // BUY SKIN LOGIC
+    function buySkin(skinTitle) {
+      const skin = SKINS_CATALOG.find(s => s.title === skinTitle || s.name === skinTitle);
+      if (!skin) return;
+
+      if (careerStats.vbucks < skin.price) {
+        promptNeedMoreCoins(skin.title, skin.price - careerStats.vbucks);
+        return;
+      }
+
+      careerStats.vbucks -= skin.price;
+      if (!careerStats.unlocked_skins.includes(skin.title)) {
+        careerStats.unlocked_skins.push(skin.title);
+      }
+      careerStats.equipped_skin = skin.title;
+
+      playEnhancedSound("purchase");
+      launchVictoryConfetti();
+      saveCareerProgressLocally();
+      updateEconomyUI();
+      renderShopUI();
+
+      // Show purchase celebratory modal
+      pendingPurchasedSkin = skin;
+      document.getElementById("purchase-modal-title").innerText = skin.name;
+      document.getElementById("purchase-modal-series").innerText = skin.series;
+      document.getElementById("purchase-modal-img").src = skin.url;
+      document.getElementById("purchase-modal-quote").innerText = '"' + skin.quote + '"';
+      document.getElementById("shop-purchase-modal").style.display = "flex";
+    }
+
+    function confirmEquipPurchasedSkin() {
+      if (pendingPurchasedSkin) {
+        equipSkin(pendingPurchasedSkin.title);
+      }
+      closePurchaseModal();
+    }
+
+    function closePurchaseModal() {
+      document.getElementById("shop-purchase-modal").style.display = "none";
+      pendingPurchasedSkin = null;
+    }
+
+    function promptNeedMoreCoins(skinTitle, needed) {
+      playFnSound("shield_crack");
+      triggerRickCommunicator("INSUFFICIENT MULTIVERSE COINS", `"Hey Henri! You need 🪙 ${needed.toLocaleString()} more coins for ${skinTitle}! 200-pump a few more physics drops and you'll have it in no time!"`);
+    }
+
+    // EQUIP SKIN
+    function equipSkin(skinTitle) {
+      const skin = SKINS_CATALOG.find(s => s.title === skinTitle || s.name === skinTitle);
+      if (!skin) return;
+
+      careerStats.equipped_skin = skin.title;
+      playFnSound("click");
+      saveCareerProgressLocally();
+      updateEconomyUI();
+      renderShopUI();
+      renderLockerUI();
+
+      triggerRickCommunicator("OUTFIT EQUIPPED", `"You suited up as ${skin.name}! Now jump from the Battle Bus and let's conquer Monday's exam!"`);
+    }
+
+    // RENDER LOCKER WARDROBE
+    function renderLockerUI() {
+      initCareerEconomy();
+      const equippedObj = SKINS_CATALOG.find(s => s.title === careerStats.equipped_skin || s.name === careerStats.equipped_skin) || SKINS_CATALOG[0];
+
+      // Left showcase
+      document.getElementById("locker-showcase-name").innerText = equippedObj.name;
+      document.getElementById("locker-showcase-series").innerText = equippedObj.series;
+      document.getElementById("locker-showcase-img").src = equippedObj.url;
+      document.getElementById("locker-showcase-quote").innerText = '"' + equippedObj.quote + '"';
+      document.getElementById("locker-showcase-badge").innerText = equippedObj.rarityLabel;
+      document.getElementById("locker-showcase-badge").className = "shop-badge fn-font-heavy " + equippedObj.badgeClass;
+
+      const ownedCount = SKINS_CATALOG.filter(s => (careerStats.unlocked_skins || []).includes(s.title) || s.price === 0).length;
+      document.getElementById("locker-owned-count").innerText = ownedCount;
+      document.getElementById("locker-total-count").innerText = SKINS_CATALOG.length;
+
+      // Right cards
+      const container = document.getElementById("locker-cards-container");
+      if (!container) return;
+      container.innerHTML = "";
+
+      const skinsToDisplay = (currentLockerFilter === "owned")
+        ? SKINS_CATALOG.filter(s => (careerStats.unlocked_skins || []).includes(s.title) || s.price === 0)
+        : SKINS_CATALOG;
+
+      skinsToDisplay.forEach(skin => {
+        const isOwned = (careerStats.unlocked_skins || []).includes(skin.title) || skin.price === 0;
+        const isEquipped = (careerStats.equipped_skin === skin.title || careerStats.equipped_skin === skin.name);
+
+        const card = document.createElement("div");
+        card.className = "shop-card " + skin.rarity;
+
+        let btnHtml = "";
+        if (isEquipped) {
+          btnHtml = '<button class="shop-btn equipped fn-font-heavy" disabled>⭐ EQUIPPED</button>';
+        } else if (isOwned) {
+          btnHtml = `<button class="shop-btn equip fn-font-heavy" onclick="equipSkin('${skin.title}')">👕 EQUIP</button>`;
+        } else {
+          btnHtml = `<button class="shop-btn locked fn-font-heavy" onclick="switchFnTab('shop')">🛒 GET IN SHOP (🪙 ${skin.price.toLocaleString()})</button>`;
+        }
+
+        card.innerHTML = `
+          <span class="shop-card-badge ${skin.badgeClass} fn-font-heavy">${skin.rarityLabel}</span>
+          <div class="shop-render-frame">
+            <img src="${skin.url}" class="shop-skin-img" alt="${skin.name}">
+          </div>
+          <div>
+            <h4 class="shop-skin-title fn-font-heavy" style="font-size: 18px;">${skin.name}</h4>
+            <div class="shop-skin-series fn-font-condensed" style="font-size: 11px;">${skin.series}</div>
+          </div>
+          <div class="shop-card-footer">
+            ${btnHtml}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function filterLocker(filterType) {
+      currentLockerFilter = filterType;
+      document.getElementById("locker-filter-all").className = "next-drop-btn fn-font-heavy " + (filterType === "all" ? "active" : "");
+      document.getElementById("locker-filter-all").style.background = (filterType === "all" ? "#ffe600" : "#334155");
+      document.getElementById("locker-filter-all").style.color = (filterType === "all" ? "#000" : "#94a3b8");
+
+      document.getElementById("locker-filter-owned").className = "next-drop-btn fn-font-heavy " + (filterType === "owned" ? "active" : "");
+      document.getElementById("locker-filter-owned").style.background = (filterType === "owned" ? "#ffe600" : "#334155");
+      document.getElementById("locker-filter-owned").style.color = (filterType === "owned" ? "#000" : "#94a3b8");
+      renderLockerUI();
+    }
+
+    // ACTION JUICE: RICK'S COMMUNICATOR RADIO POPUP
+    let commTimeout = null;
+    function triggerRickCommunicator(title, message) {
+      const comm = document.getElementById("rick-communicator-card");
+      if (!comm) return;
+      document.getElementById("comm-title").innerText = title;
+      document.getElementById("comm-message").innerText = message;
+      comm.style.display = "block";
+      if (commTimeout) clearTimeout(commTimeout);
+      commTimeout = setTimeout(() => { comm.style.display = "none"; }, 4500);
+    }
+
+    // ACTION JUICE: ALIVE PLAYERS DECREMENT & RADAR CONTRACT
+    function updateAliveAndRadar(isCorrect) {
+      const total = activeQuestions.length || 12;
+      const progress = (currentQIndex + 1) / total;
+
+      if (isCorrect) {
+        // Drop alive players rapidly toward 1
+        const elimStep = Math.max(2, Math.floor((84 - 1) / total));
+        alivePlayers = Math.max(1, alivePlayers - elimStep);
+        if (currentQIndex === total - 1) alivePlayers = 1;
+      }
+      const aliveEl = document.getElementById("hud-alive-count");
+      if (aliveEl) aliveEl.innerText = alivePlayers;
+
+      // Contract storm ring on radar
+      const stormRing = document.getElementById("radar-storm");
+      const ticker = document.getElementById("radar-storm-ticker");
+      if (stormRing) {
+        const stormSize = Math.max(48, Math.round(100 - (progress * 52)));
+        stormRing.style.width = stormSize + "px";
+        stormRing.style.height = stormSize + "px";
+      }
+      if (ticker) {
+        if (alivePlayers === 1) {
+          ticker.innerText = "👑 VICTORY ROYALE SECURED!";
+          ticker.style.color = "#ffe600";
+        } else if (progress > 0.75) {
+          ticker.innerText = "⚠️ FINAL CIRCLE // 1v1 DUEL";
+          ticker.style.color = "#ef4444";
+        } else {
+          ticker.innerText = "⚡ STORM CIRCLE " + (currentQIndex + 1) + ": CLOSING";
+          ticker.style.color = "#38bdf8";
+        }
+      }
+    }
+
+    // ACTION JUICE: OVERDRIVE ENERGY BAR
+    function addOverdriveEnergy(amount) {
+      overdriveEnergy = Math.min(100, overdriveEnergy + amount);
+      const fill = document.getElementById("overdrive-fill");
+      const pctLabel = document.getElementById("overdrive-pct");
+      const multTag = document.getElementById("overdrive-multiplier-tag");
+
+      if (fill) fill.style.width = overdriveEnergy + "%";
+      if (pctLabel) pctLabel.innerText = overdriveEnergy + "%";
+
+      if (overdriveEnergy >= 100) {
+        if (multTag) {
+          multTag.innerText = "🔥 2X HYPERSPACE COINS ACTIVE!";
+          multTag.style.color = "#ffe600";
+        }
+        playEnhancedSound("overdrive");
+        triggerRickCommunicator("⚡ HYPERSPACE OVERDRIVE ENGAGED", '"MAXIMUM MULTIVERSE POWER! You are operating with 100% empirical mastery! DOUBLE COINS ACTIVE!"');
+      } else {
+        if (multTag) {
+          multTag.innerText = "1X COIN MULTIPLIER";
+          multTag.style.color = "#38bdf8";
+        }
+      }
+    }
+
+    // ACTION JUICE: SUPPLY DROP CRATE ANIMATION
+    function triggerSupplyDrop() {
+      const stage = document.getElementById("supply-drop-stage");
+      if (!stage) return;
+      stage.style.display = "block";
+      playEnhancedSound("supply_drop");
+      setTimeout(() => { stage.style.display = "none"; }, 1400);
+    }
+
     function renderQuestion() {
       triggerPortalTransition();
+      triggerSupplyDrop();
       const q = activeQuestions[currentQIndex];
       const total = activeQuestions.length;
 
@@ -2869,6 +4225,19 @@
         removeFromVault(q.id);
         addKillfeedItem("Henri", "[PUMP SHOTGUN]", q.category, "200 CRITICAL HEADSHOT", "#ffe600");
         if (streak >= 3) launchVictoryConfetti();
+
+        // ACTION JUICE: COIN EARNING & OVERDRIVE
+        const isDouble = (overdriveEnergy >= 100);
+        const earnedCoins = isDouble ? 500 : (streak >= 3 ? 400 : 250);
+        earnCoins(earnedCoins, event.clientX, event.clientY);
+        addOverdriveEnergy(25);
+        updateAliveAndRadar(true);
+
+        if (streak === 3) {
+          triggerRickCommunicator("🔥 3X RAMPAGE STREAK", '"Wubba Lubba Dub-Dub! 3 in a row! Look at you using empirical science instead of Jerry-tier superstition!"');
+        } else if (streak === 5) {
+          triggerRickCommunicator("👑 5X UNSTOPPABLE", '"5 in a row! Dimension C-137 approved precision! Monday\'s exam is going down!"');
+        }
       } else {
         btnElement.classList.add("wrong");
         buttons[q.correct].classList.add("correct");
@@ -3067,6 +4436,14 @@
       queueMatchForSync(savePayload);
       saveToIndexedDB(keys.historyKey, matchHistory);
       saveToIndexedDB(keys.statsKey, careerStats);
+
+      // VICTORY ROYALE GRAND COIN REWARD
+      if (pct === 100) {
+        earnCoins(2000);
+        triggerRickCommunicator("👑 #1 VICTORY ROYALE BONUS", '"FLAWLESS 100%! +2,000 COINS GRANTED! Rick admits you have a brain!"');
+      } else if (pct >= 80) {
+        earnCoins(1000);
+      }
     }
 
     function closeVictoryModal() {
