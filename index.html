@@ -918,6 +918,268 @@
       animation: criticalDamageFloat 1s forwards ease-out !important;
     }
 
+
+    /* ==========================================================================
+       DIMENSION C-137 PORTAL HERO BANNER & INTERDIMENSIONAL VORTEX (ANTI-CRINGE)
+       ========================================================================== */
+    .c137-portal-hero {
+      position: relative;
+      background: radial-gradient(ellipse at 80% 50%, rgba(16, 185, 129, 0.28) 0%, rgba(6, 78, 59, 0.4) 40%, #030712 90%);
+      border: 2px solid #10b981;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      overflow: hidden;
+      box-shadow: 0 0 35px rgba(16, 185, 129, 0.35), inset 0 0 40px rgba(16, 185, 129, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @keyframes c137PortalSpin {
+      0% { transform: translate(-50%, -50%) rotate(0deg) scale(0.9); }
+      50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.08); }
+      100% { transform: translate(-50%, -50%) rotate(360deg) scale(0.9); }
+    }
+
+    @keyframes c137GlowPulse {
+      0%, 100% { filter: drop-shadow(0 0 25px #00ff66) drop-shadow(0 0 45px #10b981); }
+      50% { filter: drop-shadow(0 0 45px #a3e635) drop-shadow(0 0 75px #00ff66); }
+    }
+
+    @keyframes pulseGreen {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.5; }
+    }
+
+    @keyframes portalFlash {
+      0% { opacity: 0; transform: scale(0.6); }
+      50% { opacity: 1; transform: scale(1.1); filter: hue-rotate(30deg); }
+      100% { opacity: 0; transform: scale(1.3); }
+    }
+
+    .portal-vortex-bg {
+      position: absolute;
+      right: 120px;
+      top: 50%;
+      width: 420px;
+      height: 420px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .portal-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+
+    .portal-ring.ring-1 {
+      width: 380px;
+      height: 380px;
+      border: 4px dashed #00ff66;
+      animation: c137PortalSpin 12s linear infinite;
+      opacity: 0.6;
+    }
+
+    .portal-ring.ring-2 {
+      width: 290px;
+      height: 290px;
+      border: 6px dotted #10b981;
+      animation: c137PortalSpin 8s linear infinite reverse;
+      opacity: 0.75;
+    }
+
+    .portal-ring.ring-3 {
+      width: 200px;
+      height: 200px;
+      border: 4px solid #a3e635;
+      box-shadow: 0 0 30px #00ff66, inset 0 0 30px #10b981;
+      animation: c137PortalSpin 5s ease-in-out infinite;
+    }
+
+    .portal-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120px;
+      height: 120px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, #fff 0%, #00ff66 40%, #10b981 70%, transparent 100%);
+      border-radius: 50%;
+      animation: c137GlowPulse 2.5s ease-in-out infinite;
+    }
+
+    .c137-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 620px;
+    }
+
+    .c137-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16, 185, 129, 0.25);
+      border: 1.5px solid #00ff66;
+      color: #00ff66;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.3);
+    }
+
+    .c137-hero-title {
+      font-size: 38px;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 10px;
+      text-shadow: 0 0 20px rgba(0, 255, 102, 0.6), 2px 2px 0 #000;
+    }
+
+    .c137-hero-subtitle {
+      font-size: 16.5px;
+      color: #cbd5e1;
+      margin-bottom: 20px;
+      line-height: 1.45;
+    }
+
+    .c137-hero-subtitle strong {
+      color: #ffe600;
+    }
+
+    .c137-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .c137-quick-drop-btn {
+      background: linear-gradient(135deg, #00ff66 0%, #10b981 50%, #047857 100%);
+      border: 2px solid #fff;
+      color: #022c22;
+      padding: 14px 32px;
+      font-size: 22px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      transition: all 0.2s ease;
+      box-shadow: 0 0 25px rgba(0, 255, 102, 0.6), 0 6px 0 #022c22;
+      text-transform: uppercase;
+    }
+
+    .c137-quick-drop-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 40px rgba(0, 255, 102, 0.85), 0 8px 0 #022c22;
+      color: #000;
+    }
+
+    .c137-quick-drop-btn:active {
+      transform: translateY(4px);
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.4), 0 2px 0 #022c22;
+    }
+
+    .c137-exam-countdown {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 230, 0, 0.4);
+      padding: 10px 16px;
+      border-radius: 8px;
+      color: #ffe600;
+      font-size: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: #00ff66;
+      border-radius: 50%;
+      box-shadow: 0 0 10px #00ff66;
+      animation: pulseGreen 1.2s infinite;
+    }
+
+    .c137-hero-character {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .c137-rick-img {
+      width: 220px;
+      height: auto;
+      filter: drop-shadow(0 0 30px rgba(0, 255, 102, 0.7));
+      animation: pedSkinFloat 3.6s ease-in-out infinite;
+    }
+
+    .c137-quote-bubble {
+      background: rgba(15, 23, 42, 0.95);
+      border: 1.5px solid #00ff66;
+      border-radius: 8px;
+      padding: 8px 12px;
+      color: #e2e8f0;
+      font-size: 13px;
+      max-width: 240px;
+      text-align: center;
+      margin-top: -10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+
+    /* PORTAL VORTEX OVERLAY (DROP TRANSITION) */
+    #rick-portal-vortex-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 9997;
+      background: radial-gradient(circle at center, rgba(0, 255, 102, 0.45) 0%, rgba(16, 185, 129, 0.3) 35%, transparent 70%);
+      animation: portalFlash 0.45s ease-out forwards;
+    }
+
+    /* CLOUD SAVE AUDIT BUTTON & STATUS PILL */
+    .cloud-save-status-pill {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1.5px solid #10b981;
+      padding: 5px 12px;
+      border-radius: 6px;
+      color: #10b981;
+      font-size: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .cloud-save-status-pill:hover {
+      background: #10b981;
+      color: #022c22;
+      box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+    }
+
+    .save-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #00ff66;
+      box-shadow: 0 0 8px #00ff66;
+      animation: pulseGreen 1.5s infinite;
+    }
+
   </style>
 </head>
 <body>
@@ -941,6 +1203,63 @@
         </button>
       </div>
       <button id="modal-cancel-btn" style="background: none; border: none; color: #94a3b8; font-size: 13px; margin-top: 14px; cursor: pointer; text-decoration: underline; display: none;" onclick="closePlayerSelectModal()">Keep current profile</button>
+    </div>
+  </div>
+
+
+  <div id="rick-portal-vortex-overlay"></div>
+
+  <!-- DATA PERSISTENCE & PRIVACY AUDIT MODAL -->
+  <div id="save-audit-modal" class="fn-player-modal" style="display: none;">
+    <div class="player-modal-box" style="max-width: 640px;">
+      <div class="player-modal-header fn-font-heavy">🛡️ SCORE & PROGRESS AUDIT</div>
+      <h3 class="fn-font-heavy" style="color: #00ff66; font-size: 24px; margin: 10px 0;">WHERE IS HENRI'S PROGRESS SAVED?</h3>
+      <p class="fn-font-condensed" style="color: #cbd5e1; font-size: 14.5px; margin-bottom: 16px; line-height: 1.5;">
+        Henri's scores and test performance are recorded across 3 persistent layers with strict profile isolation:
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px; text-align: left; margin-bottom: 20px;">
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1.5px solid #0078ff; border-radius: 8px; padding: 12px 16px;">
+          <div class="fn-font-heavy" style="color: #38bdf8; font-size: 15px; display: flex; justify-content: space-between;">
+            <span>1. MASTER GOOGLE SPREADSHEET (CLOUD DATABASE)</span>
+            <span style="color: #22c55e;">LIVE CLOUD SYNC</span>
+          </div>
+          <p style="font-size: 13px; color: #94a3b8; margin: 4px 0; line-height: 1.4;">
+            Spreadsheet: <code>Henri_Physics_Mastery_Scores</code><br>
+            • <strong>Match_History</strong>: Exclusively logs Henri's official exams, accuracy %, and XP.<br>
+            • <strong>Guest_Matches</strong>: Guest practice runs are recorded in this isolated sheet and <em>never</em> alter Henri's GPA or rank.<br>
+            • <strong>Career_Summary</strong>: Henri's high-water marks, total Victory Royales, and Battle Pass tier.<br>
+            • <strong>Missed_Vault</strong>: Tracks tricky questions for redo drills.
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1.5px solid #ffe600; border-radius: 8px; padding: 12px 16px;">
+          <div class="fn-font-heavy" style="color: #ffe600; font-size: 15px; display: flex; justify-content: space-between;">
+            <span>2. SERVER JSON VAULT (PERSISTENT DISK STORAGE)</span>
+            <span style="color: #22c55e;">PORT 3456</span>
+          </div>
+          <p style="font-size: 13px; color: #94a3b8; margin: 4px 0; line-height: 1.4;">
+            Local files on disk:<br>
+            • <code>henri_scores.json</code> (Henri's career stats, matches, and redo vault)<br>
+            • <code>guest_scores.json</code> (Guest unranked logs)
+          </p>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.85); border: 1.5px solid #10b981; border-radius: 8px; padding: 12px 16px;">
+          <div class="fn-font-heavy" style="color: #10b981; font-size: 15px; display: flex; justify-content: space-between;">
+            <span>3. DEVICE LOCALSTORAGE (OFFLINE CACHE)</span>
+            <span style="color: #22c55e;">INSTANT RESILIENCE</span>
+          </div>
+          <p style="font-size: 13px; color: #94a3b8; margin: 4px 0; line-height: 1.4;">
+            Browser Keys: <code>henri_physics_history</code>, <code>henri_physics_stats</code>, <code>henri_physics_vault</code>.<br>
+            Guarantees progress is never lost even if the internet drops momentarily.
+          </p>
+        </div>
+      </div>
+
+      <button class="ready-up-btn fn-font-heavy" style="padding: 10px 24px; font-size: 18px; margin: 0 auto; display: block;" onclick="closeSaveAuditModal()">
+        GOT IT ➔ RETURN TO BATTLE BUS
+      </button>
     </div>
   </div>
 
@@ -973,6 +1292,10 @@
         <span>👑</span>
         <span id="header-level">LEVEL 88</span>
       </div>
+      <button class="cloud-save-status-pill fn-font-condensed" onclick="openSaveAuditModal()" title="View data persistence audit">
+        <span class="save-status-dot"></span>
+        <span id="header-save-status-label">CLOUD SAVE: HENRI (SYNCED)</span>
+      </button>
       <div id="header-player-pill" class="fn-font-condensed" style="font-size: 18px; display: flex; align-items: center;">
         <!-- Filled by applyProfileUI() -->
       </div>
@@ -983,19 +1306,55 @@
 
     <!-- TAB 1: PLAY -->
     <section id="play-screen">
+
+      <!-- DIMENSION C-137 INTERDIMENSIONAL PORTAL HERO (IMMEDIATE PULL-IN) -->
+      <div class="c137-portal-hero">
+        <div class="portal-vortex-bg">
+          <div class="portal-ring ring-1"></div>
+          <div class="portal-ring ring-2"></div>
+          <div class="portal-ring ring-3"></div>
+          <div class="portal-core"></div>
+        </div>
+        <div class="c137-hero-content">
+          <div class="c137-badge fn-font-heavy">⚡ DIMENSION C-137 // EMERGENCY DROP</div>
+          <h1 class="c137-hero-title fn-font-heavy">
+            WUBBA LUBBA DUB-DUB, HENRI!
+          </h1>
+          <p class="c137-hero-subtitle fn-font-condensed">
+            The Multiverse Battle Bus is dropping straight into Mr. Carosaari's Physical Science Gauntlet. Monday's exam has zero room for distractor traps. <strong>Push the floor, the floor pushes back!</strong>
+          </p>
+          <div class="c137-hero-actions">
+            <button class="c137-quick-drop-btn fn-font-heavy" onclick="launchMatch()">
+              <span>🚀 QUICK DROP: MONDAY'S PHYSICS EXAM</span>
+              <span class="btn-subtext">Instant Drop • 12 Drops • F = ma • 100% Mastery</span>
+            </button>
+            <div class="c137-exam-countdown fn-font-condensed">
+              <span class="pulse-dot"></span>
+              <span id="c137-countdown-text">MONDAY EXAM COUNTDOWN: READY UP</span>
+            </div>
+          </div>
+        </div>
+        <div class="c137-hero-character">
+          <img src="https://fortnite-api.com/images/cosmetics/br/cid_a_112_athena_commando_m_ruckus/featured.png" alt="Rick Sanchez" class="c137-rick-img">
+          <div class="c137-quote-bubble fn-font-condensed">
+            "Listen Henri! In science, belief without evidence is immoral. 200-pump these questions!"
+          </div>
+        </div>
+      </div>
+
       <div class="lobby-grid">
         <div class="pedestal-card">
-          <div class="pedestal-rank-badge fn-font-heavy" id="ped-tier-badge">👑 245 LBS (F = ma)</div>
+          <div class="pedestal-rank-badge fn-font-heavy" id="ped-tier-badge">👑 RICK C-137 // F = ma MASTER</div>
           <div class="pedestal-avatar-img">
-            <img id="ped-avatar-skin" class="pedestal-skin-render" src="https://fortnite-api.com/images/cosmetics/br/cid_a_136_athena_commando_m_majesty_yr1gj/featured.png" alt="LeBron James Fortnite Skin">
+            <img id="ped-avatar-skin" class="pedestal-skin-render" src="https://fortnite-api.com/images/cosmetics/br/cid_a_112_athena_commando_m_ruckus/featured.png" alt="Rick Sanchez Fortnite Skin">
             <div class="pedestal-base"></div>
           </div>
           <div style="display: flex; justify-content: center; margin-top: 8px;">
-            <button class="emote-cycle-btn fn-font-condensed" onclick="cycleLockerSkin()">👕 LOCKER SKIN: <span id="current-skin-btn-label">LEBRON JAMES</span> ➔</button>
+            <button class="emote-cycle-btn fn-font-condensed" onclick="cycleLockerSkin()">👕 LOCKER SKIN: <span id="current-skin-btn-label">RICK SANCHEZ (C-137)</span> ➔</button>
           </div>
           <div style="text-align: center; margin-top: 10px;">
-            <h2 class="fn-font-heavy" id="player-skin-name" style="font-size: 26px; color: #fff;">LEBRON JAMES</h2>
-            <p class="fn-font-condensed" id="player-skin-series" style="color: var(--fn-blue-glow);">OUTFIT: ICON SERIES (245 LBS • F = ma)</p>
+            <h2 class="fn-font-heavy" id="player-skin-name" style="font-size: 26px; color: #fff;">RICK SANCHEZ</h2>
+            <p class="fn-font-condensed" id="player-skin-series" style="color: #00ff66;">OUTFIT: CH2 S7 TIER 100 • DIMENSION C-137 (THEORETICAL PHYSICIST)</p>
           </div>
           <div class="pedestal-stats-row fn-font-condensed">
             <div><div id="ped-wins" style="font-size: 22px; color: #ffe600;">0</div><span style="font-size: 11px; color: #94a3b8;">VICTORY ROYALES</span></div>
@@ -1071,7 +1430,7 @@
             <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 10px;">
               <div style="font-size: 32px;" id="coach-avatar-icon">👨‍🏫</div>
               <div>
-                <h4 class="fn-font-heavy" id="coach-header-title" style="color: #00e5ff; font-size: 18px;">COACH CAROSAARI (INTEL)</h4>
+                <h4 class="fn-font-heavy" id="coach-header-title" style="color: #00e5ff; font-size: 18px;">COACH CAROSAARI × RICK SANCHEZ (C-137)</h4>
                 <p id="coach-subtitle" class="fn-font-condensed" style="color: #94a3b8; font-size: 14px;">PLAY DEBRIEF</p>
               </div>
             </div>
@@ -1182,7 +1541,8 @@
     <div class="victory-main-banner">
       <h1 class="fn-font-heavy" style="font-size: 52px; color: #fff; text-shadow: 3px 3px 0 #000;">#1 VICTORY ROYALE</h1>
     </div>
-    <img class="victory-gif-img" id="victory-royale-gif" src="https://media.giphy.com/media/3Fkfrn9g4BZl4A56Dc/giphy.gif" alt="Victory Royale World Cup Hype" style="object-fit: cover; width: 220px; height: 160px; border-radius: 12px; border: 3px solid #ffe600; box-shadow: 0 0 45px rgba(255,230,0,0.85); margin: 0 auto 16px auto; display: block;">
+    <img class="victory-gif-img" id="victory-royale-gif" src="https://media.giphy.com/media/IdZgPp8tfWPOo/giphy.gif" alt="Rick Sanchez Victory Royale Dance" style="object-fit: cover; width: 260px; height: 180px; border-radius: 12px; border: 3px solid #00ff66; box-shadow: 0 0 45px rgba(0,255,102,0.85); margin: 0 auto 16px auto; display: block;">
+    <div class="c137-badge fn-font-heavy" style="margin: 0 auto 12px auto; display: table;">👑 DIMENSION C-137 // 100% EXAM MASTERY</div>
     <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #ffe600; border-radius: 12px; padding: 24px; text-align: center; max-width: 600px; width: 90%;">
       <div id="v-stat-score" class="fn-font-heavy" style="font-size: 42px; color: #ffe600;">100%</div>
       <p id="victory-summary-text" style="color: #cbd5e1; margin: 15px 0; font-size: 16px;"></p>
@@ -1594,6 +1954,45 @@
       };
     }
 
+
+    // SAVE AUDIT MODAL
+    function openSaveAuditModal() {
+      playFnSound("click");
+      const modal = document.getElementById("save-audit-modal");
+      if (modal) modal.style.display = "flex";
+    }
+
+    function closeSaveAuditModal() {
+      playFnSound("click");
+      const modal = document.getElementById("save-audit-modal");
+      if (modal) modal.style.display = "none";
+    }
+
+    // LIVE EXAM COUNTDOWN TICKER
+    function updateExamCountdown() {
+      const el = document.getElementById("c137-countdown-text");
+      if (!el) return;
+      const now = new Date();
+      const target = new Date();
+      const day = target.getDay(); // 0: Sun, 1: Mon
+      let daysUntilMon = (1 - day + 7) % 7;
+      if (daysUntilMon === 0 && target.getHours() >= 8) {
+        daysUntilMon = 7;
+      }
+      target.setDate(target.getDate() + daysUntilMon);
+      target.setHours(8, 0, 0, 0);
+
+      const diffMs = target - now;
+      if (diffMs <= 0) {
+        el.innerText = "⚡ EXAM IS LIVE: DROP IN & SECURE 100%!";
+        return;
+      }
+      const h = Math.floor(diffMs / 3600000);
+      const m = Math.floor((diffMs % 3600000) / 60000);
+      const s = Math.floor((diffMs % 60000) / 1000);
+      el.innerText = `MONDAY EXAM COUNTDOWN: ${h}H ${m}M ${s}S // 100% MASTERY`;
+    }
+
     function openPlayerSelectModal(forMatch = false) {
       pendingMatchLaunch = !!forMatch;
       const modal = document.getElementById("player-select-modal");
@@ -1644,6 +2043,11 @@
             </span>
           `;
         }
+      }
+
+      const saveLabel = document.getElementById("header-save-status-label");
+      if (saveLabel) {
+        saveLabel.innerText = isHenri ? "CLOUD SAVE: ACTIVE (HENRI OFFICIAL)" : "LOCAL SAVE: GUEST PRACTICE";
       }
 
       // Update pedestal badge
@@ -1728,6 +2132,42 @@
       if (!audioCtx) return;
       if (audioCtx.state === "suspended") audioCtx.resume();
       const now = audioCtx.currentTime;
+      if (type === "portal") {
+        try {
+          const osc = audioCtx.createOscillator();
+          const osc2 = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          const filter = audioCtx.createBiquadFilter();
+
+          osc.type = "sawtooth";
+          osc2.type = "sine";
+          filter.type = "bandpass";
+          filter.frequency.setValueAtTime(250, now);
+          filter.frequency.exponentialRampToValueAtTime(1600, now + 0.25);
+          filter.frequency.exponentialRampToValueAtTime(320, now + 0.55);
+          filter.Q.value = 6.0;
+
+          osc.frequency.setValueAtTime(75, now);
+          osc.frequency.exponentialRampToValueAtTime(380, now + 0.3);
+          osc2.frequency.setValueAtTime(150, now);
+          osc2.frequency.exponentialRampToValueAtTime(760, now + 0.3);
+
+          gain.gain.setValueAtTime(0.01, now);
+          gain.gain.linearRampToValueAtTime(0.35, now + 0.12);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.6);
+
+          osc.connect(filter);
+          osc2.connect(filter);
+          filter.connect(gain);
+          gain.connect(audioCtx.destination);
+
+          osc.start(now);
+          osc2.start(now);
+          osc.stop(now + 0.65);
+          osc2.stop(now + 0.65);
+        } catch(e) {}
+        return;
+      }
       if (type === "headshot") {
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
@@ -1862,7 +2302,17 @@
       renderQuestion();
     }
 
+    function triggerPortalTransition() {
+      playFnSound("portal");
+      const overlay = document.getElementById("rick-portal-vortex-overlay");
+      if (overlay) {
+        overlay.style.display = "block";
+        setTimeout(() => { overlay.style.display = "none"; }, 500);
+      }
+    }
+
     function renderQuestion() {
+      triggerPortalTransition();
       const q = activeQuestions[currentQIndex];
       const total = activeQuestions.length;
 
@@ -1889,8 +2339,32 @@
       document.getElementById("next-drop-btn").innerText = (currentQIndex === total - 1) ? "CLAIM VICTORY ROYALE ➔" : "CLAIM INTEL & NEXT DROP ➔";
     }
 
-    // OFFICIAL FORTNITE LOCKER SKINS (ZERO CRINGE, 100% AUTHENTIC)
+        // OFFICIAL FORTNITE LOCKER SKINS (VERIFIED AUTHENTIC CDN ASSETS)
     const LOCKER_SKINS = [
+      {
+        name: "RICK SANCHEZ",
+        series: "CH2 S7 TIER 100 • DIMENSION C-137 (THEORETICAL PHYSICIST)",
+        btn: "RICK SANCHEZ (C-137)",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_a_112_athena_commando_m_ruckus/featured.png"
+      },
+      {
+        name: "MECHA MORTY",
+        series: "MECHA SUIT • THEORETICAL LAB ASSISTANT (AWW GEEZ F=ma)",
+        btn: "MECHA MORTY",
+        url: "https://fortnite-api.com/images/cosmetics/br/cid_a_181_athena_commando_m_ruckusmini_a6vg6/featured.png"
+      },
+      {
+        name: "MR. MEESEEKS",
+        series: "EXISTENCE IS PAIN • 100% EXAM ACCURACY",
+        btn: "MR. MEESEEKS",
+        url: "https://fortnite-api.com/images/cosmetics/br/character_geniusblob/featured.png"
+      },
+      {
+        name: "QUEEN SUMMER",
+        series: "INTERDIMENSIONAL GLORY • MULTIVERSE WARRIOR",
+        btn: "QUEEN SUMMER",
+        url: "https://fortnite-api.com/images/cosmetics/br/character_genius/featured.png"
+      },
       {
         name: "LEBRON JAMES",
         series: "ICON SERIES (245 LBS • F = ma)",
@@ -1989,7 +2463,7 @@
       setTimeout(() => { overlay.style.display = "none"; }, 400);
     }
 
-    // OFFICIAL FORTNITE COMBAT REACTION CARDS
+        // OFFICIAL RICK & MORTY × FORTNITE COMBAT REACTION CARDS
     function renderMemeReaction(isCorrect, q) {
       const tagEl = document.getElementById("meme-reaction-tag");
       const gifEl = document.getElementById("meme-reaction-gif");
@@ -2004,35 +2478,47 @@
           tagEl.innerText = "👑 LEBRON: F = ma MASTER";
           gifEl.src = "https://fortnite-api.com/images/cosmetics/br/cid_a_136_athena_commando_m_majesty_yr1gj/featured.png";
           captionEl.innerText = "245 LBS LAUNCHED 44 INCHES! DOWNWARD PUSH = UPWARD BLAST!";
-        } else if (streak >= 3) {
-          tagEl.innerText = "👑 CROWNED VICTORY STREAK";
-          gifEl.src = "https://media.giphy.com/media/3Fkfrn9g4BZl4A56Dc/giphy.gif";
-          captionEl.innerText = "FLAWLESS EXECUTION! ALL DISTRACTOR TRAPS ELIMINATED!";
-        } else if (rand > 0.5) {
-          tagEl.innerText = "🎯 200 PUMP HEADSHOT // HYPE DANCE";
+        } else if (rand < 0.35) {
+          tagEl.innerText = "🟢 RICK C-137: 200 PUMP HEADSHOT";
+          gifEl.src = "https://media.giphy.com/media/2s0ouek0z4OmQCqVE8/giphy.gif";
+          captionEl.innerText = "WUBBA LUBBA DUB-DUB! PURE EMPIRICAL EVIDENCE! THAT'S A MULTIVERSE ELIMINATION!";
+        } else if (rand < 0.65) {
+          tagEl.innerText = "⚡ MR. MEESEEKS: MISSION ACCOMPLISHED";
+          gifEl.src = "https://media.giphy.com/media/9zXWAIcr6jycE/giphy.gif";
+          captionEl.innerText = "LOOK AT ME! 100% EXAM ACCURACY UNLOCKED! EXISTENCE IS NO LONGER PAIN!";
+        } else if (rand < 0.85) {
+          tagEl.innerText = "🌀 INTERDIMENSIONAL PHYSICS WIN";
+          gifEl.src = "https://media.giphy.com/media/l378bzHA5F5nFXLVT2/giphy.gif";
+          captionEl.innerText = "F = ma IS UNIVERSAL IN EVERY REALITY! DISTRACTOR TRAP ANNIHILATED!";
+        } else {
+          tagEl.innerText = "🔥 200 PUMP // GET GRIDDY";
           gifEl.src = "https://media.giphy.com/media/5dWh40EFy4n6NviaCC/giphy.gif";
           captionEl.innerText = "DIRECT HIT! FULL 100% MARKS SECURED ON THIS CONCEPT!";
-        } else {
-          tagEl.innerText = "🔥 GET GRIDDY // UNSTOPPABLE MOMENTUM";
-          gifEl.src = "https://fortnite-api.com/images/cosmetics/br/eid_griddles/icon.png";
-          captionEl.innerText = "RIGHT FOOT CREEP! F = ma IN FULL EFFECT!";
         }
       } else {
         const rand = Math.random();
-        if (rand > 0.5) {
+        if (rand < 0.45) {
+          tagEl.innerText = "⚠️ RICK C-137: DISTRACTOR TRAP TRIGGERED";
+          gifEl.src = "https://media.giphy.com/media/TJawtKM6OCKkvwCIqX/giphy.gif";
+          captionEl.innerText = "MORTY, YOU DONKEY! BELIEF WITHOUT EVIDENCE IS ILLOGICAL AND IMMORAL! STUDY THE PAPER PHRASING!";
+        } else if (rand < 0.75) {
+          tagEl.innerText = "🪦 CAROSAARI TRAP ACTIVATED";
+          gifEl.src = "https://media.giphy.com/media/ISX4R2mMMWys0/giphy.gif";
+          captionEl.innerText = "YOU WALKED INTO THE DISTRACTOR TRAP! MEMORIZE THE 5-WORD RHYTHM CHANT!";
+        } else {
           tagEl.innerText = "⚠️ SHIELD CRACKED // TAKE THE L";
           gifEl.src = "https://media2.giphy.com/media/1fgIljJsFEph3SjFjG/giphy.gif";
-          captionEl.innerText = "YOU WALKED INTO THE DISTRACTOR TRAP! MEMORIZE THE CHANT!";
-        } else {
-          tagEl.innerText = "🪦 REBOOT CARD DROPPED";
-          gifEl.src = "https://fortnite-api.com/images/cosmetics/br/eid_laugh/icon.png";
-          captionEl.innerText = "CAROSAARI'S TRAP TRIGGERED! STUDY THE EXACT PAPER PHRASING!";
+          captionEl.innerText = "CAROSAARI'S TRAP HIT YOUR SHIELD! STUDY THE EXACT PAPER PHRASING!";
         }
       }
     }
 
     // KILLFEED ENGINE
     const KILLFEED_MESSAGES = [
+      { killer: "Rick_Sanchez_C137", weapon: "[PORTAL GUN]", victim: "Caloric_Fluid_Theory", detail: "Kinetic energy only" },
+      { killer: "Mecha_Morty", weapon: "[F=ma HAMMER]", victim: "Inertia_Trap", detail: "2nd Law verified" },
+      { killer: "Mr_Meeseeks", weapon: "[COGNITIVE BLAST]", victim: "Insha'Allah_Guess", detail: "Quantifiable numbers" },
+      { killer: "Pickle_Rick", weapon: "[LASER SHOTGUN]", victim: "Distractor_Option", detail: "200 Pump" },
       { killer: "LeBron_James", weapon: "[SLAM DUNK]", victim: "245lbs_Gravity", detail: "44-inch vert" },
       { killer: "Cyclist_Spandex", weapon: "[AERO DRAG]", victim: "Air_Resistance", detail: "35 mph" },
       { killer: "Sir_Isaac_Newton", weapon: "[APPLE DROP]", victim: "Ignorance", detail: "Law #1" },
@@ -2433,6 +2919,8 @@
         loadActiveProfileData();
         applyProfileUI();
       }
+      setInterval(updateExamCountdown, 1000);
+      updateExamCountdown();
     };
   </script>
 </body>
