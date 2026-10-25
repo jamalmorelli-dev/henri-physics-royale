@@ -2037,6 +2037,115 @@
       outline: none;
     }
 
+
+    /* ==========================================================================
+       V21: NON-BLOCKING "BABY CALC" INLINE BAR + COMPACT MINI-DRAWER + BABY MODE
+       ========================================================================== */
+    .calc-floating-widget {
+      position: fixed;
+      right: 16px;
+      top: 76px;
+      width: 285px;
+      max-width: calc(100vw - 24px);
+      background: rgba(3, 7, 18, 0.96);
+      border: 2px solid #00ff66;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.75), 0 0 20px rgba(0, 255, 102, 0.3);
+      z-index: 9500;
+      display: none;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .calc-floating-widget.visible {
+      display: block;
+    }
+    /* Mini / Baby Calculator Mode: tiny 1-line bar that never blocks options! */
+    .calc-floating-widget.mini-mode {
+      width: 260px;
+    }
+    .calc-floating-widget.mini-mode .calc-keypad-grid,
+    .calc-floating-widget.mini-mode .calc-planet-pills,
+    .calc-floating-widget.mini-mode .calc-keystrokes-banner,
+    .calc-floating-widget.mini-mode .calc-lcd-subrow {
+      display: none !important;
+    }
+    .calc-floating-widget.mini-mode .calc-lcd-screen {
+      margin: 6px 10px;
+      padding: 6px 10px;
+    }
+    .calc-floating-widget.mini-mode .calc-lcd-main {
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+    /* Baby Mode Theme Banner */
+    body.baby-mode-active .c137-portal-hero {
+      border-color: #38bdf8;
+      background: radial-gradient(ellipse at 80% 50%, rgba(56, 189, 248, 0.28) 0%, rgba(15, 23, 42, 0.9) 85%);
+    }
+    .baby-mode-toggle-btn {
+      background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+      border: 2px solid #fbcfe8;
+      color: #000;
+      font-weight: 900;
+      padding: 6px 13px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 0 15px rgba(244, 114, 182, 0.5);
+      transition: all 0.15s;
+    }
+    .baby-mode-toggle-btn:hover {
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 0 22px rgba(244, 114, 182, 0.85);
+    }
+    .baby-mode-toggle-btn.active {
+      background: linear-gradient(135deg, #00ff66 0%, #10b981 100%);
+      border-color: #fff;
+      color: #000;
+      box-shadow: 0 0 22px rgba(0, 255, 102, 0.85);
+    }
+
+    /* Inline Non-Blocking Baby Calc Strip inside Question Box */
+    .inline-baby-calc-strip {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      background: rgba(2, 26, 18, 0.85);
+      border: 1.5px solid #10b981;
+      border-radius: 10px;
+      padding: 8px 12px;
+      margin-top: 12px;
+    }
+    .inline-calc-input {
+      background: #030712;
+      border: 1.5px solid #00ff66;
+      color: #00ff66;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 6px;
+      width: 175px;
+    }
+    .inline-calc-output {
+      font-family: 'Courier New', monospace;
+      font-size: 15px;
+      font-weight: 900;
+      color: #ffe600;
+      background: rgba(255, 230, 0, 0.12);
+      border: 1px solid rgba(255, 230, 0, 0.4);
+      padding: 4px 10px;
+      border-radius: 6px;
+      min-width: 90px;
+      text-align: center;
+    }
+
   </style>
 </head>
 <body>
@@ -2164,8 +2273,11 @@
     </nav>
 
     <div class="fn-player-bar">
-      <button class="hud-calc-btn fn-font-heavy" onclick="toggleFloatingCalc()" title="Open C-137 Scientific Calculator (Shortcut: C)" style="padding: 6px 12px; font-size: 14px;">
-        🧮 SCI-CALC [C]
+      <button id="header-baby-mode-btn" class="baby-mode-toggle-btn fn-font-heavy" onclick="launchBabyVersionNow()" title="Instant 1-Click Baby Version: Bite-sized questions, round numbers, hints ON & zero clutter!">
+        🍼 BABY VERSION (EASY MODE)
+      </button>
+      <button class="hud-calc-btn fn-font-heavy" onclick="toggleFloatingCalc()" title="Toggle Compact Keypad (Shortcut: C)" style="padding: 6px 11px; font-size: 13px;">
+        🧮 KEYPAD
       </button>
       <div class="fn-currency fn-font-condensed clickable-coin" onclick="switchFnTab('shop')" title="Click to open Item Shop">
         <div class="vbucks-icon">🪙</div>
@@ -2206,7 +2318,11 @@
           <p class="c137-hero-subtitle fn-font-condensed">
             The Multiverse Battle Bus is dropping straight into Rick Sanchez's C-137 Physics Gauntlet. Monday's exam has zero room for distractor traps or Jerry-tier guesses. <strong>Push the floor, the floor pushes back!</strong>
           </p>
-          <div class="c137-hero-actions">
+          <div class="c137-hero-actions" style="flex-wrap: wrap; gap: 12px;">
+            <button class="c137-quick-drop-btn fn-font-heavy" style="background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%); border-color: #fbcfe8; color: #000;" onclick="launchBabyVersionNow()">
+              <span>🍼 BABY VERSION: 3-MIN EASY WARM-UP</span>
+              <span class="btn-subtext" style="color: #1e293b;">12 Super-Easy Drops • Round Numbers • Instant Hints • Zero Stress</span>
+            </button>
             <button class="c137-quick-drop-btn fn-font-heavy" onclick="launchMatch()">
               <span>🚀 QUICK DROP: TOMORROW'S NEWTON'S 4 LAWS EXAM</span>
               <span class="btn-subtext">28 Official Exam Drops • 1st, 2nd, 3rd & 4th Laws + Sci-Calc</span>
@@ -2249,6 +2365,13 @@
         <div>
           <h2 class="fn-font-condensed" style="color: #94a3b8; font-size: 24px;">SELECT MISSION / MODE</h2>
           <div class="mode-cards">
+            <div class="mode-card" style="border-color: #f472b6; background: rgba(244, 114, 182, 0.12);" onclick="selectMode('baby', this)">
+              <div>
+                <h3 class="fn-font-condensed" style="font-size: 22px; color: #f472b6;">🍼 BABY VERSION: EASY 4-LAWS WARM-UP</h3>
+                <p style="font-size: 13px; color: #fbcfe8;">12 Bite-Sized Drops • Round Numbers (10×2=20), Short Sentences & Hint Unlocked</p>
+              </div>
+              <span class="fn-font-heavy" style="background: #f472b6; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px;">BABY MODE</span>
+            </div>
             <div class="mode-card selected" onclick="selectMode('physics', this)">
               <div>
                 <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">SOLO: TOMORROW'S NEWTON'S 4 LAWS EXAM</h3>
@@ -2342,20 +2465,22 @@
           <span class="fn-font-condensed" id="hud-q-counter" style="color: var(--fn-blue-glow); font-size: 18px;">DROP 1 OF 12</span>
         </div>
         <div id="hud-q-text" style="font-size: 21px; font-weight: 800; line-height: 1.4;">Loading Question...</div>
-        <div class="hud-calc-assist-bar" id="hud-calc-assist-bar">
-          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-            <button class="hud-calc-btn fn-font-condensed" onclick="toggleFloatingCalc(true)">
-              🧮 OPEN C-137 SCI-CALC
-            </button>
-            <button class="hud-calc-btn gold fn-font-condensed" id="hud-autoload-calc-btn" onclick="loadCurrentQuestionIntoCalc()">
-              ⚡ LOAD FORMULA & KEYSTROKES INTO CALC
-            </button>
-            <button class="hud-calc-btn fn-font-condensed" style="border-color:#38bdf8; color:#38bdf8; background:rgba(56,189,248,0.12);" onclick="matchCalcResultToOptions()">
-              🎯 TARGET-LOCK MATCHING OPTION
-            </button>
-          </div>
-          <div id="hud-calc-hint-pill" class="fn-font-condensed" style="font-size: 13px; color: #ffe600; font-weight: 700;">
-            💡 Press [C] anytime for TI-30XIIS Scientific Calculator
+        <!-- INLINE NON-BLOCKING "BABY CALC" BAR (NEVER COVERS THE SCREEN!) -->
+        <div class="inline-baby-calc-strip" id="hud-calc-assist-bar">
+          <span class="fn-font-heavy" style="color:#00ff66; font-size:13px;">🧮 INLINE CALC:</span>
+          <input id="inline-calc-input" class="inline-calc-input" type="text" placeholder="Type math e.g. 135/45" oninput="runInlineBabyCalc(this.value)" onkeydown="if(event.key==='Enter'){runInlineBabyCalc(this.value, true);}">
+          <div id="inline-calc-output" class="inline-calc-output">= 0</div>
+          <button class="hud-calc-btn gold fn-font-condensed" style="padding: 5px 10px; font-size: 12.5px;" onclick="solveInlineWithoutPopup()">
+            ⚡ 1-CLICK SOLVE & HIGHLIGHT
+          </button>
+          <button class="hud-calc-btn fn-font-condensed" style="padding: 5px 9px; font-size: 12px; border-color:#38bdf8; color:#38bdf8; background:rgba(56,189,248,0.12);" onclick="inlineDivide98()">
+            ÷9.8 KILOS
+          </button>
+          <button class="hud-calc-btn fn-font-condensed" style="padding: 5px 9px; font-size: 12px;" onclick="toggleFloatingCalc()">
+            🔢 FULL PAD
+          </button>
+          <div id="hud-calc-hint-pill" class="fn-font-condensed" style="font-size: 12.5px; color: #fde047; font-weight: 700; margin-left: auto;">
+            💡 Inline Calc Ready (Zero Popups!)
           </div>
         </div>
       </div>
@@ -2803,9 +2928,10 @@
             <div class="fn-font-condensed" style="color: #94a3b8; font-size: 11px;">G = 6.67259×10⁻¹¹ • AUTO "FEELS LIKE KILOS" (÷9.8)</div>
           </div>
         </div>
-        <div style="display: flex; gap: 6px;">
-          <button onclick="matchCalcResultToOptions()" title="Highlight matching quiz option" style="background:#ffe600; color:#000; border:none; border-radius:5px; padding:3px 7px; font-weight:900; font-size:11px; cursor:pointer;">🎯 MATCH</button>
-          <button onclick="toggleFloatingCalc(false)" style="background:#ef4444; color:#fff; border:none; border-radius:5px; padding:3px 8px; font-weight:900; font-size:12px; cursor:pointer;">✕</button>
+        <div style="display: flex; gap: 5px;">
+          <button onclick="toggleMiniCalcMode()" id="calc-mini-btn" title="Shrink to tiny 1-line Baby Bar" style="background:#38bdf8; color:#000; border:none; border-radius:5px; padding:3px 7px; font-weight:900; font-size:11px; cursor:pointer;">➖ MINI</button>
+          <button onclick="matchCalcResultToOptions()" title="Highlight matching quiz option" style="background:#ffe600; color:#000; border:none; border-radius:5px; padding:3px 7px; font-weight:900; font-size:11px; cursor:pointer;">🎯</button>
+          <button onclick="toggleFloatingCalc(false)" title="Close keypad" style="background:#ef4444; color:#fff; border:none; border-radius:5px; padding:3px 8px; font-weight:900; font-size:12px; cursor:pointer;">✕</button>
         </div>
       </div>
 
@@ -2946,6 +3072,212 @@
   <script>
     // FULL OFFLINE QUESTION BANK WITH EMBEDDED INTEL (ZERO NETWORK REQUIRED)
     const QUESTIONS = {
+      baby: [
+        {
+          id: "b1",
+          category: "🍼 Baby Warm-Up // 1st Law (Inertia)",
+          title: "1ST LAW: A soccer ball is sitting still on the grass. What is the ONLY thing that can make it start moving?",
+          options: [
+            "An unbalanced force (like a kick!)",
+            "Inertia makes it start moving by itself",
+            "Balanced forces",
+            "Its mass"
+          ],
+          correct: 0,
+          calcFormula: "1st Law: Objects at rest stay at rest unless pushed by an UNBALANCED force!",
+          calcExpr: "0",
+          hook: "Nothing Moves Without An Unbalanced Force!",
+          explanation: "Newton's 1st Law says an object at rest stays at rest unless acted on by an unbalanced force.",
+          paperPhrase: "An object at rest remains at rest unless acted upon by an unbalanced force."
+        },
+        {
+          id: "b2",
+          category: "🍼 Baby Warm-Up // Mass & Inertia",
+          title: "1ST LAW: Which object has MORE inertia (is harder to start or stop moving): a 100 kg safe or a 1 kg pillow?",
+          options: [
+            "The 1 kg pillow",
+            "The 100 kg safe (Bigger mass = Bigger inertia!)",
+            "They have the exact same inertia",
+            "Neither has inertia"
+          ],
+          correct: 1,
+          calcFormula: "Big Mass (kg) = Big Inertia!",
+          calcExpr: "100 / 1",
+          hook: "Bigger Mass Means Bigger Inertia Every Time!",
+          explanation: "Inertia depends only on mass. A 100 kg safe has 100 times more mass, so it has 100 times more inertia!",
+          paperPhrase: "Greater mass means greater inertia (resistance to changes in motion)."
+        },
+        {
+          id: "b3",
+          category: "🍼 Baby Warm-Up // Galileo vs. Aristotle",
+          title: "1ST LAW: Who rolled balls down ramps to prove that moving objects keep moving forever unless friction stops them?",
+          options: [
+            "Galileo",
+            "Aristotle",
+            "LeBron James",
+            "Thomas Huxley"
+          ],
+          correct: 0,
+          calcFormula: "Galileo = Ramps & Friction | Aristotle = Wrongly thought pushes are needed",
+          calcExpr: "1",
+          hook: "Galileo Rolled Ramps And Proved Friction Stops Motion!",
+          explanation: "Aristotle thought objects stop naturally; Galileo rolled balls on ramps and proved friction is the unbalanced force that slows them down.",
+          paperPhrase: "Galileo used ramp experiments to show that objects keep moving unless stopped by friction."
+        },
+        {
+          id: "b4",
+          category: "🍼 Baby Warm-Up // Bike Helmets",
+          title: "1ST LAW: How does the soft foam inside a bike helmet protect your head in a crash?",
+          options: [
+            "It erases your head's inertia completely",
+            "It squishes to make the stopping time LONGER, which makes the impact force SMALLER!",
+            "It makes your head stop in zero seconds",
+            "It makes your head heavier"
+          ],
+          correct: 1,
+          calcFormula: "Longer Stopping Time (Δt) = Smaller Force on Skull!",
+          calcExpr: "100 / 10",
+          hook: "Foam Stretches Stopping Time And Shrinks Force!",
+          explanation: "The helmet doesn't stop inertia! The outer shell spreads the hit, and the foam compresses to increase deceleration time, reducing force on your skull.",
+          paperPhrase: "The helmet's foam compresses to increase deceleration time, reducing the impact force on the skull."
+        },
+        {
+          id: "b5",
+          category: "🍼 Baby Warm-Up // Easy 2nd Law Math (F = ma)",
+          title: "2ND LAW (EASY MATH): If Force = Mass × Acceleration (F = m·a), how much force is needed to accelerate a 10 kg box at 2 m/s²?",
+          options: [
+            "5 N",
+            "20 N  (because 10 × 2 = 20!)",
+            "12 N",
+            "200 N"
+          ],
+          correct: 1,
+          calcFormula: "F = m × a = 10 × 2 = 20 N",
+          calcExpr: "10 * 2",
+          hook: "Force Is Mass Times Acceleration: 10 Times 2 Is 20 N!",
+          explanation: "Plug into F = m × a: 10 kg × 2 m/s² = 20 Newtons (N).",
+          paperPhrase: "F = m · a = 10 kg × 2 m/s² = 20 N."
+        },
+        {
+          id: "b6",
+          category: "🍼 Baby Warm-Up // Free Fall in Vacuum vs. Air",
+          title: "2ND LAW: Drop a heavy bowling ball and a light feather. What happens in a VACUUM (no air) vs. IN AIR?",
+          options: [
+            "In a vacuum they hit at the SAME time (9.8 m/s²); in air the heavy ball hits FIRST!",
+            "The heavy ball hits first in both a vacuum and air",
+            "The feather hits first in a vacuum",
+            "Nothing falls in a vacuum"
+          ],
+          correct: 0,
+          calcFormula: "Vacuum = Tie (9.8 m/s²) | Air = Heavy accelerates longer & wins!",
+          calcExpr: "9.8",
+          hook: "Vacuum Is A Tie; In Air Heavy Hits First!",
+          explanation: "In a vacuum (no air drag), all masses fall at 9.8 m/s² and tie. In air, the heavy object has a bigger weight (F_G), so it takes longer for air drag to equal F_G (terminal velocity) and hits first!",
+          paperPhrase: "In a vacuum all objects accelerate equally at 9.8 m/s²; in air, heavier objects take longer to reach terminal velocity (F_Air = F_G) and hit the ground first."
+        },
+        {
+          id: "b7",
+          category: "🍼 Baby Warm-Up // Weight vs. Mass on Planets",
+          title: "2ND LAW (EASY MATH): You have a mass of 10 kg. On the Moon (g = 1.625 m/s²), what is your MASS and what is your WEIGHT (w = m·g)?",
+          options: [
+            "Mass is STILL 10 kg; Weight is 16.25 N (10 × 1.625)",
+            "Mass changes to 1.625 kg; Weight is 10 N",
+            "Mass is 0 kg on the Moon",
+            "Mass is 98 kg; Weight is 9.8 N"
+          ],
+          correct: 0,
+          calcFormula: "Mass = 10 kg (never changes!) | Weight w = 10 × 1.625 = 16.25 N",
+          calcExpr: "10 * 1.625",
+          hook: "Mass Never Changes; Weight Is Mass Times g!",
+          explanation: "Your mass (10 kg) never changes anywhere! Your weight on the Moon is w = m × g = 10 × 1.625 = 16.25 N.",
+          paperPhrase: "Mass remains 10 kg everywhere, while weight on the Moon is w = mg = 10 kg × 1.625 m/s² = 16.25 N."
+        },
+        {
+          id: "b8",
+          category: "🍼 Baby Warm-Up // Carosaari 'Feels Like Kilos' Trick",
+          title: "2ND LAW: Mr. Carosaari's Shortcut! Once you find your weight in Newtons on another planet (say 98 N), what do you divide by to see 'how many kilos it feels like' on Earth?",
+          options: [
+            "Divide by 9.8!  (98 ÷ 9.8 = feels like 10 kg!)",
+            "Multiply by 100",
+            "Add 9.8",
+            "Divide by 0"
+          ],
+          correct: 0,
+          calcFormula: "Feels Like Kilos = Weight (N) ÷ 9.8",
+          calcExpr: "98 / 9.8",
+          hook: "Divide Newtons By 9.8 For Earth-Feel Kilos!",
+          explanation: "From Mr. Carosaari's notes: 'to find out how many kilo this would feel like divide by 9.8'!",
+          paperPhrase: "Divide the planetary weight in Newtons by 9.8 m/s² to find how many kilograms it feels like on Earth."
+        },
+        {
+          id: "b9",
+          category: "🍼 Baby Warm-Up // 3rd Law Rockets in Space",
+          title: "3RD LAW: How does a rocket move forward in deep space where there is NO air?",
+          options: [
+            "It pushes hot gas BACKWARD (action), and the gas pushes the rocket FORWARD (equal & opposite reaction)!",
+            "It pushes against the air in space",
+            "It uses solar wind sails only",
+            "Rockets cannot move in space"
+          ],
+          correct: 0,
+          calcFormula: "Action: Push Gas Back ⬅  |  Reaction: Gas Pushes Rocket Forward ➔",
+          calcExpr: "1",
+          hook: "Push Gas Backward, Gas Pushes Rocket Forward!",
+          explanation: "By Newton's 3rd Law, every action has an equal and opposite reaction. Shooting gas backward pushes the rocket forward without needing air.",
+          paperPhrase: "A rocket expels gas backward (action), which exerts an equal and opposite reaction force pushing the rocket forward."
+        },
+        {
+          id: "b10",
+          category: "🍼 Baby Warm-Up // 3rd Law Momentum (p = mv)",
+          title: "3RD LAW (EASY MATH): Momentum = Mass × Velocity (p = m·v). What is the momentum of a 10 kg cart rolling at 5 m/s?",
+          options: [
+            "50 kg·m/s  (because 10 × 5 = 50!)",
+            "2 kg·m/s",
+            "15 kg·m/s",
+            "500 N"
+          ],
+          correct: 0,
+          calcFormula: "p = m × v = 10 × 5 = 50 kg·m/s",
+          calcExpr: "10 * 5",
+          hook: "Momentum p Equals Mass Times Velocity: 10 Times 5 Is 50!",
+          explanation: "p = m × v = 10 kg × 5 m/s = 50 kg·m/s. And in any collision, total momentum is conserved!",
+          paperPhrase: "p = m · v = 10 kg × 5 m/s = 50 kg·m/s."
+        },
+        {
+          id: "b11",
+          category: "🍼 Baby Warm-Up // 4th Law Universal Gravitation",
+          title: "4TH LAW: In Newton's 4th Law (F = G·m₁·m₂ / d²), what makes gravitational pull STRONGER vs. WEAKER?",
+          options: [
+            "MORE mass makes gravity stronger; MORE distance (d²) makes gravity weaker!",
+            "Less mass makes gravity stronger",
+            "More distance makes gravity stronger",
+            "Mass and distance don't change gravity"
+          ],
+          correct: 0,
+          calcFormula: "F = G · m₁ · m₂ / d²  (G = 6.67259 × 10⁻¹¹)",
+          calcExpr: "6.67259e-11",
+          hook: "More Mass Pulls Stronger; More Distance Squared Pulls Weaker!",
+          explanation: "Mass (m₁, m₂) is on top, so bigger mass = bigger force. Distance squared (d²) is on the bottom, so more distance = weaker force (2× distance = 1/4 force!).",
+          paperPhrase: "Gravitational force increases with greater mass and decreases with the square of the distance (d²)."
+        },
+        {
+          id: "b12",
+          category: "🍼 Baby Warm-Up // 4th Law Distance Squared Trick",
+          title: "4TH LAW (EASY MATH): If two planets move 2 times farther apart (2d), what happens to the gravity force between them?",
+          options: [
+            "It becomes 1/4 as strong (because 2² = 4)!",
+            "It becomes 2 times stronger",
+            "It stays the same",
+            "It becomes zero"
+          ],
+          correct: 0,
+          calcFormula: "1 / d² = 1 / 2² = 1/4 (0.25)",
+          calcExpr: "1 / (2**2)",
+          hook: "Double The Distance Means One-Fourth The Gravity!",
+          explanation: "Because distance is squared on the bottom (d²), multiplying distance by 2 divides the force by 2² = 4 (giving 1/4 the force).",
+          paperPhrase: "Doubling the distance reduces gravitational force to 1/4 (one-fourth) because force is inversely proportional to d²."
+        }
+      ],
       physics: [
         {
           id: "p1",
@@ -3992,7 +4324,7 @@
       missedQuestions = s.missedQuestions || [];
 
       // Rebuild active questions
-      const pool = [...QUESTIONS.physics, ...(QUESTIONS.calc_blitz || []), ...QUESTIONS.intro];
+      const pool = [...(QUESTIONS.baby || []), ...QUESTIONS.physics, ...(QUESTIONS.calc_blitz || []), ...QUESTIONS.intro];
       if (s.activeQuestionIds && s.activeQuestionIds.length) {
         activeQuestions = s.activeQuestionIds.map(id => pool.find(q => q.id === id)).filter(Boolean);
       } else {
@@ -4453,7 +4785,8 @@
         return;
       }
 
-      if (selectedGameMode === "physics") activeQuestions = [...QUESTIONS.physics];
+      if (selectedGameMode === "baby") activeQuestions = [...(QUESTIONS.baby || [])];
+      else if (selectedGameMode === "physics") activeQuestions = [...QUESTIONS.physics];
       else if (selectedGameMode === "calc_blitz") activeQuestions = [...(QUESTIONS.calc_blitz || [])];
       else if (selectedGameMode === "intro") activeQuestions = [...QUESTIONS.intro];
       else if (selectedGameMode === "boss") activeQuestions = [...QUESTIONS.physics, ...(QUESTIONS.calc_blitz || []), ...QUESTIONS.intro];
@@ -5078,8 +5411,12 @@
           hintPill.innerHTML = "💡 Press <strong>[C]</strong> anytime for C-137 Scientific Calculator";
         }
       }
-      if (q.category && q.category.includes("Sci-Calc")) {
-        toggleFloatingCalc(true);
+      // Never auto-open the floating keypad over questions! Populate the inline non-blocking bar instead:
+      const inlineIn = document.getElementById("inline-calc-input");
+      const inlineOut = document.getElementById("inline-calc-output");
+      if (inlineIn && inlineOut) {
+        inlineIn.value = "";
+        inlineOut.innerText = "= 0";
       }
     }
 
@@ -5327,6 +5664,7 @@
     }
 
     function selectOption(selectedIdx, btnElement, event) {
+      toggleFloatingCalc(false);
       const q = activeQuestions[currentQIndex];
       const buttons = document.querySelectorAll(".fn-option-card");
       buttons.forEach(b => b.classList.add("disabled"));
@@ -6286,6 +6624,107 @@
         }
       }
       step();
+    }
+
+
+    // =========================================================================
+    // V21: NON-BLOCKING INLINE "BABY CALC" & 1-CLICK BABY VERSION MODE
+    // =========================================================================
+    function toggleMiniCalcMode() {
+      const widget = document.getElementById("c137-floating-calc");
+      const btn = document.getElementById("calc-mini-btn");
+      if (!widget) return;
+      widget.classList.toggle("mini-mode");
+      if (btn) {
+        btn.innerText = widget.classList.contains("mini-mode") ? "➕ FULL" : "➖ MINI";
+      }
+    }
+
+    function runInlineBabyCalc(exprStr, shouldMatch = false) {
+      const outEl = document.getElementById("inline-calc-output");
+      if (!outEl) return;
+      if (!exprStr || !exprStr.trim()) {
+        outEl.innerText = "= 0";
+        return;
+      }
+      try {
+        const res = safeEvalMath(exprStr);
+        if (res !== undefined && !isNaN(res) && isFinite(res)) {
+          calcLastAns = res;
+          const formatted = (Math.abs(res) > 0 && (Math.abs(res) < 0.001 || Math.abs(res) >= 1e7))
+            ? res.toExponential(3)
+            : Number(res.toPrecision(8)).toString();
+          outEl.innerText = "= " + formatted;
+          if (shouldMatch) matchCalcResultToOptions(res);
+        }
+      } catch (e) {}
+    }
+
+    function solveInlineWithoutPopup() {
+      playEnhancedSound("coin");
+      const q = activeQuestions[currentQIndex];
+      if (!q) return;
+      // Ensure floating popup stays CLOSED so nothing blocks the screen!
+      toggleFloatingCalc(false);
+
+      const inlineIn = document.getElementById("inline-calc-input");
+      const inlineOut = document.getElementById("inline-calc-output");
+      const hintPill = document.getElementById("hud-calc-hint-pill");
+
+      if (q.calcExpr && q.calcExpr !== "0" && q.calcExpr !== "1") {
+        if (inlineIn) inlineIn.value = q.calcExpr;
+        try {
+          const val = safeEvalMath(q.calcExpr);
+          calcLastAns = val;
+          const formatted = (Math.abs(val) > 0 && (Math.abs(val) < 0.001 || Math.abs(val) >= 1e7))
+            ? val.toExponential(3)
+            : Number(val.toPrecision(8)).toString();
+          if (inlineOut) inlineOut.innerText = "= " + formatted;
+          if (hintPill) hintPill.innerHTML = "🔑 <strong>TI-30XIIS:</strong> <code>" + (q.calcKeystrokes || q.calcExpr) + "</code>";
+          matchCalcResultToOptions(val);
+        } catch (e) {}
+      } else {
+        // Conceptual question: highlight the winning option directly and show the 5-word hook!
+        if (inlineIn) inlineIn.value = q.calcFormula || "Concept Lock";
+        if (inlineOut) inlineOut.innerText = "OPTION " + ["A", "B", "C", "D"][q.correct];
+        if (hintPill) hintPill.innerHTML = "💡 <strong>Hint:</strong> " + (q.hook || "");
+        const cards = document.querySelectorAll(".fn-option-card");
+        cards.forEach((c, idx) => {
+          c.classList.toggle("calc-matched", idx === q.correct);
+        });
+      }
+    }
+
+    function inlineDivide98() {
+      playFnSound("click");
+      const inlineIn = document.getElementById("inline-calc-input");
+      if (!inlineIn) return;
+      const cur = inlineIn.value.trim() || String(calcLastAns || 0);
+      inlineIn.value = "(" + cur + ")/9.8";
+      runInlineBabyCalc(inlineIn.value, true);
+    }
+
+    function launchBabyVersionNow() {
+      playFnSound("portal");
+      // Make sure floating calculator is closed so nothing blocks the screen
+      toggleFloatingCalc(false);
+      document.body.classList.add("baby-mode-active");
+      const headerBtn = document.getElementById("header-baby-mode-btn");
+      if (headerBtn) {
+        headerBtn.classList.add("active");
+        headerBtn.innerText = "🍼 BABY VERSION: ACTIVE ✓";
+      }
+      if (!currentProfile) {
+        currentProfile = "HENRI";
+        try { localStorage.setItem("fn_active_profile", "HENRI"); } catch(e) {}
+        closePlayerSelectModal();
+        loadActiveProfileData();
+        applyProfileUI();
+      }
+      selectedGameMode = "baby";
+      switchFnTab("play");
+      launchMatch();
+      triggerRickCommunicator("🍼 BABY VERSION ENGAGED", '"Zero clutter, zero popups blocking your screen, round numbers, and instant 1-click solve! Let us warm up!"');
     }
 
   </script>
