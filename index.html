@@ -1802,6 +1802,241 @@
       animation: modalPop 0.35s cubic-bezier(0.18, 0.89, 0.32, 1.28);
     }
 
+
+    /* ==========================================================================
+       V20: C-137 PORTAL GUN SCIENTIFIC CALCULATOR & GRAVITY SIMULATOR LAB
+       ========================================================================== */
+    .calc-floating-widget {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      width: 390px;
+      max-width: calc(100vw - 24px);
+      background: linear-gradient(165deg, rgba(3, 7, 18, 0.98) 0%, rgba(15, 23, 42, 0.98) 100%);
+      border: 2.5px solid #00ff66;
+      border-radius: 16px;
+      box-shadow: 0 0 45px rgba(0, 255, 102, 0.45), inset 0 0 25px rgba(0, 255, 102, 0.12);
+      z-index: 9500;
+      display: none;
+      overflow: hidden;
+      backdrop-filter: blur(14px);
+      animation: modalPop 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+    }
+    .calc-floating-widget.visible {
+      display: block;
+    }
+    .calc-widget-header {
+      background: linear-gradient(90deg, #064e3b 0%, #0f172a 100%);
+      border-bottom: 2px solid #00ff66;
+      padding: 10px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: move;
+      user-select: none;
+    }
+    .calc-lcd-screen {
+      background: #021a12;
+      border: 2px solid #10b981;
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin: 12px;
+      box-shadow: inset 0 0 20px rgba(0, 255, 102, 0.2);
+      font-family: 'Courier New', monospace;
+    }
+    .calc-lcd-expr {
+      color: #6ee7b7;
+      font-size: 13px;
+      min-height: 18px;
+      word-break: break-all;
+      text-align: right;
+      opacity: 0.9;
+    }
+    .calc-lcd-main {
+      color: #00ff66;
+      font-size: 26px;
+      font-weight: 900;
+      text-align: right;
+      margin-top: 4px;
+      text-shadow: 0 0 12px rgba(0, 255, 102, 0.6);
+      overflow-x: auto;
+    }
+    .calc-lcd-subrow {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px dashed rgba(16, 185, 129, 0.35);
+      margin-top: 6px;
+      padding-top: 6px;
+      font-size: 11.5px;
+      color: #ffe600;
+    }
+    .calc-keystrokes-banner {
+      background: rgba(255, 230, 0, 0.1);
+      border-left: 3px solid #ffe600;
+      margin: 0 12px 10px 12px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      color: #fde047;
+      line-height: 1.35;
+    }
+    .calc-planet-pills {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      padding: 0 12px 8px 12px;
+    }
+    .calc-planet-pill {
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+      font-size: 10.5px;
+      font-weight: 800;
+      padding: 3px 7px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .calc-planet-pill:hover {
+      background: #38bdf8;
+      color: #000;
+      transform: translateY(-1px);
+    }
+    .calc-keypad-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      padding: 0 12px 12px 12px;
+    }
+    .calc-key {
+      background: #1e293b;
+      border: 1.5px solid #334155;
+      border-radius: 8px;
+      color: #f8fafc;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 10px 4px;
+      cursor: pointer;
+      transition: all 0.12s;
+      text-align: center;
+      user-select: none;
+    }
+    .calc-key:hover {
+      background: #334155;
+      border-color: #00e5ff;
+      transform: translateY(-1px);
+    }
+    .calc-key:active {
+      transform: scale(0.95);
+    }
+    .calc-key.fn-sci {
+      background: #0f172a;
+      color: #38bdf8;
+      border-color: #1e3a8a;
+      font-size: 12.5px;
+    }
+    .calc-key.fn-ee {
+      background: rgba(255, 230, 0, 0.18);
+      color: #ffe600;
+      border-color: #ffe600;
+    }
+    .calc-key.fn-op {
+      background: #0284c7;
+      color: #fff;
+      border-color: #38bdf8;
+    }
+    .calc-key.fn-eq {
+      background: linear-gradient(135deg, #00ff66 0%, #10b981 100%);
+      color: #000;
+      border-color: #a7f3d0;
+      font-size: 16px;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
+    }
+    .calc-key.fn-clr {
+      background: #dc2626;
+      color: #fff;
+      border-color: #f87171;
+    }
+
+    /* HUD Question Calc Assist Bar */
+    .hud-calc-assist-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(56, 189, 248, 0.25);
+    }
+    .hud-calc-btn {
+      background: linear-gradient(90deg, rgba(0, 255, 102, 0.18) 0%, rgba(16, 185, 129, 0.28) 100%);
+      border: 1.5px solid #00ff66;
+      color: #00ff66;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .hud-calc-btn:hover {
+      background: #00ff66;
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 255, 102, 0.6);
+    }
+    .hud-calc-btn.gold {
+      background: rgba(255, 230, 0, 0.16);
+      border-color: #ffe600;
+      color: #ffe600;
+    }
+    .hud-calc-btn.gold:hover {
+      background: #ffe600;
+      color: #000;
+    }
+    .fn-option-card.calc-matched {
+      border-color: #00ff66 !important;
+      box-shadow: 0 0 28px rgba(0, 255, 102, 0.85), inset 0 0 18px rgba(0, 255, 102, 0.25) !important;
+      animation: c137GlowPulse 1.2s infinite;
+    }
+
+    /* Lab Screen Layout */
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 1.15fr;
+      gap: 20px;
+    }
+    @media (max-width: 960px) {
+      .lab-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .solver-card {
+      background: rgba(15, 23, 42, 0.92);
+      border: 1.5px solid #1e3a8a;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .solver-input {
+      background: #030712;
+      border: 1.5px solid #334155;
+      border-radius: 6px;
+      color: #fff;
+      padding: 7px 10px;
+      width: 100%;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .solver-input:focus {
+      border-color: #00ff66;
+      outline: none;
+    }
+
   </style>
 </head>
 <body>
@@ -1924,10 +2159,14 @@
       <button class="fn-tab locker-tab fn-font-condensed" onclick="switchFnTab('locker')">LOCKER 👕</button>
       <button class="fn-tab fn-font-condensed" onclick="switchFnTab('career')">CAREER</button>
       <button class="fn-tab fn-font-condensed" onclick="switchFnTab('vault')">REDO VAULT (<span id="tab-vault-count">0</span>)</button>
+      <button class="fn-tab fn-font-condensed" style="color: #00ff66; border-bottom-color: #00ff66;" onclick="switchFnTab('lab')">🧮 SCI-CALC & LAB</button>
       <button class="fn-tab fn-font-condensed" onclick="switchFnTab('cheatsheet')">TACTICAL INTEL</button>
     </nav>
 
     <div class="fn-player-bar">
+      <button class="hud-calc-btn fn-font-heavy" onclick="toggleFloatingCalc()" title="Open C-137 Scientific Calculator (Shortcut: C)" style="padding: 6px 12px; font-size: 14px;">
+        🧮 SCI-CALC [C]
+      </button>
       <div class="fn-currency fn-font-condensed clickable-coin" onclick="switchFnTab('shop')" title="Click to open Item Shop">
         <div class="vbucks-icon">🪙</div>
         <span id="vbucks-display">1,000</span>
@@ -1969,8 +2208,8 @@
           </p>
           <div class="c137-hero-actions">
             <button class="c137-quick-drop-btn fn-font-heavy" onclick="launchMatch()">
-              <span>🚀 QUICK DROP: MONDAY'S PHYSICS EXAM</span>
-              <span class="btn-subtext">Instant Drop • 12 Drops • F = ma • 100% Mastery</span>
+              <span>🚀 QUICK DROP: TOMORROW'S NEWTON'S 4 LAWS EXAM</span>
+              <span class="btn-subtext">28 Official Exam Drops • 1st, 2nd, 3rd & 4th Laws + Sci-Calc</span>
             </button>
             <div class="c137-exam-countdown fn-font-condensed">
               <span class="pulse-dot"></span>
@@ -2012,24 +2251,31 @@
           <div class="mode-cards">
             <div class="mode-card selected" onclick="selectMode('physics', this)">
               <div>
-                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">SOLO: MONDAY'S PHYSICS UNIT EXAM</h3>
-                <p style="font-size: 13px; color: #94a3b8;">12 Drops • Newton's 1st, 2nd, 3rd Laws & Sports Physics</p>
+                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">SOLO: TOMORROW'S NEWTON'S 4 LAWS EXAM</h3>
+                <p style="font-size: 13px; color: #00ff66;">28 Drops • Laws 1, 2, 3 & 4 (Universal Gravitation), Planets, Terminal Velocity, Momentum & Helmets</p>
               </div>
-              <span class="fn-font-heavy" style="background: #0078ff; padding: 4px 10px; border-radius: 4px; font-size: 12px;">SOLO</span>
+              <span class="fn-font-heavy" style="background: #0078ff; padding: 4px 10px; border-radius: 4px; font-size: 12px;">EXAM SOLO</span>
+            </div>
+            <div class="mode-card" onclick="selectMode('calc_blitz', this)">
+              <div>
+                <h3 class="fn-font-condensed" style="font-size: 22px; color: #ffe600;">🧮 SCI-CALC BLITZ: WORD PROBLEM GAUNTLET</h3>
+                <p style="font-size: 13px; color: #cbd5e1;">14 Calculation Drops • F=ma, w=mg, ÷9.8 Kilos, p=mv & F=Gm₁m₂/d² with 1-Click Sci-Calc</p>
+              </div>
+              <span class="fn-font-heavy" style="background: #00ff66; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px;">SCI-CALC</span>
             </div>
             <div class="mode-card" onclick="selectMode('intro', this)">
               <div>
-                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">DUOS: INTRO TEST REDO (ROAD TO 90%)</h3>
+                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">DUOS: INTRO TEST RETAKE (ROAD TO 90%)</h3>
                 <p style="font-size: 13px; color: #94a3b8;">12 Traps • 11 Senses, Hypotheses, Cold Fusion & Rick's Garage Rules</p>
               </div>
-              <span class="fn-font-heavy" style="background: #22c55e; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px;">DUOS</span>
+              <span class="fn-font-heavy" style="background: #22c55e; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px;">RETAKE DUOS</span>
             </div>
             <div class="mode-card" onclick="selectMode('boss', this)">
               <div>
-                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">SQUADS: 24-QUESTION BOSS GAUNTLET</h3>
-                <p style="font-size: 13px; color: #94a3b8;">Full 24-Q Victory Royale Mastery Challenge</p>
+                <h3 class="fn-font-condensed" style="font-size: 22px; color: #fff;">SQUADS: 54-QUESTION MULTIVERSE BOSS GAUNTLET</h3>
+                <p style="font-size: 13px; color: #94a3b8;">All 28 Newton Laws + 14 Sci-Calc Problems + 12 Intro Retake Drops</p>
               </div>
-              <span class="fn-font-heavy" style="background: #ff8000; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px;">SQUADS</span>
+              <span class="fn-font-heavy" style="background: #ff8000; color: #000; padding: 4px 10px; border-radius: 4px; font-size: 12px;">BOSS 54</span>
             </div>
             <div class="mode-card" onclick="selectMode('vault_practice', this)">
               <div>
@@ -2096,6 +2342,22 @@
           <span class="fn-font-condensed" id="hud-q-counter" style="color: var(--fn-blue-glow); font-size: 18px;">DROP 1 OF 12</span>
         </div>
         <div id="hud-q-text" style="font-size: 21px; font-weight: 800; line-height: 1.4;">Loading Question...</div>
+        <div class="hud-calc-assist-bar" id="hud-calc-assist-bar">
+          <div style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center;">
+            <button class="hud-calc-btn fn-font-condensed" onclick="toggleFloatingCalc(true)">
+              🧮 OPEN C-137 SCI-CALC
+            </button>
+            <button class="hud-calc-btn gold fn-font-condensed" id="hud-autoload-calc-btn" onclick="loadCurrentQuestionIntoCalc()">
+              ⚡ LOAD FORMULA & KEYSTROKES INTO CALC
+            </button>
+            <button class="hud-calc-btn fn-font-condensed" style="border-color:#38bdf8; color:#38bdf8; background:rgba(56,189,248,0.12);" onclick="matchCalcResultToOptions()">
+              🎯 TARGET-LOCK MATCHING OPTION
+            </button>
+          </div>
+          <div id="hud-calc-hint-pill" class="fn-font-condensed" style="font-size: 13px; color: #ffe600; font-weight: 700;">
+            💡 Press [C] anytime for TI-30XIIS Scientific Calculator
+          </div>
+        </div>
       </div>
 
       <div class="fn-options-grid" id="hud-options-container"></div>
@@ -2284,35 +2546,335 @@
       </div>
     </section>
 
-    <!-- TAB 5: CHEAT SHEET -->
+    <!-- TAB: SCI-CALC & INTERACTIVE GRAVITY LAB -->
+    <section id="lab-screen" style="display: none;">
+      <div style="background: linear-gradient(135deg, rgba(6, 78, 59, 0.5) 0%, rgba(15, 23, 42, 0.96) 100%); border: 2px solid #00ff66; border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;">
+        <div>
+          <div class="shop-badge fn-font-heavy" style="background: #00ff66; color: #000;">C-137 SCIENTIFIC CALCULATOR & GRAVITY SANDBOX</div>
+          <h1 class="fn-font-heavy" style="font-size: 28px; color: #fff; margin: 4px 0;">MR. CAROSAARI'S NEWTON'S 4 LAWS COMMAND DECK</h1>
+          <p class="fn-font-condensed" style="color: #cbd5e1; font-size: 14.5px;">
+            "Covering 1st, 2nd, 3rd, 4th Laws of Motion. Bring a scientific calculator, or you will be lost on the test!" — Mr. Jed Carosaari
+          </p>
+        </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="ready-up-btn fn-font-heavy" style="margin: 0; padding: 10px 18px; font-size: 16px;" onclick="selectModeFromLab('calc_blitz')">
+            🚀 PLAY SCI-CALC BLITZ (14 DROPS)
+          </button>
+          <button class="hud-calc-btn gold fn-font-heavy" style="padding: 10px 16px; font-size: 15px;" onclick="toggleFloatingCalc(true)">
+            📌 POP OUT FLOATING CALC
+          </button>
+        </div>
+      </div>
+
+      <div class="lab-grid">
+        <!-- LEFT COLUMN: INSTANT FORMULA SOLVERS + PLANETARY WEIGHT CALCULATOR -->
+        <div>
+          <!-- SOLVER 1: 4TH LAW UNIVERSAL GRAVITATION -->
+          <div class="solver-card" style="border-color: #00ff66;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <h3 class="fn-font-heavy" style="color: #00ff66; font-size: 17px;">🌌 4TH LAW SOLVER: UNIVERSAL GRAVITATION</h3>
+              <span class="fn-font-condensed" style="color: #ffe600; font-size: 13px; font-weight: 800;">F = G · m₁ · m₂ / d²</span>
+            </div>
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 10px;">
+              Uses Mr. Carosaari's exact constant <code>G = 6.67259 × 10⁻¹¹</code> and wraps <code>(d²)</code> in parentheses!
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1; font-weight: 700;">Mass 1 m₁ (kg)</label>
+                <input id="ug-m1" class="solver-input" type="text" value="500" placeholder="e.g. 500 or 5.97e24">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1; font-weight: 700;">Mass 2 m₂ (kg)</label>
+                <input id="ug-m2" class="solver-input" type="text" value="500" placeholder="e.g. 500">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1; font-weight: 700;">Distance d (m)</label>
+                <input id="ug-d" class="solver-input" type="text" value="2" placeholder="e.g. 2">
+              </div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center; justify-content: space-between; flex-wrap: wrap;">
+              <button class="hud-calc-btn fn-font-heavy" onclick="runUniversalGravSolver()">⚡ COMPUTE 4TH LAW FORCE (F)</button>
+              <div id="ug-result-box" class="fn-font-condensed" style="color: #ffe600; font-size: 15px; font-weight: 800;">
+                F = 4.170 × 10⁻⁶ N
+              </div>
+            </div>
+            <div id="ug-keystrokes-box" style="margin-top: 8px; font-family: monospace; font-size: 11.5px; color: #6ee7b7; background: rgba(0,0,0,0.45); padding: 6px 8px; border-radius: 6px;">
+              TI-30XIIS Keys: [6][.][6][7][2][5][9][EE][-][1][1] [×] 500 [×] 500 [÷] [(] 2 [x²] [)] [=]
+            </div>
+          </div>
+
+          <!-- SOLVER 2: CAROSAARI PLANETARY WEIGHT & "FEELS LIKE KILOS" -->
+          <div class="solver-card" style="border-color: #ffe600;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 17px;">🪐 2ND LAW: PLANETARY WEIGHT & "FEELS LIKE KILOS"</h3>
+              <span class="fn-font-condensed" style="color: #38bdf8; font-size: 13px; font-weight: 800;">w = m·g  |  Kilos = w / 9.8</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1.3fr; gap: 8px; margin-bottom: 10px;">
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1; font-weight: 700;">Your Mass m (kg) [Constant!]</label>
+                <input id="pw-mass" class="solver-input" type="number" value="70" oninput="runPlanetaryWeightSolver()">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1; font-weight: 700;">Select Body (Mr. Carosaari's Notes)</label>
+                <select id="pw-planet" class="solver-input" onchange="runPlanetaryWeightSolver()">
+                  <option value="9.8|Earth">🌍 Earth (g = 9.8 m/s²)</option>
+                  <option value="3.728|Mars" selected>🔴 Mars (g = 3.728 m/s²)</option>
+                  <option value="8.872|Venus">🟡 Venus (g = 8.872 m/s²)</option>
+                  <option value="3.703|Mercury">⚪ Mercury (g = 3.703 m/s²)</option>
+                  <option value="11.19|Saturn">🪐 Saturn (g = 11.19 m/s²)</option>
+                  <option value="25.93|Jupiter">🟠 Jupiter (g = 25.93 m/s²)</option>
+                  <option value="0.610|Pluto">❄️ Pluto (g = 0.610 m/s²)</option>
+                  <option value="1.625|Luna (Moon)">🌙 Luna / Moon (g = 1.625 m/s²)</option>
+                  <option value="274.1|Sol (Sun)">☀️ Sol / Sun (g = 274.1 m/s²)</option>
+                </select>
+              </div>
+            </div>
+            <div id="pw-result-box" style="background: rgba(0,0,0,0.5); border: 1px solid #ffe600; border-radius: 8px; padding: 10px; font-size: 13.5px; color: #f8fafc; line-height: 1.5;">
+              • <strong>Mass everywhere:</strong> <span style="color:#00ff66;">70 kg</span> (Mass NEVER changes!)<br>
+              • <strong>Weight on Mars (w = m·g):</strong> 70 × 3.728 = <span style="color:#ffe600; font-weight:900;">260.96 N</span><br>
+              • <strong>Carosaari "Feels Like Kilos" (w ÷ 9.8):</strong> 260.96 ÷ 9.8 = <span style="color:#38bdf8; font-weight:900;">26.63 kg</span>
+            </div>
+          </div>
+
+          <!-- SOLVER 3: 2ND LAW F = ma & 3RD LAW MOMENTUM p = mv -->
+          <div class="solver-card" style="border-color: #38bdf8;">
+            <h3 class="fn-font-heavy" style="color: #38bdf8; font-size: 17px; margin-bottom: 8px;">⚡ 2ND LAW (F = ma) & 3RD LAW MOMENTUM (p = mv)</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1;">Net Force F (N)</label>
+                <input id="fma-f" class="solver-input" type="text" placeholder="Leave 1 blank" value="135">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1;">Mass m (kg)</label>
+                <input id="fma-m" class="solver-input" type="text" placeholder="Leave 1 blank" value="45">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1;">Accel a (m/s²)</label>
+                <input id="fma-a" class="solver-input" type="text" placeholder="Leave 1 blank" value="">
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <button class="hud-calc-btn fn-font-heavy" onclick="runFmaSolver()">SOLVE F = m·a</button>
+              <div id="fma-result-text" class="fn-font-condensed" style="color: #00ff66; font-size: 15px; font-weight: 800;">a = 135 / 45 = 3.0 m/s²</div>
+            </div>
+
+            <div style="border-top: 1px solid #1e293b; padding-top: 10px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1;">Momentum p (kg·m/s)</label>
+                <input id="pmv-p" class="solver-input" type="text" placeholder="Leave 1 blank" value="">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1;">Mass m (kg)</label>
+                <input id="pmv-m" class="solver-input" type="text" placeholder="Leave 1 blank" value="80">
+              </div>
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1;">Velocity v (m/s)</label>
+                <input id="pmv-v" class="solver-input" type="text" placeholder="Leave 1 blank" value="15">
+              </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <button class="hud-calc-btn gold fn-font-heavy" onclick="runPmvSolver()">SOLVE p = m·v</button>
+              <div id="pmv-result-text" class="fn-font-condensed" style="color: #ffe600; font-size: 15px; font-weight: 800;">p = 80 × 15 = 1,200 kg·m/s</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: INTERACTIVE GRAVITY DROP, TERMINAL VELOCITY & BIKE HELMET SIMULATOR -->
+        <div>
+          <div class="solver-card" style="border-color: #a855f7;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 10px;">
+              <div>
+                <span class="shop-badge fn-font-heavy" style="background: #a855f7; color: #fff;">INTERACTIVE PHYSICS SANDBOX</span>
+                <h3 class="fn-font-heavy" style="color: #fff; font-size: 19px; margin-top: 4px;">GALILEO VACUUM vs. TERMINAL VELOCITY & HELMET CRASH LAB</h3>
+              </div>
+              <span class="fn-font-condensed" style="color: #00ff66; font-size: 13px;">+150 🪙 COINS PER EXPERIMENT!</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px;">
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1; font-weight: 700;">1. Planet Gravity (g)</label>
+                <select id="sim-planet" class="solver-input" onchange="resetGravitySim()">
+                  <option value="9.8|Earth">🌍 Earth (9.8 m/s²)</option>
+                  <option value="1.625|Luna">🌙 Luna (1.625 m/s²)</option>
+                  <option value="3.728|Mars">🔴 Mars (3.728 m/s²)</option>
+                  <option value="25.93|Jupiter">🟠 Jupiter (25.93 m/s²)</option>
+                  <option value="0.610|Pluto">❄️ Pluto (0.610 m/s²)</option>
+                  <option value="274.1|Sol">☀️ Sol (274.1 m/s²)</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1; font-weight: 700;">2. Chamber Mode</label>
+                <select id="sim-air" class="solver-input" onchange="resetGravitySim()">
+                  <option value="vacuum">🧪 VACUUM (No Air Resistance)</option>
+                  <option value="air">💨 AIR DRAG (Terminal Velocity!)</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size: 11px; color: #cbd5e1; font-weight: 700;">3. 1st Law Bike Helmet Foam</label>
+                <select id="sim-helmet" class="solver-input" onchange="resetGravitySim()">
+                  <option value="helmet">🪖 FOAM HELMET ON (Long Δt)</option>
+                  <option value="bare">💀 NO HELMET (Violent Short Δt)</option>
+                </select>
+              </div>
+            </div>
+
+            <canvas id="gravity-sim-canvas" width="540" height="290" style="width: 100%; height: 290px; background: radial-gradient(circle at 50% 20%, #0f172a 0%, #020617 100%); border: 2px solid #38bdf8; border-radius: 10px; display: block; margin-bottom: 10px;"></canvas>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
+              <button class="ready-up-btn fn-font-heavy" style="margin: 0; padding: 10px 18px; font-size: 15px; flex: 1;" onclick="startGravityDropSim()">
+                🚀 DROP 100kg SAFE vs. 1kg BALL
+              </button>
+              <button class="hud-calc-btn gold fn-font-heavy" style="padding: 10px 16px; font-size: 14px;" onclick="startRocketVacuumSim()">
+                🔥 3RD LAW ROCKET IN VACUUM
+              </button>
+              <button class="hud-calc-btn fn-font-heavy" style="padding: 10px 14px; font-size: 14px; border-color:#94a3b8; color:#cbd5e1;" onclick="resetGravitySim()">
+                ↺ RESET
+              </button>
+            </div>
+
+            <div id="sim-live-readout" style="background: rgba(0,0,0,0.55); border-left: 4px solid #00ff66; padding: 10px 12px; border-radius: 6px; font-size: 13px; color: #e2e8f0; line-height: 1.45;">
+              <strong>🧪 GALILEO vs. ARISTOTLE LAB READY:</strong> Choose <em>Vacuum</em> to prove a 100 kg safe and 1 kg ball hit the ground at the exact same instant (bigger mass has more F_G, but proportionally more inertia!). Switch to <em>Air Drag</em> to see why the 100 kg safe takes longer for F_Air = F_G and hits first!
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 5: TACTICAL INTEL (MR. CAROSAARI'S COMPLETE 4 LAWS NOTES) -->
     <section id="cheatsheet-screen" style="display: none;">
+      <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #ffe600; border-radius: 12px; padding: 18px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+        <div>
+          <div class="shop-badge fn-font-heavy" style="background: #ffe600; color: #000;">OFFICIAL GOOGLE CLASSROOM LECTURE NOTES</div>
+          <h2 class="fn-font-heavy" style="color: #fff; font-size: 24px; margin: 4px 0;">MR. JED CAROSAARI'S 4 LAWS OF NEWTON MASTER INTEL</h2>
+          <p class="fn-font-condensed" style="color: #94a3b8; font-size: 14px;">Extracted directly from your 4 Google Classroom notes files posted yesterday + ReadWorks & Intro Retake</p>
+        </div>
+        <button class="hud-calc-btn fn-font-heavy" onclick="toggleFloatingCalc(true)">🧮 OPEN TI-30XIIS SCI-CALC</button>
+      </div>
+
       <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00e5ff; border-radius: 10px; padding: 18px;">
-          <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 18px;">⚡ NEWTON'S 1ST LAW (INERTIA)</h3>
-          <p style="font-size: 14px; color: #cbd5e1; margin-top: 6px;">
-            Objects stay moving unless an unbalanced force pushes back. On grass, soccer balls stop because of friction and drag. Cyclists shave body hair and wear aerodynamic spandex to eliminate air friction.
+        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00ff66; border-radius: 10px; padding: 18px;">
+          <h3 class="fn-font-heavy" style="color: #00ff66; font-size: 18px;">⚡ 1ST LAW: INERTIA, GALILEO & BIKE HELMETS</h3>
+          <p style="font-size: 13.5px; color: #cbd5e1; margin-top: 6px; line-height: 1.5;">
+            • <strong>Law of Inertia:</strong> An object at rest stays at rest, and an object in motion maintains its velocity unless acted on by an <strong>unbalanced force</strong>.<br>
+            • <strong>Mass = Inertia:</strong> Greater mass means greater resistance to any change in motion.<br>
+            • <strong>Aristotle vs. Galileo:</strong> Aristotle (4th c. BC) wrongly thought objects only move while pushed and heavy objects fall faster. <strong>Galileo</strong> rolled balls down ramps to prove objects keep moving forever unless friction stops them.<br>
+            • <strong>Bike Helmets & Inertia:</strong> In a crash, your head keeps moving forward due to inertia. The helmet does <em>not</em> stop inertia: the <strong>outer shell</strong> spreads force over a larger area, and the <strong>inner foam</strong> compresses to <strong>increase deceleration time (Δt)</strong>, reducing acceleration and skull force!
           </p>
         </div>
-        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00e5ff; border-radius: 10px; padding: 18px;">
-          <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 18px;">🚀 NEWTON'S 2ND LAW (F = ma)</h3>
-          <p style="font-size: 14px; color: #cbd5e1; margin-top: 6px;">
-            Force = Mass × Acceleration. If mass doubles, you need 2× the force. LeBron weighs 245 lbs, so his legs must push with vastly more force into the court than a 170-lb player.
+
+        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #38bdf8; border-radius: 10px; padding: 18px;">
+          <h3 class="fn-font-heavy" style="color: #38bdf8; font-size: 18px;">🚀 2ND LAW: F = ma, FREE FALL & TERMINAL VELOCITY</h3>
+          <p style="font-size: 13.5px; color: #cbd5e1; margin-top: 6px; line-height: 1.5;">
+            • <strong>Formula & Units:</strong> <code>F = m · a</code> (1 Newton = <code>1 kg·m/s²</code>). More mass = less acceleration for the same force.<br>
+            • <strong>Free Fall in a Vacuum:</strong> Why do all masses fall at <code>9.8 m/s²</code>? Bigger mass has more gravity force (<code>F_G = mg</code>) pulling it, <em>but</em> has proportionally more inertia (<code>a = F_G / m = g</code>). They cancel out!<br>
+            • <strong>Terminal Velocity (in Air):</strong> Occurs when upward air resistance equals downward weight (<code>F_Air = F_G</code>), so acceleration stops. Because <code>F_G</code> is larger for a heavier object, it takes <strong>longer</strong> for <code>F_Air</code> to equal <code>F_G</code>—so the heavier object accelerates longer, reaches a higher top speed, and <strong>hits the ground first</strong>!
           </p>
         </div>
-        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00e5ff; border-radius: 10px; padding: 18px;">
-          <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 18px;">💥 NEWTON'S 3RD LAW (ACTION / REACTION)</h3>
-          <p style="font-size: 14px; color: #cbd5e1; margin-top: 6px;">
-            Every action has an equal and opposite reaction. LeBron pushes DOWN on the floor (action); the floor pushes back UP against his feet (reaction). Muscle produces contractile force; fat is dead weight.
+
+        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #ffe600; border-radius: 10px; padding: 18px;">
+          <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 18px;">💥 3RD LAW: ACTION-REACTION, MOMENTUM & ROCKETS</h3>
+          <p style="font-size: 13.5px; color: #cbd5e1; margin-top: 6px; line-height: 1.5;">
+            • <strong>Action & Reaction:</strong> For every action force, there is an equal and opposite reaction force.<br>
+            • <strong>Why Equal Forces ≠ Equal Effects:</strong> Gravity pulls you and Earth with the exact same force, but Earth's gigantic mass gives it zero noticeable acceleration while your small mass accelerates at <code>9.8 m/s²</code>.<br>
+            • <strong>Momentum (<code>p = m · v</code>):</strong> Units = <code>kg·m/s</code> ("mass and v together"). Total momentum is <strong>conserved</strong> in collisions (objects exchange <code>p</code>).<br>
+            • <strong>Rockets in Space:</strong> Rockets don't push against air! They push exhaust gas backward (action), and the gas pushes the rocket forward with an equal and opposite reaction force.
           </p>
         </div>
-        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #00e5ff; border-radius: 10px; padding: 18px;">
-          <h3 class="fn-font-heavy" style="color: #ffe600; font-size: 18px;">👑 THEORY VS. LAW (RICK'S TRAP WARNING)</h3>
-          <p style="font-size: 14px; color: #cbd5e1; margin-top: 6px;">
-            Laws describe WHAT happens (often math). Theories explain WHY it happens (predictive, repeatable). A Theory NEVER turns into a Law!
+
+        <div style="background: rgba(15, 23, 42, 0.95); border: 2px solid #a855f7; border-radius: 10px; padding: 18px;">
+          <h3 class="fn-font-heavy" style="color: #d8b4fe; font-size: 18px;">🌌 4TH LAW: UNIVERSAL GRAVITATION & PLANETARY g</h3>
+          <p style="font-size: 13.5px; color: #cbd5e1; margin-top: 6px; line-height: 1.5;">
+            • <strong>Newton's 4th Law:</strong> <code>F = G · m₁ · m₂ / d²</code> where <code>G = 6.67259 × 10⁻¹¹</code>.<br>
+            • <strong>Inverse-Square Distance Law:</strong> Force increases with mass and decreases with distance <strong>squared</strong> (<code>2× distance = 1/4 force</code>; <code>3× distance = 1/9 force</code>).<br>
+            • <strong>People Attraction & w = mg:</strong> Force between two people exists but is tiny because <code>G</code> is tiny. Between you and Earth, it becomes <code>w = mg</code>.<br>
+            • <strong>Carosaari's Planetary g & "Feels Like Kilos" Rule:</strong> Multiply mass by planet's <code>g</code> to get Newtons (<code>w = mg</code>), then <strong>divide by 9.8</strong> to find how many kilos it feels like on Earth! (<code>Mars 3.728 | Venus 8.872 | Mercury 3.703 | Saturn 11.19 | Jupiter 25.93 | Pluto 0.610 | Luna 1.625 | Sol 274.1</code>).
           </p>
         </div>
       </div>
     </section>
+
+    <!-- FLOATING C-137 TI-30XIIS SCIENTIFIC CALCULATOR WIDGET (ACCESSIBLE EVERYWHERE) -->
+    <div id="c137-floating-calc" class="calc-floating-widget">
+      <div class="calc-widget-header" id="calc-drag-header">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 18px;">🧮</span>
+          <div>
+            <div class="fn-font-heavy" style="color: #00ff66; font-size: 14px; letter-spacing: 0.5px;">C-137 TI-30XIIS SCIENTIFIC CALCULATOR</div>
+            <div class="fn-font-condensed" style="color: #94a3b8; font-size: 11px;">G = 6.67259×10⁻¹¹ • AUTO "FEELS LIKE KILOS" (÷9.8)</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button onclick="matchCalcResultToOptions()" title="Highlight matching quiz option" style="background:#ffe600; color:#000; border:none; border-radius:5px; padding:3px 7px; font-weight:900; font-size:11px; cursor:pointer;">🎯 MATCH</button>
+          <button onclick="toggleFloatingCalc(false)" style="background:#ef4444; color:#fff; border:none; border-radius:5px; padding:3px 8px; font-weight:900; font-size:12px; cursor:pointer;">✕</button>
+        </div>
+      </div>
+
+      <div class="calc-lcd-screen">
+        <div class="calc-lcd-expr" id="calc-expr-display">0</div>
+        <div class="calc-lcd-main" id="calc-main-display">0</div>
+        <div class="calc-lcd-subrow">
+          <span id="calc-sci-display">SCI: 0.00 × 10⁰</span>
+          <span id="calc-kilo-display" style="color: #38bdf8;">÷9.8 KILOS: 0.00 kg</span>
+        </div>
+      </div>
+
+      <div class="calc-keystrokes-banner" id="calc-keystroke-guide">
+        💡 <strong>TI-30XIIS Pro-Tip:</strong> Use <strong>[EE]</strong> for <code>×10ⁿ</code> and wrap <code>(d²)</code> in parentheses!
+      </div>
+
+      <!-- 1-CLICK CAROSAARI CONSTANTS & PLANETARY g PILLS -->
+      <div class="calc-planet-pills">
+        <button class="calc-planet-pill" style="border-color:#00ff66; color:#00ff66;" onclick="calcInsertConst('6.67259e-11', 'G (4th Law)')">G=6.67259e-11</button>
+        <button class="calc-planet-pill" onclick="calcInsertConst('9.8', 'g_Earth')">Earth 9.8</button>
+        <button class="calc-planet-pill" onclick="calcInsertConst('3.728', 'g_Mars')">Mars 3.728</button>
+        <button class="calc-planet-pill" onclick="calcInsertConst('25.93', 'g_Jupiter')">Jup 25.93</button>
+        <button class="calc-planet-pill" onclick="calcInsertConst('1.625', 'g_Luna')">Luna 1.625</button>
+        <button class="calc-planet-pill" onclick="calcInsertConst('8.872', 'g_Venus')">Ven 8.872</button>
+        <button class="calc-planet-pill" onclick="calcInsertConst('3.703', 'g_Mercury')">Merc 3.703</button>
+        <button class="calc-planet-pill" onclick="calcInsertConst('11.19', 'g_Saturn')">Sat 11.19</button>
+        <button class="calc-planet-pill" onclick="calcInsertConst('0.610', 'g_Pluto')">Pluto 0.61</button>
+        <button class="calc-planet-pill" onclick="calcInsertConst('274.1', 'g_Sol')">Sol 274.1</button>
+        <button class="calc-planet-pill" style="border-color:#ffe600; color:#ffe600;" onclick="calcDivideBy98()">÷9.8 (Feels Like kg)</button>
+      </div>
+
+      <!-- SCIENTIFIC KEYPAD -->
+      <div class="calc-keypad-grid">
+        <button class="calc-key fn-ee" onclick="calcPress('e')">EE (10ⁿ)</button>
+        <button class="calc-key fn-sci" onclick="calcPress('**2')">x²</button>
+        <button class="calc-key fn-sci" onclick="calcPress('sqrt(')">√x</button>
+        <button class="calc-key fn-sci" onclick="calcPress('(')">(</button>
+        <button class="calc-key fn-sci" onclick="calcPress(')')">)</button>
+
+        <button class="calc-key fn-sci" onclick="calcPress('**')">xʸ</button>
+        <button class="calc-key fn-sci" onclick="calcPress('sin(')">sin</button>
+        <button class="calc-key fn-sci" onclick="calcPress('cos(')">cos</button>
+        <button class="calc-key fn-clr" onclick="calcBack()">DEL</button>
+        <button class="calc-key fn-clr" onclick="calcClear()">AC</button>
+
+        <button class="calc-key" onclick="calcPress('7')">7</button>
+        <button class="calc-key" onclick="calcPress('8')">8</button>
+        <button class="calc-key" onclick="calcPress('9')">9</button>
+        <button class="calc-key fn-op" onclick="calcPress('/')">÷</button>
+        <button class="calc-key fn-sci" onclick="calcPressAns()">ANS</button>
+
+        <button class="calc-key" onclick="calcPress('4')">4</button>
+        <button class="calc-key" onclick="calcPress('5')">5</button>
+        <button class="calc-key" onclick="calcPress('6')">6</button>
+        <button class="calc-key fn-op" onclick="calcPress('*')">×</button>
+        <button class="calc-key fn-sci" onclick="calcReciprocal()">1/x</button>
+
+        <button class="calc-key" onclick="calcPress('1')">1</button>
+        <button class="calc-key" onclick="calcPress('2')">2</button>
+        <button class="calc-key" onclick="calcPress('3')">3</button>
+        <button class="calc-key fn-op" onclick="calcPress('-')">−</button>
+        <button class="calc-key fn-sci" onclick="calcToggleSign()">±</button>
+
+        <button class="calc-key" onclick="calcPress('0')" style="grid-column: span 2;">0</button>
+        <button class="calc-key" onclick="calcPress('.')">.</button>
+        <button class="calc-key fn-op" onclick="calcPress('+')">+</button>
+        <button class="calc-key fn-eq" onclick="calcEvaluate()">=</button>
+      </div>
+    </div>
 
   
   <!-- RICK'S INTERDIMENSIONAL COMMUNICATOR (WALKIE TALKIE POPUP) -->
@@ -2564,6 +3126,549 @@
           hook: "The Golden Rule: Something is true until we get NEW EVIDENCE!",
           explanation: "Science is a dynamic process of discovery. Even established laws are modified when new observations or measurements contradict them.",
           paperPhrase: "In science, knowledge is provisional: an idea or law is considered true only until new, verifiable empirical evidence arises that refutes or modifies it."
+        },
+        {
+          id: "p13",
+          category: "Newton's 1st Law (Aristotle vs. Galileo)",
+          title: "In Mr. Carosaari's 1st Law notes, how did Galileo's ramp experiments disprove Aristotle's 4th-century BC beliefs about motion?",
+          options: [
+            "Aristotle proved friction doesn't exist; Galileo showed heavier objects fall 10× faster.",
+            "Aristotle believed objects move only while a force pushes them and heavier objects fall faster; Galileo rolled balls down ramps to show objects keep moving unless friction stops them.",
+            "Galileo proved that inertia only exists in outer space.",
+            "Aristotle discovered F = ma, while Galileo invented the bike helmet."
+          ],
+          correct: 1,
+          calcFormula: "ΣF = 0 ⇔ v = constant",
+          calcExpr: "0",
+          calcKeystrokes: "Concept: Galileo Ramp Test -> Friction is the unbalanced force that stops moving balls!",
+          hook: "Aristotle Wrong on Pushes; Galileo Ramps Prove Inertia!",
+          explanation: "Aristotle believed objects only move when continuously pushed and heavier objects fall faster. Galileo tested balls on ramps and proved objects maintain velocity indefinitely unless an unbalanced force like friction slows them.",
+          paperPhrase: "Aristotle wrongly believed objects require a continuous pushing force to move and that heavier objects fall faster; Galileo used ramp experiments to prove objects keep moving at constant velocity unless stopped by friction."
+        },
+        {
+          id: "p14",
+          category: "Newton's 1st Law (Bike Helmets)",
+          title: "When you crash your bike, your head keeps moving forward due to inertia. According to Mr. Carosaari's notes, does a bike helmet stop inertia, and how do its outer shell and inner foam protect your skull?",
+          options: [
+            "Yes, the helmet completely cancels your head's mass and inertia.",
+            "No! A helmet does NOT stop inertia—the outer shell spreads impact over a larger area, and the foam compresses to increase deceleration time (Δt), reducing the force on your skull.",
+            "The foam layer makes your head stop in zero seconds so the impact finishes faster.",
+            "The helmet increases acceleration so your skull absorbs more kinetic energy."
+          ],
+          correct: 1,
+          calcFormula: "F = m · (Δv / Δt)  [Longer Δt = Smaller Force!]",
+          calcExpr: "(5 * 10) / 0.1",
+          calcKeystrokes: "Bare skull (0.01s): [5][×][10][÷][0.01][=] -> 5000 N | Foam helmet (0.1s): [5][×][10][÷][0.1][=] -> 500 N",
+          hook: "Helmet Doesn't Stop Inertia: Foam Stretches Time, Shrinks Force!",
+          explanation: "The helmet doesn't stop inertia—it manages how the head stops! The outer shell spreads impact over a larger area, and the foam compresses to increase deceleration time, turning a violent short stop into a slower, safer one with smaller force.",
+          paperPhrase: "A helmet does not stop inertia; the outer shell spreads impact over a larger area while the compressing foam increases deceleration time (Δt), producing a smaller rate of change in velocity and therefore less force on the skull."
+        },
+        {
+          id: "p15",
+          category: "Newton's 1st Law (Mass & Inertia)",
+          title: "What is 'inertia', and how does an object's mass affect its inertia?",
+          options: [
+            "Inertia is the speed of an object; smaller mass means greater inertia.",
+            "Inertia is an object's tendency to resist changes in motion; greater mass means greater inertia.",
+            "Inertia is the downward pull of gravity and disappears in space.",
+            "Inertia only applies to objects that are completely stationary."
+          ],
+          correct: 1,
+          calcFormula: "Big Mass (kg) = Big Inertia",
+          calcExpr: "100 / 2",
+          calcKeystrokes: "100 kg safe has 50× more inertia than a 2 kg book everywhere in the universe!",
+          hook: "Inertia Resists Motion Change: Bigger Mass = Bigger Inertia!",
+          explanation: "Inertia is the tendency of an object to resist any change in its velocity (speed or direction). Mass is the direct measure of inertia: big mass = more inertia.",
+          paperPhrase: "Inertia is an object's tendency to resist any change in its state of motion; greater mass directly produces greater inertia."
+        },
+        {
+          id: "p16",
+          category: "Newton's 2nd Law (Free Fall in Vacuum)",
+          title: "Why do objects with different masses fall at the exact same rate (9.8 m/s²) in a vacuum on Earth, even though the heavier object has a bigger gravitational force (F_G = mg) pulling on it?",
+          options: [
+            "Because gravity turns off inside a vacuum chamber.",
+            "Because the heavier object has more gravitational force on it, BUT also has proportionally more mass (inertia), so it takes proportionally more force to accelerate it (a = F/m = 9.8 m/s²).",
+            "Because lighter objects are pushed down by magnetic fields in a vacuum.",
+            "Because all objects have the exact same weight in Newtons."
+          ],
+          correct: 1,
+          calcFormula: "a = F_G / m = (m · 9.8) / m = 9.8 m/s²",
+          calcExpr: "(100 * 9.8) / 100",
+          calcKeystrokes: "100 kg: [100][×][9.8][÷][100][=] -> 9.8 m/s² | 1 kg: [1][×][9.8][÷][1][=] -> 9.8 m/s²",
+          hook: "More Weight Force Cancels More Inertia: Vacuum Fall = 9.8!",
+          explanation: "In free fall, a bigger mass has more gravitational force (F_G = mg) on it, but because it has more inertia, it requires proportionally more force to accelerate. The two cancel out (a = mg/m = 9.8 m/s²).",
+          paperPhrase: "Although a heavier object experiences a greater gravitational force (F_G = mg), it also has proportionally greater mass (inertia) resisting acceleration, so F/m yields the exact same 9.8 m/s² acceleration in a vacuum."
+        },
+        {
+          id: "p17",
+          category: "Newton's 2nd Law (Terminal Velocity)",
+          title: "According to Mr. Carosaari's 2nd Law notes, what is 'terminal velocity', and why does a heavier object hit the ground first when falling through air?",
+          options: [
+            "Terminal velocity is when gravity becomes zero; lighter objects hit the ground first.",
+            "Terminal velocity is when air resistance equals gravity (F_Air = F_G) and acceleration stops; a heavier object has a larger F_G, so it takes LONGER for F_Air to equal F_G, meaning it accelerates longer, goes faster, and hits first!",
+            "Heavier objects have a higher initial acceleration than 9.8 m/s² at the instant they are dropped.",
+            "Air resistance pushes downward on heavy objects and upward on light objects."
+          ],
+          correct: 1,
+          calcFormula: "Terminal Velocity: F_Air = F_G ⇔ a = 0",
+          calcExpr: "100 * 9.8",
+          calcKeystrokes: "Heavy 100kg needs 980 N of air drag to stop accelerating; 1kg needs only 9.8 N!",
+          hook: "Terminal Velocity: F_Air Equals F_G; Heavy Accelerates Longer!",
+          explanation: "All falling objects stop accelerating when upward air resistance equals downward weight (F_Air = F_G). Because F_G is larger for a heavier object, it takes longer for air drag to build up to F_G—so it accelerates for a longer time, reaches a higher speed, and hits the ground first!",
+          paperPhrase: "Terminal velocity occurs when F_Air = F_G so acceleration stops. Because a heavier object has a larger F_G, it takes longer for air resistance to equal F_G, so it accelerates for a longer period, reaches a higher velocity, and hits the ground first."
+        },
+        {
+          id: "p18",
+          category: "Newton's 2nd Law (Planetary Weight vs. Mass)",
+          title: "An astronaut has a mass of 70 kg on Earth (g = 9.8 m/s²). Using Mr. Carosaari's planetary gravity table, what is the astronaut's MASS and WEIGHT on Mars (g = 3.728 m/s²)?",
+          options: [
+            "Mass = 26.63 kg; Weight = 70 N",
+            "Mass = 70 kg (unchanged); Weight = 260.96 N (w = 70 × 3.728)",
+            "Mass = 260.96 kg; Weight = 686 N",
+            "Mass = 0 kg; Weight = 3.728 N"
+          ],
+          correct: 1,
+          calcFormula: "w = m · g_Mars = 70 × 3.728",
+          calcExpr: "70 * 3.728",
+          calcKeystrokes: "[7][0] [×] [3][.][7][2][8] [=] -> 260.96 N",
+          hook: "Mass Never Changes (kg); Weight Is m Times g (Newtons)!",
+          explanation: "Mass (70 kg) is the amount of matter and never changes by location. Weight on Mars is w = mg = 70 kg × 3.728 m/s² = 260.96 N.",
+          paperPhrase: "The astronaut's mass remains 70 kg because mass does not vary with location, while their weight on Mars is w = mg = 70 kg × 3.728 m/s² = 260.96 N."
+        },
+        {
+          id: "p19",
+          category: "Newton's 2nd Law (Carosaari 'Feels Like Kilos' Method)",
+          title: "In Mr. Carosaari's 2nd Law notes, once you calculate your weight in Newtons on another planet (like Jupiter, g = 25.93 m/s²), how do you find out 'how many kilos this would feel like' on Earth?",
+          options: [
+            "Multiply the Newtons by 25.93 again.",
+            "Divide the weight in Newtons by 9.8 (Earth's g)!",
+            "Subtract 9.8 from your mass.",
+            "Multiply by G (6.67259 × 10⁻¹¹)."
+          ],
+          correct: 1,
+          calcFormula: "Feels Like Kilos = (m · g_planet) / 9.8",
+          calcExpr: "(70 * 25.93) / 9.8",
+          calcKeystrokes: "[7][0] [×] [2][5][.][9][3] [=] 1815.1 N -> [÷] [9][.][8] [=] -> 185.21 kg!",
+          hook: "Newtons Divided By 9.8 Equals Earth-Feel Kilos!",
+          explanation: "Mr. Carosaari's notes state: First multiply mass by planetary g to find Newtons (w = mg), then 'to find out how many kilo this would feel like divide by 9.8'.",
+          paperPhrase: "To determine how many kilograms a planetary weight in Newtons would feel like on Earth, divide the weight in Newtons by Earth's gravitational acceleration (9.8 m/s²)."
+        },
+        {
+          id: "p20",
+          category: "Newton's 3rd Law (Unequal Mass Effect: You vs. Earth)",
+          title: "By Newton's 3rd Law, the gravitational force of the Earth pulling down on you is EQUAL and OPPOSITE to the force of you pulling up on the Earth. Why do you accelerate at 9.8 m/s² while the Earth barely moves?",
+          options: [
+            "Because Newton's 3rd Law does not apply to planets.",
+            "Because Earth's force on you is actually trillions of times stronger than your force on Earth.",
+            "Because equal forces do NOT give equal effects (accelerations) when masses are vastly different (a = F/m); Earth's colossal mass makes its acceleration microscopically tiny!",
+            "Because the atmosphere absorbs your upward pull."
+          ],
+          correct: 2,
+          calcFormula: "F_Earth_on_You = F_You_on_Earth, but a = F / m",
+          calcExpr: "588 / 5.97e24",
+          calcKeystrokes: "[5][8][8] [÷] [5][.][9][7][EE][2][4] [=] -> 9.85e-23 m/s² (Earth barely budges!)",
+          hook: "Equal Forces, Different Masses: Giant Earth Barely Accelerates!",
+          explanation: "From Mr. Carosaari's 3rd Law notes: 'equal forces do not give equal effects, for instance, G between us and the earth.' Because a = F/m, the same force acting on Earth's massive 5.97×10²⁴ kg produces near-zero acceleration.",
+          paperPhrase: "Equal action-reaction forces do not produce equal accelerations when acting on different masses (a = F/m); because Earth's mass is immense compared to a human, Earth's resulting acceleration is infinitesimally small."
+        },
+        {
+          id: "p21",
+          category: "Newton's 3rd Law (Momentum & Conservation)",
+          title: "According to Mr. Carosaari's 3rd Law notes, what is the equation and SI unit for momentum, and what happens to momentum when two objects collide?",
+          options: [
+            "p = m / v (measured in Newtons); momentum is destroyed on impact.",
+            "p = m · v (measured in kg·m/s); the total amount of momentum is conserved (colliding objects exchange momentum).",
+            "p = m · a (measured in Joules); momentum doubles after every collision.",
+            "p = G · m₁m₂ / d²; momentum turns into friction."
+          ],
+          correct: 1,
+          calcFormula: "p = m · v  (Units: kg·m/s)",
+          calcExpr: "50 * 8",
+          calcKeystrokes: "[5][0] [×] [8] [=] -> 400 kg·m/s",
+          hook: "Momentum p Equals mv (kg·m/s): Total Momentum Is Conserved!",
+          explanation: "Momentum is mass and velocity together: p = mv, with units kg·m/s. By the Law of Conservation of Momentum, the total amount of p is conserved in collisions as objects exchange momentum.",
+          paperPhrase: "Momentum is the product of mass and velocity (p = mv, in units of kg·m/s). In any collision or interaction, total momentum is conserved as the interacting objects exchange momentum."
+        },
+        {
+          id: "p22",
+          category: "Newton's 3rd Law (Rockets in Outer Space)",
+          title: "How can a rocket accelerate forward in the vacuum of outer space where there is NO air to push against?",
+          options: [
+            "The rocket pushes against cosmic background radiation.",
+            "The rocket engines push exhaust gas backward (action), and by Newton's 3rd Law & Conservation of Momentum, the expelled gas pushes the rocket forward with an equal and opposite reaction force!",
+            "Gravity pulls the rocket forward once it leaves the atmosphere.",
+            "Rockets cannot accelerate in a vacuum; they only coast using 1st Law inertia."
+          ],
+          correct: 1,
+          calcFormula: "F_rocket_on_gas = -F_gas_on_rocket  (Δp_rocket = -Δp_gas)",
+          calcExpr: "(25 * 30) / 150",
+          calcKeystrokes: "Action force = reaction force: Expelling gas backward propels rocket forward!",
+          hook: "Rockets Push Gas Back; Gas Pushes Rocket Forward!",
+          explanation: "Rockets do not need air! By Newton's 3rd Law and conservation of momentum, pushing high-speed exhaust gas out the back produces an equal and opposite reaction force that pushes the rocket forward.",
+          paperPhrase: "Rockets move in a vacuum by expelling exhaust gas backward at high velocity (action force), which exerts an equal and opposite reaction force pushing the rocket forward."
+        },
+        {
+          id: "p23",
+          category: "Newton's 4th Law (Universal Gravitation Formula & G)",
+          title: "What is the equation for Newton's Law of Universal Gravitation ('Newton's 4th Law') and the exact value of the gravitational constant G in Mr. Carosaari's notes?",
+          options: [
+            "F = m · a, where G = 9.8 m/s²",
+            "F = G · m₁ · m₂ / d², where G = 6.67259 × 10⁻¹¹",
+            "F = G · d² / (m₁ · m₂), where G = 6.67259 × 10¹¹",
+            "F = m · g · d, where G = 3.00 × 10⁸"
+          ],
+          correct: 1,
+          calcFormula: "F = G · m₁ · m₂ / d²  (G = 6.67259 × 10⁻¹¹)",
+          calcExpr: "6.67259e-11",
+          calcKeystrokes: "[6][.][6][7][2][5][9][EE][-][1][1]",
+          hook: "Fourth Law Gravity: G Times m1 m2 Over d Squared!",
+          explanation: "Mr. Carosaari's 4th Law notes define Universal Gravitation as F = G·m₁m₂/d², where G = 6.67259 × 10⁻¹¹. Force increases with mass and decreases with distance squared.",
+          paperPhrase: "Newton's Law of Universal Gravitation (4th Law) states that F = G·m₁·m₂ / d², where G = 6.67259 × 10⁻¹¹; gravitational force increases with mass and decreases with the square of the distance."
+        },
+        {
+          id: "p24",
+          category: "Newton's 4th Law (Inverse-Square Distance Law)",
+          title: "In F = G · m₁ · m₂ / d², how does changing the distance (d) between two objects affect the gravitational force between them?",
+          options: [
+            "If distance doubles, gravitational force doubles.",
+            "Force decreases with distance SQUARED: if distance doubles (2×), force drops to 1/4; if distance triples (3×), force drops to 1/9!",
+            "If distance doubles, force drops to 1/2.",
+            "Distance has no effect on gravitational force in space."
+          ],
+          correct: 1,
+          calcFormula: "F ∝ 1 / d²  (2d → 1/4 F;  3d → 1/9 F)",
+          calcExpr: "1 / (3**2)",
+          calcKeystrokes: "Double d: [1][÷][(][2][x²][)][=] -> 0.25 (1/4) | Triple d: [1][÷][(][3][x²][)][=] -> 0.111 (1/9)",
+          hook: "Inverse Square Law: Double Distance Quarters Gravity Force!",
+          explanation: "Because distance d is squared in the denominator (d²), doubling the distance reduces gravitational attraction by 2² = 4 times (1/4), and tripling distance reduces it by 3² = 9 times (1/9).",
+          paperPhrase: "Gravitational force is inversely proportional to the square of the distance (1/d²): doubling the distance reduces the force to one-fourth (1/4), and tripling the distance reduces it to one-ninth (1/9)."
+        },
+        {
+          id: "p25",
+          category: "Newton's 4th Law (People Attraction & Connection to w = mg)",
+          title: "According to Mr. Carosaari's 4th Law notes, why don't two students sitting next to each other feel pulled together by gravity, and how does F = G·m₁m₂/d² connect to w = mg?",
+          options: [
+            "Human bodies do not have gravitational attraction; only magnetic planets have gravity.",
+            "Gravitational force between people DOES exist, but is extremely tiny because G = 6.67259 × 10⁻¹¹ is tiny; when one mass is the entire Earth, G·M_Earth/d² equals g (9.8 m/s²), giving w = mg!",
+            "Air pressure cancels out gravity between people.",
+            "w = mg only applies on the Moon, whereas the 4th Law only applies on the Sun."
+          ],
+          correct: 1,
+          calcFormula: "F_people = 6.67259e-11 · m₁ · m₂ / d²  |  w = m · g",
+          calcExpr: "6.67259e-11 * 60 * 60 / (1**2)",
+          calcKeystrokes: "[6][.][6][7][2][5][9][EE][-][1][1] [×] 60 [×] 60 [÷] 1 [=] -> 2.40e-7 N (Tiny!)",
+          hook: "Tiny G Makes People Pull Tiny; Earth Mass Makes w=mg!",
+          explanation: "Gravitational attraction exists between all masses, including people, but is minuscule because G = 6.67259 × 10⁻¹¹. When calculating attraction between you and Earth's huge mass, the equation simplifies to w = mg.",
+          paperPhrase: "Gravitational attraction between people exists but is extremely tiny because the constant G (6.67259 × 10⁻¹¹) is minuscule; between a person and the massive Earth, F = G·m₁m₂/d² simplifies directly to weight w = mg."
+        },
+        {
+          id: "p26",
+          category: "Sci-Calc Exam Problem (2nd Law F = ma)",
+          title: "🧮 [SCI-CALC] A 45 kg laboratory cart is pushed with an unbalanced net force of 135 N. What is its acceleration?",
+          options: [
+            "0.33 m/s²",
+            "3.0 m/s²",
+            "6,075 m/s²",
+            "90 m/s²"
+          ],
+          correct: 1,
+          calcFormula: "a = F / m = 135 N / 45 kg",
+          calcExpr: "135 / 45",
+          calcKeystrokes: "[1][3][5] [÷] [4][5] [=] -> 3.0 m/s²",
+          hook: "Acceleration Equals Force Divided By Mass: 135 Over 45 Is 3!",
+          explanation: "Rearranging F = ma gives a = F / m = 135 N / 45 kg = 3.0 m/s².",
+          paperPhrase: "Using Newton's Second Law (a = F/m), a = 135 N / 45 kg = 3.0 m/s²."
+        },
+        {
+          id: "p27",
+          category: "Sci-Calc Exam Problem (Mars Weight & Feels Like Kilos)",
+          title: "🧮 [SCI-CALC] Using Mr. Carosaari's Mars gravity (g = 3.728 m/s²), what is the weight in Newtons of an 80 kg astronaut on Mars, and how many kilograms would that 'feel like' on Earth (÷ 9.8)?",
+          options: [
+            "Weight = 784 N; feels like 80 kg",
+            "Weight = 298.24 N; feels like 30.43 kg",
+            "Weight = 21.45 N; feels like 210 kg",
+            "Weight = 298.24 kg; feels like 30.43 N"
+          ],
+          correct: 1,
+          calcFormula: "w = 80 × 3.728 = 298.24 N  |  Kilos = 298.24 / 9.8 = 30.43 kg",
+          calcExpr: "(80 * 3.728) / 9.8",
+          calcKeystrokes: "[8][0] [×] [3][.][7][2][8] [=] 298.24 N -> [÷] [9][.][8] [=] -> 30.43 kg",
+          hook: "Eighty Times 3.728 Gives Newtons; Divide By 9.8 For Kilos!",
+          explanation: "First find weight on Mars: w = mg = 80 kg × 3.728 m/s² = 298.24 N. Then divide by 9.8 to find what mass that weight feels like on Earth: 298.24 / 9.8 = 30.43 kg.",
+          paperPhrase: "w_Mars = 80 kg × 3.728 m/s² = 298.24 N. Dividing by Earth's gravity (298.24 N / 9.8 m/s²) shows this feels like 30.43 kg on Earth."
+        },
+        {
+          id: "p28",
+          category: "Sci-Calc Exam Problem (4th Law Universal Gravitation)",
+          title: "🧮 [SCI-CALC] Using G = 6.67259 × 10⁻¹¹, calculate the gravitational force (F = G·m₁·m₂/d²) between two 1,000 kg asteroids whose centers are d = 2.0 m apart.",
+          options: [
+            "1.668 × 10⁻⁵ N",
+            "6.673 × 10⁻⁵ N",
+            "3.336 × 10⁻⁸ N",
+            "1.668 × 10⁵ N"
+          ],
+          correct: 0,
+          calcFormula: "F = (6.67259e-11 × 1000 × 1000) / (2²)",
+          calcExpr: "(6.67259e-11 * 1000 * 1000) / (2**2)",
+          calcKeystrokes: "[6][.][6][7][2][5][9][EE][-][1][1] [×] 1000 [×] 1000 [÷] [(] 2 [x²] [)] [=] -> 1.668e-5 N",
+          hook: "Parentheses Around d Squared: 1.668 Times Ten To Minus Five!",
+          explanation: "F = (6.67259 × 10⁻¹¹ × 1,000 × 1,000) / (2.0)² = (6.67259 × 10⁻⁵) / 4 = 1.668 × 10⁻⁵ N.",
+          paperPhrase: "F = G·m₁·m₂ / d² = (6.67259 × 10⁻¹¹ × 1000 kg × 1000 kg) / (2.0 m)² = 1.668 × 10⁻⁵ N."
+        }
+      ],
+
+      calc_blitz: [
+        {
+          id: "c1",
+          category: "Sci-Calc Blitz // 2nd Law (F = ma)",
+          title: "🧮 [CALC #1] A 65 kg sprinter blasts out of the blocks with an acceleration of 4.2 m/s². What unbalanced net force (in Newtons) did the sprinter generate?",
+          options: [
+            "15.48 N",
+            "273.0 N",
+            "69.2 N",
+            "637.0 N"
+          ],
+          correct: 1,
+          calcFormula: "F = m · a = 65 × 4.2",
+          calcExpr: "65 * 4.2",
+          calcKeystrokes: "[6][5] [×] [4][.][2] [=] -> 273 N",
+          hook: "Force Equals Mass Times Acceleration: 65 Times 4.2 Is 273 N!",
+          explanation: "By Newton's 2nd Law, F = m · a = 65 kg × 4.2 m/s² = 273.0 N.",
+          paperPhrase: "F = m · a = 65 kg × 4.2 m/s² = 273.0 N."
+        },
+        {
+          id: "c2",
+          category: "Sci-Calc Blitz // Net Force & Acceleration",
+          title: "🧮 [CALC #2] A 60 kg crate is pushed forward with 450 N of force while 90 N of friction opposes the motion. What is the net force and resulting acceleration?",
+          options: [
+            "F_net = 540 N; a = 9.0 m/s²",
+            "F_net = 360 N; a = 6.0 m/s²",
+            "F_net = 360 N; a = 7.5 m/s²",
+            "F_net = 450 N; a = 1.5 m/s²"
+          ],
+          correct: 1,
+          calcFormula: "F_net = 450 - 90 = 360 N  →  a = 360 / 60",
+          calcExpr: "(450 - 90) / 60",
+          calcKeystrokes: "[(] [4][5][0] [-] [9][0] [)] [÷] [6][0] [=] -> 6.0 m/s²",
+          hook: "Subtract Friction First: 360 Divided By 60 Equals 6 m/s²!",
+          explanation: "First subtract opposing friction: F_net = 450 N - 90 N = 360 N. Then divide by mass: a = 360 N / 60 kg = 6.0 m/s².",
+          paperPhrase: "F_net = 450 N - 90 N = 360 N; a = F_net / m = 360 N / 60 kg = 6.0 m/s²."
+        },
+        {
+          id: "c3",
+          category: "Sci-Calc Blitz // Free Fall Mass (w = mg)",
+          title: "🧮 [CALC #3] In free fall on Earth (g = 9.8 m/s²), the gravitational force (weight) pulling on a skydiver is 539 N. What is the skydiver's mass in kilograms?",
+          options: [
+            "5,282.2 kg",
+            "55.0 kg",
+            "53.9 kg",
+            "0.018 kg"
+          ],
+          correct: 1,
+          calcFormula: "m = w / g = 539 / 9.8",
+          calcExpr: "539 / 9.8",
+          calcKeystrokes: "[5][3][9] [÷] [9][.][8] [=] -> 55 kg",
+          hook: "Mass Equals Weight Divided By 9.8: 539 Over 9.8 Is 55 kg!",
+          explanation: "Since w = mg, mass m = w / g = 539 N / 9.8 m/s² = 55.0 kg.",
+          paperPhrase: "Using w = mg, m = w / g = 539 N / 9.8 m/s² = 55.0 kg."
+        },
+        {
+          id: "c4",
+          category: "Sci-Calc Blitz // 1st Law Bike Helmet Deceleration",
+          title: "🧮 [CALC #4] In a bike crash, a 5.0 kg head traveling at 12 m/s stops. Without a helmet it stops in 0.01 s; with a foam helmet it stops in 0.10 s. Compare the impact forces (F = m·Δv/Δt)!",
+          options: [
+            "Bare skull = 600 N; Foam helmet = 6,000 N",
+            "Bare skull = 6,000 N; Foam helmet = 600 N (10× less force!)",
+            "Both experience 60 N of force because inertia is identical.",
+            "Bare skull = 1,200 N; Foam helmet = 120 N"
+          ],
+          correct: 1,
+          calcFormula: "F = m · (Δv / Δt) = (5 × 12) / Δt",
+          calcExpr: "(5 * 12) / 0.10",
+          calcKeystrokes: "Bare: [5][×][12][÷][0.01][=] 6000 N | Helmet: [5][×][12][÷][0.10][=] 600 N",
+          hook: "Ten Times Longer Stop Time Cuts Skull Force Tenfold!",
+          explanation: "Momentum change is 5.0 kg × 12 m/s = 60 kg·m/s. Dividing by 0.01 s gives 6,000 N; dividing by 0.10 s (foam compression) reduces the force to 600 N!",
+          paperPhrase: "Increasing deceleration time from 0.01 s to 0.10 s via helmet foam compression reduces acceleration from 1,200 m/s² to 120 m/s², cutting skull impact force from 6,000 N to 600 N."
+        },
+        {
+          id: "c5",
+          category: "Sci-Calc Blitz // Carosaari Jupiter Weight & Kilos",
+          title: "🧮 [CALC #5] Using Mr. Carosaari's Jupiter gravity (g = 25.93 m/s²), calculate the weight in Newtons of a 70 kg person on Jupiter, and how many kilos that would feel like on Earth (÷ 9.8)!",
+          options: [
+            "Weight = 1,815.1 N; feels like 185.21 kg",
+            "Weight = 686.0 N; feels like 70.0 kg",
+            "Weight = 2.65 N; feels like 25.93 kg",
+            "Weight = 185.21 N; feels like 1,815.1 kg"
+          ],
+          correct: 0,
+          calcFormula: "w = 70 × 25.93 = 1815.1 N  |  Kilos = 1815.1 / 9.8 = 185.21 kg",
+          calcExpr: "(70 * 25.93) / 9.8",
+          calcKeystrokes: "[7][0] [×] [2][5][.][9][3] [=] 1815.1 N -> [÷] [9][.][8] [=] -> 185.21 kg",
+          hook: "Jupiter Weight 1815.1 N; Divide By 9.8 Gives 185.21 Kilos!",
+          explanation: "On Jupiter, w = 70 kg × 25.93 m/s² = 1,815.1 N. Dividing by Earth's g (9.8): 1,815.1 / 9.8 = 185.21 kg.",
+          paperPhrase: "On Jupiter, w = 70 kg × 25.93 m/s² = 1,815.1 N. Divided by 9.8 m/s², this feels like 185.21 kg on Earth."
+        },
+        {
+          id: "c6",
+          category: "Sci-Calc Blitz // Carosaari Luna (Moon) Weight & Kilos",
+          title: "🧮 [CALC #6] Using Mr. Carosaari's Luna (Moon) gravity (g = 1.625 m/s²), what is the weight of a 70 kg astronaut on the Moon, and how many kilos does that feel like on Earth (÷ 9.8)?",
+          options: [
+            "Weight = 113.75 N; feels like 11.61 kg",
+            "Weight = 686 N; feels like 70 kg",
+            "Weight = 43.08 N; feels like 4.40 kg",
+            "Weight = 11.61 N; feels like 113.75 kg"
+          ],
+          correct: 0,
+          calcFormula: "w = 70 × 1.625 = 113.75 N  |  Kilos = 113.75 / 9.8 = 11.61 kg",
+          calcExpr: "(70 * 1.625) / 9.8",
+          calcKeystrokes: "[7][0] [×] [1][.][6][2][5] [=] 113.75 N -> [÷] [9][.][8] [=] -> 11.61 kg",
+          hook: "Moon Weight 113.75 N; Divide By 9.8 Feels Like 11.61 Kilos!",
+          explanation: "w_Luna = 70 × 1.625 = 113.75 N. Dividing by 9.8 gives 113.75 / 9.8 = 11.61 kg.",
+          paperPhrase: "On Luna, w = 70 kg × 1.625 m/s² = 113.75 N, which feels like 113.75 / 9.8 = 11.61 kg on Earth."
+        },
+        {
+          id: "c7",
+          category: "Sci-Calc Blitz // Sol (Sun) vs. Pluto Gravity",
+          title: "🧮 [CALC #7] Using Mr. Carosaari's notes, compare the weight of a 50 kg probe on Pluto (g = 0.610 m/s²) vs. at the surface of Sol / the Sun (g = 274.1 m/s²)!",
+          options: [
+            "Pluto = 30.5 N; Sol = 13,705 N",
+            "Pluto = 50 N; Sol = 50 N",
+            "Pluto = 3.11 N; Sol = 1,398.5 N",
+            "Pluto = 490 N; Sol = 274.1 N"
+          ],
+          correct: 0,
+          calcFormula: "w_Pluto = 50 × 0.610 = 30.5 N  |  w_Sol = 50 × 274.1 = 13,705 N",
+          calcExpr: "50 * 274.1",
+          calcKeystrokes: "Pluto: [5][0][×][0.610][=] 30.5 N | Sol: [5][0][×][274.1][=] 13705 N",
+          hook: "Pluto 30.5 Newtons; Sun 13,705 Newtons; Mass Still 50 kg!",
+          explanation: "On Pluto: w = 50 × 0.610 = 30.5 N. On Sol: w = 50 × 274.1 = 13,705 N.",
+          paperPhrase: "w_Pluto = 50 kg × 0.610 m/s² = 30.5 N; w_Sol = 50 kg × 274.1 m/s² = 13,705 N (while mass remains 50 kg at both locations)."
+        },
+        {
+          id: "c8",
+          category: "Sci-Calc Blitz // 3rd Law Momentum (p = mv)",
+          title: "🧮 [CALC #8] Calculate the momentum (p = mv) of a 1,200 kg car traveling at a velocity of 25 m/s.",
+          options: [
+            "48 kg·m/s",
+            "30,000 kg·m/s",
+            "1,225 kg·m/s",
+            "375,000 kg·m/s"
+          ],
+          correct: 1,
+          calcFormula: "p = m · v = 1200 × 25",
+          calcExpr: "1200 * 25",
+          calcKeystrokes: "[1][2][0][0] [×] [2][5] [=] -> 30000 kg·m/s",
+          hook: "Momentum p Equals Mass Times Velocity: 30,000 kg·m/s!",
+          explanation: "p = m · v = 1,200 kg × 25 m/s = 30,000 kg·m/s.",
+          paperPhrase: "p = m · v = 1,200 kg × 25 m/s = 30,000 kg·m/s."
+        },
+        {
+          id: "c9",
+          category: "Sci-Calc Blitz // Conservation of Momentum Collision",
+          title: "🧮 [CALC #9] A 4.0 kg lab cart moving at 6.0 m/s collides with and latches onto a stationary 2.0 kg cart. By Conservation of Momentum, what is their combined velocity after the collision?",
+          options: [
+            "6.0 m/s",
+            "4.0 m/s",
+            "12.0 m/s",
+            "3.0 m/s"
+          ],
+          correct: 1,
+          calcFormula: "p_initial = 4 × 6 = 24 kg·m/s  →  v_final = 24 / (4 + 2)",
+          calcExpr: "(4 * 6) / (4 + 2)",
+          calcKeystrokes: "[(] 4 [×] 6 [)] [÷] [(] 4 [+] 2 [)] [=] -> 4.0 m/s",
+          hook: "Conserve Total Momentum: 24 Divided By 6 kg Equals 4 m/s!",
+          explanation: "Initial momentum p = 4.0 kg × 6.0 m/s = 24 kg·m/s. Since total momentum is conserved and combined mass is 4.0 + 2.0 = 6.0 kg, v_f = 24 / 6.0 = 4.0 m/s.",
+          paperPhrase: "By conservation of momentum, p_total = 4.0 kg × 6.0 m/s = 24 kg·m/s; dividing by the combined mass (6.0 kg) yields a final velocity of 4.0 m/s."
+        },
+        {
+          id: "c10",
+          category: "Sci-Calc Blitz // 3rd Law Rocket Thrust in Space",
+          title: "🧮 [CALC #10] A 150 kg thruster sled in deep space expels 3.0 kg of exhaust gas backward at 100 m/s. By conservation of momentum, what forward velocity does the 150 kg sled gain?",
+          options: [
+            "2.0 m/s forward",
+            "50.0 m/s forward",
+            "300 m/s forward",
+            "0 m/s (because there is no air in space)"
+          ],
+          correct: 0,
+          calcFormula: "p_gas = 3 × 100 = 300 kg·m/s  →  v_sled = 300 / 150",
+          calcExpr: "(3 * 100) / 150",
+          calcKeystrokes: "[(] 3 [×] 100 [)] [÷] 150 [=] -> 2.0 m/s",
+          hook: "Gas Momentum 300 Backward Equals Sled Momentum 300 Forward!",
+          explanation: "The exhaust gas carries backward momentum p = 3.0 kg × 100 m/s = 300 kg·m/s. The 150 kg sled gains an equal and opposite forward momentum of 300 kg·m/s, so v = 300 / 150 = 2.0 m/s.",
+          paperPhrase: "Backward exhaust momentum is p = 3.0 kg × 100 m/s = 300 kg·m/s; by conservation of momentum, the 150 kg sled gains v = 300 / 150 = 2.0 m/s forward."
+        },
+        {
+          id: "c11",
+          category: "Sci-Calc Blitz // 4th Law Copper Spheres",
+          title: "🧮 [CALC #11] Two 500 kg lead spheres have their centers separated by d = 2.0 m. Using Mr. Carosaari's G = 6.67259 × 10⁻¹¹, what is the gravitational force between them?",
+          options: [
+            "4.170 × 10⁻⁶ N",
+            "8.341 × 10⁻⁶ N",
+            "1.668 × 10⁻⁵ N",
+            "4.170 × 10⁶ N"
+          ],
+          correct: 0,
+          calcFormula: "F = (6.67259e-11 × 500 × 500) / (2.0²)",
+          calcExpr: "(6.67259e-11 * 500 * 500) / (2**2)",
+          calcKeystrokes: "[6][.][6][7][2][5][9][EE][-][1][1] [×] 500 [×] 500 [÷] [(] 2 [x²] [)] [=] -> 4.170e-6 N",
+          hook: "G Times 250,000 Divided By 4 Equals 4.17 Micro-Newtons!",
+          explanation: "F = G·m₁m₂/d² = (6.67259 × 10⁻¹¹ × 250,000) / 4 = 4.170 × 10⁻⁶ N.",
+          paperPhrase: "F = (6.67259 × 10⁻¹¹ × 500 kg × 500 kg) / (2.0 m)² = 4.170 × 10⁻⁶ N."
+        },
+        {
+          id: "c12",
+          category: "Sci-Calc Blitz // 4th Law Attraction Between Two Students",
+          title: "🧮 [CALC #12] Two 70 kg students sit d = 1.5 m apart in Mr. Carosaari's classroom. Using G = 6.67259 × 10⁻¹¹, calculate the gravitational attraction between them!",
+          options: [
+            "1.453 × 10⁻⁷ N",
+            "2.180 × 10⁻⁷ N",
+            "3.270 × 10⁻⁷ N",
+            "9.80 N"
+          ],
+          correct: 0,
+          calcFormula: "F = (6.67259e-11 × 70 × 70) / (1.5²)",
+          calcExpr: "(6.67259e-11 * 70 * 70) / (1.5**2)",
+          calcKeystrokes: "[6][.][6][7][2][5][9][EE][-][1][1] [×] 70 [×] 70 [÷] [(] 1.5 [x²] [)] [=] -> 1.453e-7 N",
+          hook: "Parentheses Around 1.5 Squared: 1.453 Times Ten To Minus Seven!",
+          explanation: "F = (6.67259 × 10⁻¹¹ × 4,900) / 2.25 = 1.453 × 10⁻⁷ N (proving why people attraction exists but is extremely tiny!).",
+          paperPhrase: "F = (6.67259 × 10⁻¹¹ × 70 kg × 70 kg) / (1.5 m)² = 1.453 × 10⁻⁷ N."
+        },
+        {
+          id: "c13",
+          category: "Sci-Calc Blitz // 4th Law Proving w = mg on Earth",
+          title: "🧮 [CALC #13] Earth has mass m₁ = 5.972 × 10²⁴ kg and radius d = 6.371 × 10⁶ m. Using F = G·m₁·m₂/d² (G = 6.67259 × 10⁻¹¹), calculate Earth's pull on a 60 kg student!",
+          options: [
+            "589 N (which matches w = mg = 60 × 9.8 = 588 N!)",
+            "60 N",
+            "3.74 × 10⁹ N",
+            "9.8 N"
+          ],
+          correct: 0,
+          calcFormula: "F = (6.67259e-11 × 5.972e24 × 60) / (6.371e6)²",
+          calcExpr: "(6.67259e-11 * 5.972e24 * 60) / ((6.371e6)**2)",
+          calcKeystrokes: "[6.67259][EE][-11] [×] [5.972][EE][24] [×] 60 [÷] [(] [6.371][EE][6] [x²] [)] [=] -> 589 N",
+          hook: "Fourth Law With Earth Mass And RadiusProves w Equals mg!",
+          explanation: "Plugging Earth's mass and radius into F = G·m₁m₂/d² yields ~589 N, which is why the 4th Law connects directly to w = mg (60 kg × 9.8 m/s² = 588 N)!",
+          paperPhrase: "F = (6.67259 × 10⁻¹¹ × 5.972 × 10²⁴ kg × 60 kg) / (6.371 × 10⁶ m)² ≈ 589 N, demonstrating how Universal Gravitation produces w = mg."
+        },
+        {
+          id: "c14",
+          category: "Sci-Calc Blitz // 4th Law Inverse-Square Scaling",
+          title: "🧮 [CALC #14] Two spacecraft attract each other with a gravitational force of 360 Micronewtons at distance d. If they move to 3 times that distance (3d), what is the new force?",
+          options: [
+            "120 Micronewtons (divided by 3)",
+            "40 Micronewtons (divided by 3² = 9!)",
+            "90 Micronewtons (divided by 4)",
+            "1,080 Micronewtons (multiplied by 3)"
+          ],
+          correct: 1,
+          calcFormula: "F_new = F_old / (3²) = 360 / 9",
+          calcExpr: "360 / (3**2)",
+          calcKeystrokes: "[3][6][0] [÷] [(] [3] [x²] [)] [=] -> 40",
+          hook: "Triple Distance Means Divide By Nine: 360 Over 9 Is 40!",
+          explanation: "By the inverse-square law (1/d²), tripling the distance reduces the force by 3² = 9 times: 360 / 9 = 40 Micronewtons.",
+          paperPhrase: "Because F is inversely proportional to d², tripling the distance divides the force by 3² = 9, giving 360 / 9 = 40 Micronewtons."
         }
       ],
 
@@ -2887,7 +3992,7 @@
       missedQuestions = s.missedQuestions || [];
 
       // Rebuild active questions
-      const pool = [...QUESTIONS.physics, ...QUESTIONS.intro];
+      const pool = [...QUESTIONS.physics, ...(QUESTIONS.calc_blitz || []), ...QUESTIONS.intro];
       if (s.activeQuestionIds && s.activeQuestionIds.length) {
         activeQuestions = s.activeQuestionIds.map(id => pool.find(q => q.id === id)).filter(Boolean);
       } else {
@@ -3308,7 +4413,7 @@
     // TAB NAVIGATION
     function switchFnTab(tabId) {
       playFnSound("click");
-      const tabs = ["play", "shop", "locker", "career", "vault", "cheatsheet"];
+      const tabs = ["play", "shop", "locker", "career", "vault", "lab", "cheatsheet"];
       tabs.forEach(t => {
         const el = document.getElementById(t + "-screen");
         if (el) el.style.display = "none";
@@ -3330,6 +4435,7 @@
       if (tabId === "locker") renderLockerUI();
       if (tabId === "career") renderCareerUI();
       if (tabId === "vault") updateVaultUI();
+      if (tabId === "lab") { setTimeout(() => { resetGravitySim(); runPlanetaryWeightSolver(); }, 50); }
     }
 
     function selectMode(mode, cardEl) {
@@ -3348,8 +4454,9 @@
       }
 
       if (selectedGameMode === "physics") activeQuestions = [...QUESTIONS.physics];
+      else if (selectedGameMode === "calc_blitz") activeQuestions = [...(QUESTIONS.calc_blitz || [])];
       else if (selectedGameMode === "intro") activeQuestions = [...QUESTIONS.intro];
-      else if (selectedGameMode === "boss") activeQuestions = [...QUESTIONS.physics, ...QUESTIONS.intro];
+      else if (selectedGameMode === "boss") activeQuestions = [...QUESTIONS.physics, ...(QUESTIONS.calc_blitz || []), ...QUESTIONS.intro];
       else if (selectedGameMode === "vault_practice") {
         if (missedQuestions.length === 0) {
           alert("Your Redo Vault is currently empty! Play Solo or Duos first.");
@@ -3962,6 +5069,18 @@
 
       document.getElementById("coach-dialog").classList.remove("visible");
       document.getElementById("next-drop-btn").innerText = (currentQIndex === total - 1) ? "CLAIM VICTORY ROYALE ➔" : "CLAIM INTEL & NEXT DROP ➔";
+
+      const hintPill = document.getElementById("hud-calc-hint-pill");
+      if (hintPill) {
+        if (q.calcFormula) {
+          hintPill.innerHTML = "🧮 <strong>Formula:</strong> <code>" + q.calcFormula + "</code>";
+        } else {
+          hintPill.innerHTML = "💡 Press <strong>[C]</strong> anytime for C-137 Scientific Calculator";
+        }
+      }
+      if (q.category && q.category.includes("Sci-Calc")) {
+        toggleFloatingCalc(true);
+      }
     }
 
         // OFFICIAL FORTNITE LOCKER SKINS (VERIFIED AUTHENTIC CDN ASSETS)
@@ -4588,6 +5707,587 @@
       setInterval(updateExamCountdown, 1000);
       updateExamCountdown();
     };
+
+    // =========================================================================
+    // V20: C-137 TI-30XIIS SCIENTIFIC CALCULATOR & INTERACTIVE GRAVITY LAB ENGINE
+    // =========================================================================
+    let calcExpr = "";
+    let calcLastAns = 0;
+
+    function toggleFloatingCalc(forceState) {
+      playFnSound("click");
+      const widget = document.getElementById("c137-floating-calc");
+      if (!widget) return;
+      if (typeof forceState === "boolean") {
+        if (forceState) widget.classList.add("visible");
+        else widget.classList.remove("visible");
+      } else {
+        widget.classList.toggle("visible");
+      }
+    }
+
+    function updateCalcDisplays(resultVal) {
+      const exprEl = document.getElementById("calc-expr-display");
+      const mainEl = document.getElementById("calc-main-display");
+      const sciEl = document.getElementById("calc-sci-display");
+      const kiloEl = document.getElementById("calc-kilo-display");
+
+      if (exprEl) exprEl.innerText = calcExpr || "0";
+
+      if (resultVal !== undefined && resultVal !== null && !isNaN(resultVal) && isFinite(resultVal)) {
+        const num = Number(resultVal);
+        let formatted = "";
+        if (num !== 0 && (Math.abs(num) < 0.001 || Math.abs(num) >= 1e7)) {
+          formatted = num.toExponential(4);
+        } else {
+          formatted = Number(num.toPrecision(10)).toString();
+        }
+        if (mainEl) mainEl.innerText = formatted;
+        if (sciEl) sciEl.innerText = "SCI: " + num.toExponential(3).replace("e+", " × 10^").replace("e-", " × 10^-");
+        if (kiloEl) kiloEl.innerText = "÷9.8 KILOS: " + (num / 9.8).toFixed(2) + " kg";
+      } else if (resultVal === "SYNTAX ERROR") {
+        if (mainEl) mainEl.innerText = "SYNTAX ERR";
+      }
+    }
+
+    function calcPress(token) {
+      playFnSound("click");
+      calcExpr += token;
+      // Live preview evaluation if valid
+      try {
+        const preview = safeEvalMath(calcExpr);
+        if (preview !== null && !isNaN(preview) && isFinite(preview)) {
+          updateCalcDisplays(preview);
+          return;
+        }
+      } catch (e) {}
+      updateCalcDisplays();
+    }
+
+    function calcInsertConst(valStr, label) {
+      playFnSound("click");
+      if (calcExpr && /[0-9)]$/.test(calcExpr)) {
+        calcExpr += "*" + valStr;
+      } else {
+        calcExpr += valStr;
+      }
+      const guide = document.getElementById("calc-keystroke-guide");
+      if (guide) {
+        guide.innerHTML = "⚡ Injected <strong>" + label + " = " + valStr + "</strong> into calculator!";
+      }
+      try {
+        const preview = safeEvalMath(calcExpr);
+        updateCalcDisplays(preview);
+      } catch (e) {
+        updateCalcDisplays();
+      }
+    }
+
+    function calcDivideBy98() {
+      playFnSound("click");
+      if (!calcExpr) calcExpr = String(calcLastAns || 0);
+      calcExpr = "(" + calcExpr + ")/9.8";
+      calcEvaluate("Carosaari Feels-Like-Kilos (w ÷ 9.8)");
+    }
+
+    function calcClear() {
+      playFnSound("click");
+      calcExpr = "";
+      updateCalcDisplays(0);
+    }
+
+    function calcBack() {
+      playFnSound("click");
+      calcExpr = calcExpr.slice(0, -1);
+      try {
+        const preview = calcExpr ? safeEvalMath(calcExpr) : 0;
+        updateCalcDisplays(preview);
+      } catch (e) {
+        updateCalcDisplays();
+      }
+    }
+
+    function calcPressAns() {
+      playFnSound("click");
+      calcExpr += String(calcLastAns);
+      updateCalcDisplays(calcLastAns);
+    }
+
+    function calcReciprocal() {
+      playFnSound("click");
+      if (!calcExpr) calcExpr = String(calcLastAns || 1);
+      calcExpr = "1/(" + calcExpr + ")";
+      calcEvaluate();
+    }
+
+    function calcToggleSign() {
+      playFnSound("click");
+      if (!calcExpr) return;
+      if (calcExpr.startsWith("-(") && calcExpr.endsWith(")")) {
+        calcExpr = calcExpr.slice(2, -1);
+      } else {
+        calcExpr = "-(" + calcExpr + ")";
+      }
+      try {
+        updateCalcDisplays(safeEvalMath(calcExpr));
+      } catch (e) {
+        updateCalcDisplays();
+      }
+    }
+
+    function safeEvalMath(expr) {
+      if (!expr) return 0;
+      let clean = expr
+        .replace(/×/g, "*")
+        .replace(/÷/g, "/")
+        .replace(/−/g, "-")
+        .replace(/sqrt\(/g, "Math.sqrt(")
+        .replace(/sin\(/g, "Math.sin((Math.PI/180)*")
+        .replace(/cos\(/g, "Math.cos((Math.PI/180)*")
+        .replace(/tan\(/g, "Math.tan((Math.PI/180)*")
+        .replace(/π/g, "Math.PI");
+
+      // Auto-close any open parentheses
+      const openCount = (clean.match(/\(/g) || []).length;
+      const closeCount = (clean.match(/\)/g) || []).length;
+      for (let i = 0; i < openCount - closeCount; i++) {
+        clean += ")";
+      }
+      // Validate safe characters only
+      if (!/^[0-9+\-*/().eE,\sMathsqrtincogPI*]+$/.test(clean)) {
+        throw new Error("Unsafe expression");
+      }
+      return Function('"use strict"; return (' + clean + ')')();
+    }
+
+    function calcEvaluate(formulaTag) {
+      try {
+        const res = safeEvalMath(calcExpr);
+        if (res === undefined || isNaN(res) || !isFinite(res)) {
+          updateCalcDisplays("SYNTAX ERROR");
+          return null;
+        }
+        calcLastAns = res;
+        playEnhancedSound("coin");
+        updateCalcDisplays(res);
+
+        // Log calculation to server / GAS
+        const logPayload = {
+          action: "save_calc_log",
+          player: currentProfile || "HENRI",
+          formula: formulaTag || "SCI-CALC",
+          expression: calcExpr,
+          result: res,
+          sciNotation: res.toExponential(4)
+        };
+        if (typeof google !== "undefined" && google.script && google.script.run && google.script.run.saveCalculatorLog) {
+          google.script.run.saveCalculatorLog(logPayload);
+        }
+        return res;
+      } catch (err) {
+        updateCalcDisplays("SYNTAX ERROR");
+        return null;
+      }
+    }
+
+    // Load active question's formula & expression into the C-137 Sci-Calc
+    function loadCurrentQuestionIntoCalc() {
+      const q = activeQuestions[currentQIndex];
+      if (!q) return;
+      toggleFloatingCalc(true);
+
+      const guide = document.getElementById("calc-keystroke-guide");
+      if (q.calcExpr) {
+        calcExpr = q.calcExpr;
+        const val = calcEvaluate(q.category);
+        if (guide) {
+          guide.innerHTML = "🔑 <strong>TI-30XIIS Keys:</strong> <code>" + (q.calcKeystrokes || q.calcExpr) + "</code>";
+        }
+        if (val !== null) {
+          matchCalcResultToOptions(val);
+        }
+      } else {
+        if (guide) {
+          guide.innerHTML = "💡 <strong>Concept Question:</strong> " + (q.hook || "Use Newton's Laws!");
+        }
+      }
+    }
+
+    // Highlight any multiple-choice option that matches the current calculator output
+    function matchCalcResultToOptions(explicitVal) {
+      const val = (explicitVal !== undefined) ? explicitVal : calcLastAns;
+      const cards = document.querySelectorAll(".fn-option-card");
+      if (!cards.length) return;
+
+      cards.forEach(c => c.classList.remove("calc-matched"));
+      if (val === undefined || val === null || isNaN(val)) return;
+
+      const absVal = Math.abs(Number(val));
+      const sciParts = absVal.toExponential(3).split("e");
+      const mantissa = parseFloat(sciParts[0]).toFixed(2); // e.g. "4.17" or "1.67"
+      const fixed1 = absVal.toFixed(1);
+      const fixed2 = absVal.toFixed(2);
+      const rounded = String(Math.round(absVal));
+
+      let matchedCount = 0;
+      cards.forEach(card => {
+        const txt = card.innerText || "";
+        if (
+          (absVal >= 1 && (txt.includes(fixed2) || txt.includes(fixed1) || txt.includes(Number(absVal.toFixed(1)).toLocaleString()) || txt.includes(rounded + " ") || txt.includes(rounded + "N"))) ||
+          (absVal > 0 && absVal < 0.01 && txt.includes(mantissa))
+        ) {
+          card.classList.add("calc-matched");
+          matchedCount++;
+        }
+      });
+
+      if (matchedCount > 0) {
+        triggerRickCommunicator("🎯 C-137 CALC TARGET LOCK", '"Boom! The calculator result matches the highlighted option in green! 200-pump it!"');
+      }
+    }
+
+    // Make floating calculator draggable by header
+    (function initCalcDrag() {
+      const widget = document.getElementById("c137-floating-calc");
+      const header = document.getElementById("calc-drag-header");
+      if (!widget || !header) return;
+      let isDragging = false, startX = 0, startY = 0, origRight = 22, origBottom = 22;
+
+      header.addEventListener("mousedown", (e) => {
+        if (e.target.tagName === "BUTTON") return;
+        isDragging = true;
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = widget.getBoundingClientRect();
+        origRight = window.innerWidth - rect.right;
+        origBottom = window.innerHeight - rect.bottom;
+      });
+      window.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        widget.style.right = Math.max(8, origRight - dx) + "px";
+        widget.style.bottom = Math.max(8, origBottom - dy) + "px";
+      });
+      window.addEventListener("mouseup", () => { isDragging = false; });
+
+      // Keyboard shortcut [C] to toggle calculator
+      window.addEventListener("keydown", (e) => {
+        if (e.target.tagName === "INPUT" || e.target.tagName === "SELECT" || e.target.tagName === "TEXTAREA") return;
+        if (e.key === "c" || e.key === "C") {
+          toggleFloatingCalc();
+        }
+      });
+    })();
+
+    // =========================================================================
+    // INSTANT FORMULA SOLVERS IN #lab-screen
+    // =========================================================================
+    function runUniversalGravSolver() {
+      const m1 = parseFloat(document.getElementById("ug-m1").value);
+      const m2 = parseFloat(document.getElementById("ug-m2").value);
+      const d = parseFloat(document.getElementById("ug-d").value);
+      const G = 6.67259e-11;
+
+      if (isNaN(m1) || isNaN(m2) || isNaN(d) || d === 0) {
+        document.getElementById("ug-result-box").innerText = "Enter valid m₁, m₂, and d > 0";
+        return;
+      }
+      const F = (G * m1 * m2) / (d * d);
+      const sciStr = F.toExponential(3).replace("e+", " × 10^").replace("e-", " × 10^-");
+      document.getElementById("ug-result-box").innerText = "F = " + sciStr + " N (" + F.toPrecision(4) + " N)";
+      document.getElementById("ug-keystrokes-box").innerText =
+        "TI-30XIIS Keys: [6][.][6][7][2][5][9][EE][-][1][1] [×] " + m1 + " [×] " + m2 + " [÷] [(] " + d + " [x²] [)] [=] -> " + F.toExponential(4);
+
+      calcExpr = "(6.67259e-11*" + m1 + "*" + m2 + ")/(" + d + "**2)";
+      calcEvaluate("4th Law Universal Gravitation");
+    }
+
+    function runPlanetaryWeightSolver() {
+      const m = parseFloat(document.getElementById("pw-mass").value) || 0;
+      const raw = document.getElementById("pw-planet").value.split("|");
+      const g = parseFloat(raw[0]);
+      const planetName = raw[1] || "Planet";
+
+      const w = m * g;
+      const feelKilos = w / 9.8;
+
+      const box = document.getElementById("pw-result-box");
+      if (box) {
+        box.innerHTML =
+          "• <strong>Mass everywhere:</strong> <span style='color:#00ff66;'>" + m + " kg</span> (Mass NEVER changes!)<br>" +
+          "• <strong>Weight on " + planetName + " (w = m·g):</strong> " + m + " × " + g + " = <span style='color:#ffe600; font-weight:900;'>" + w.toFixed(2) + " N</span><br>" +
+          "• <strong>Carosaari 'Feels Like Kilos' (w ÷ 9.8):</strong> " + w.toFixed(2) + " ÷ 9.8 = <span style='color:#38bdf8; font-weight:900;'>" + feelKilos.toFixed(2) + " kg</span>";
+      }
+    }
+
+    function runFmaSolver() {
+      const fVal = document.getElementById("fma-f").value.trim();
+      const mVal = document.getElementById("fma-m").value.trim();
+      const aVal = document.getElementById("fma-a").value.trim();
+      const out = document.getElementById("fma-result-text");
+
+      if (fVal === "" && mVal !== "" && aVal !== "") {
+        const F = parseFloat(mVal) * parseFloat(aVal);
+        document.getElementById("fma-f").value = F.toFixed(2);
+        out.innerText = "F = m·a = " + mVal + " × " + aVal + " = " + F.toFixed(2) + " N";
+      } else if (aVal === "" && fVal !== "" && mVal !== "") {
+        const a = parseFloat(fVal) / parseFloat(mVal);
+        document.getElementById("fma-a").value = a.toFixed(2);
+        out.innerText = "a = F/m = " + fVal + " / " + mVal + " = " + a.toFixed(2) + " m/s²";
+      } else if (mVal === "" && fVal !== "" && aVal !== "") {
+        const m = parseFloat(fVal) / parseFloat(aVal);
+        document.getElementById("fma-m").value = m.toFixed(2);
+        out.innerText = "m = F/a = " + fVal + " / " + aVal + " = " + m.toFixed(2) + " kg";
+      } else {
+        const F = parseFloat(mVal || 0) * parseFloat(aVal || 0);
+        out.innerText = "Clear 1 box to solve for it! (F = " + F.toFixed(2) + " N)";
+      }
+      playEnhancedSound("coin");
+    }
+
+    function runPmvSolver() {
+      const pVal = document.getElementById("pmv-p").value.trim();
+      const mVal = document.getElementById("pmv-m").value.trim();
+      const vVal = document.getElementById("pmv-v").value.trim();
+      const out = document.getElementById("pmv-result-text");
+
+      if (pVal === "" && mVal !== "" && vVal !== "") {
+        const p = parseFloat(mVal) * parseFloat(vVal);
+        document.getElementById("pmv-p").value = p.toFixed(2);
+        out.innerText = "p = m·v = " + mVal + " × " + vVal + " = " + p.toFixed(2) + " kg·m/s";
+      } else if (vVal === "" && pVal !== "" && mVal !== "") {
+        const v = parseFloat(pVal) / parseFloat(mVal);
+        document.getElementById("pmv-v").value = v.toFixed(2);
+        out.innerText = "v = p/m = " + pVal + " / " + mVal + " = " + v.toFixed(2) + " m/s";
+      } else if (mVal === "" && pVal !== "" && vVal !== "") {
+        const m = parseFloat(pVal) / parseFloat(vVal);
+        document.getElementById("pmv-m").value = m.toFixed(2);
+        out.innerText = "m = p/v = " + pVal + " / " + vVal + " = " + m.toFixed(2) + " kg";
+      } else {
+        const p = parseFloat(mVal || 0) * parseFloat(vVal || 0);
+        out.innerText = "Clear 1 box to solve! (p = " + p.toFixed(2) + " kg·m/s)";
+      }
+      playEnhancedSound("coin");
+    }
+
+    function selectModeFromLab(modeName) {
+      selectedGameMode = modeName;
+      switchFnTab("play");
+      launchMatch();
+    }
+
+    // =========================================================================
+    // INTERACTIVE HTML5 CANVAS: GRAVITY DROP, TERMINAL VELOCITY & ROCKET LAB
+    // =========================================================================
+    let simAnimId = null;
+
+    function resetGravitySim() {
+      if (simAnimId) cancelAnimationFrame(simAnimId);
+      const canvas = document.getElementById("gravity-sim-canvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      const raw = (document.getElementById("sim-planet")?.value || "9.8|Earth").split("|");
+      const g = parseFloat(raw[0]);
+      const pName = raw[1];
+      const airMode = document.getElementById("sim-air")?.value || "vacuum";
+      const helmetMode = document.getElementById("sim-helmet")?.value || "helmet";
+
+      drawGravityFrame(ctx, canvas.width, canvas.height, {
+        pName, g, airMode, helmetMode,
+        ySafe: 45, vSafe: 0, aSafe: g,
+        yBall: 45, vBall: 0, aBall: g,
+        rocketMode: false, xRocket: 90, vRocket: 0
+      });
+    }
+
+    function drawGravityFrame(ctx, W, H, st) {
+      ctx.clearRect(0, 0, W, H);
+
+      // Grid lines
+      ctx.strokeStyle = "rgba(56, 189, 248, 0.12)";
+      ctx.lineWidth = 1;
+      for (let y = 30; y < H; y += 40) {
+        ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+      }
+
+      // Header HUD on canvas
+      ctx.fillStyle = "#ffe600";
+      ctx.font = "bold 13px sans-serif";
+      ctx.fillText("PLANET: " + st.pName.toUpperCase() + " (g = " + st.g + " m/s²)  |  MODE: " + (st.airMode === "vacuum" ? "VACUUM (NO AIR)" : "AIR RESISTANCE (TERMINAL VELOCITY)"), 14, 22);
+
+      // Ground / Foam Pad
+      const groundY = H - 34;
+      ctx.fillStyle = (st.helmetMode === "helmet") ? "#10b981" : "#ef4444";
+      ctx.fillRect(0, groundY, W, 34);
+      ctx.fillStyle = "#000";
+      ctx.font = "bold 12px sans-serif";
+      ctx.fillText(
+        st.helmetMode === "helmet"
+          ? "🪖 1ST LAW FOAM HELMET PAD ACTIVE (Compresses -> Increases Δt -> Reduces Impact Force 10×!)"
+          : "💀 BARE CONCRETE IMPACT (Tiny Δt = 0.01s -> Massive Skull Force!)",
+        14, groundY + 21
+      );
+
+      if (st.rocketMode) {
+        // Draw 3rd Law Rocket in Vacuum
+        ctx.fillStyle = "#38bdf8";
+        ctx.font = "bold 14px sans-serif";
+        ctx.fillText("🚀 3RD LAW ROCKET IN DEEP SPACE VACUUM (p_gas backward = p_rocket forward!)", 14, 52);
+
+        // Exhaust plume backward
+        for (let i = 0; i < 6; i++) {
+          ctx.fillStyle = i % 2 === 0 ? "#ffe600" : "#f97316";
+          ctx.beginPath();
+          ctx.arc(st.xRocket - 25 - i * 14, H / 2 + (Math.random() * 14 - 7), 8 - i, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.fillStyle = "#f87171";
+        ctx.font = "bold 12px sans-serif";
+        ctx.fillText("⬅ ACTION: Push Gas Back (-F)", Math.max(10, st.xRocket - 180), H / 2 - 26);
+
+        // Rocket body
+        ctx.fillStyle = "#00ff66";
+        ctx.fillRect(st.xRocket, H / 2 - 18, 70, 36);
+        ctx.fillStyle = "#000";
+        ctx.font = "bold 12px sans-serif";
+        ctx.fillText("ROCKET", st.xRocket + 10, H / 2 + 4);
+
+        ctx.fillStyle = "#00ff66";
+        ctx.fillText("REACTION: Push Rocket Forward (+F) ➔", st.xRocket + 80, H / 2 - 26);
+        ctx.fillStyle = "#fff";
+        ctx.fillText("Velocity v = " + st.vRocket.toFixed(1) + " m/s  |  Momentum p = m·v CONSERVED!", 14, H - 50);
+        return;
+      }
+
+      // Left Object: 100 kg Safe
+      const x1 = 140;
+      ctx.fillStyle = "#38bdf8";
+      ctx.fillRect(x1 - 28, st.ySafe, 56, 46);
+      ctx.strokeStyle = "#fff";
+      ctx.strokeRect(x1 - 28, st.ySafe, 56, 46);
+      ctx.fillStyle = "#000";
+      ctx.font = "bold 12px sans-serif";
+      ctx.fillText("100 kg", x1 - 20, st.ySafe + 20);
+      ctx.fillText("SAFE", x1 - 16, st.ySafe + 36);
+
+      // Right Object: 1 kg Ball
+      const x2 = 370;
+      ctx.fillStyle = "#ffe600";
+      ctx.beginPath();
+      ctx.arc(x2, st.yBall + 23, 18, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#000";
+      ctx.fillText("1 kg", x2 - 12, st.yBall + 27);
+
+      // Stats beside each object
+      ctx.fillStyle = "#e2e8f0";
+      ctx.font = "bold 11.5px monospace";
+      ctx.fillText("v = " + st.vSafe.toFixed(1) + " m/s", x1 + 36, st.ySafe + 16);
+      ctx.fillText("F_G = " + (100 * st.g).toFixed(0) + " N", x1 + 36, st.ySafe + 32);
+
+      ctx.fillText("v = " + st.vBall.toFixed(1) + " m/s", x2 + 26, st.yBall + 16);
+      ctx.fillText("F_G = " + (1 * st.g).toFixed(1) + " N", x2 + 26, st.yBall + 32);
+      if (st.airMode === "air" && st.aBall < 0.2) {
+        ctx.fillStyle = "#f87171";
+        ctx.fillText("TERMINAL VELOCITY (F_Air = F_G)!", x2 - 40, st.yBall - 8);
+      }
+    }
+
+    function startGravityDropSim() {
+      if (simAnimId) cancelAnimationFrame(simAnimId);
+      playFnSound("portal");
+      const canvas = document.getElementById("gravity-sim-canvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      const raw = (document.getElementById("sim-planet")?.value || "9.8|Earth").split("|");
+      const g = parseFloat(raw[0]);
+      const pName = raw[1];
+      const airMode = document.getElementById("sim-air")?.value || "vacuum";
+      const helmetMode = document.getElementById("sim-helmet")?.value || "helmet";
+
+      let ySafe = 40, vSafe = 0;
+      let yBall = 40, vBall = 0;
+      const groundLimit = canvas.height - 80;
+      const dt = 0.045;
+
+      function step() {
+        // In vacuum: both accelerate at exact g!
+        // In air: F_Air = k * v^2. For 1 kg ball, F_G = 1*g so F_Air quickly equals F_G (terminal velocity!).
+        // For 100 kg safe, F_G = 100*g so it takes much longer for F_Air to equal F_G!
+        const dragCoeff = (airMode === "air") ? 0.18 : 0;
+
+        let aSafe = g - (dragCoeff * vSafe * vSafe) / 100;
+        let aBall = g - (dragCoeff * vBall * vBall) / 1;
+        if (aSafe < 0) aSafe = 0;
+        if (aBall < 0) aBall = 0;
+
+        if (ySafe < groundLimit) {
+          vSafe += aSafe * dt;
+          ySafe = Math.min(groundLimit, ySafe + vSafe * 2.2);
+        }
+        if (yBall < groundLimit) {
+          vBall += aBall * dt;
+          yBall = Math.min(groundLimit, yBall + vBall * 2.2);
+        }
+
+        drawGravityFrame(ctx, canvas.width, canvas.height, {
+          pName, g, airMode, helmetMode,
+          ySafe, vSafe, aSafe,
+          yBall, vBall, aBall,
+          rocketMode: false
+        });
+
+        if (ySafe < groundLimit || yBall < groundLimit) {
+          simAnimId = requestAnimationFrame(step);
+        } else {
+          playFnSound("headshot");
+          earnCoins(150);
+          const stopTime = (helmetMode === "helmet") ? 0.10 : 0.01;
+          const impactForce = ((5 * vSafe) / stopTime).toFixed(0);
+          const readout = document.getElementById("sim-live-readout");
+          if (readout) {
+            readout.innerHTML = (airMode === "vacuum")
+              ? "✅ <strong>VACUUM DROP VERIFIED (+150 🪙):</strong> Both the 100 kg safe (F_G = " + (100*g).toFixed(0) + " N) and 1 kg ball (F_G = " + g.toFixed(1) + " N) accelerated at <strong>" + g + " m/s²</strong> and hit the ground at the <strong>EXACT SAME INSTANT</strong>! Helmet impact force (" + (helmetMode === "helmet" ? "Foam Δt=0.10s" : "Bare Δt=0.01s") + "): <strong>" + impactForce + " N</strong>."
+              : "✅ <strong>AIR DRAG & TERMINAL VELOCITY VERIFIED (+150 🪙):</strong> The 1 kg ball hit terminal velocity (<code>F_Air = F_G</code>) early at <strong>" + vBall.toFixed(1) + " m/s</strong>, while the 100 kg safe had a much larger <code>F_G</code>, accelerated longer to <strong>" + vSafe.toFixed(1) + " m/s</strong>, and <strong>HIT THE GROUND FIRST</strong>!";
+          }
+        }
+      }
+      step();
+    }
+
+    function startRocketVacuumSim() {
+      if (simAnimId) cancelAnimationFrame(simAnimId);
+      playFnSound("portal");
+      const canvas = document.getElementById("gravity-sim-canvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+
+      let xRocket = 80;
+      let vRocket = 0;
+
+      function step() {
+        vRocket += 0.65;
+        xRocket += vRocket * 0.45;
+        drawGravityFrame(ctx, canvas.width, canvas.height, {
+          pName: "Deep Space", g: 0, airMode: "vacuum", helmetMode: "helmet",
+          rocketMode: true, xRocket, vRocket
+        });
+        if (xRocket < canvas.width - 110) {
+          simAnimId = requestAnimationFrame(step);
+        } else {
+          playFnSound("headshot");
+          earnCoins(150);
+          const readout = document.getElementById("sim-live-readout");
+          if (readout) {
+            readout.innerHTML = "🚀 <strong>3RD LAW ROCKET IN VACUUM VERIFIED (+150 🪙):</strong> Zero air needed! The rocket pushes exhaust gas backward (action <code>-F</code>), and conservation of momentum (<code>p = mv</code>) pushes the rocket forward with an equal and opposite reaction force (<code>+F</code>)!";
+          }
+        }
+      }
+      step();
+    }
+
   </script>
 </body>
 </html>
